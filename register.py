@@ -33,8 +33,8 @@ class UserHelper:
         response = self.table.put_item(
             Item={
                 'email': email,
-                'user_id': self.user_id,
-                'user_pwd': sha256_crypt.encrypt(str(password)),
+                'userid': self.user_id,
+                'password': sha256_crypt.encrypt(str(password)),
                 'username': self.username
             }
         )
