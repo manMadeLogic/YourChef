@@ -19,44 +19,49 @@ class RegisterForm(Form):
 
 
 class UserHelper:
-    def __init__(self, id = 1):
-        self.dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
-        self.table = self.dynamodb.Table(table_name_register)
-        self.response = self.table.scan()
-        self.user_id = len(self.response['Items']) + 1
+    def __init__(self):
+        dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
+        self.table = dynamodb.Table(table_name_register)
+        # self.response = self.table.scan()
+        # self.user_id = len(self.response['Items']) + 1
 
-
-    def register(self, form):#name, email, username, password
+    def insert(self, form):# name, email, username, password
         email = form.email.data
         username = form.username.data
         password = form.password.data
+        userid = form.userid.data
         response = self.table.put_item(
             Item={
                 'email': email,
-                'userid': self.user_id,
+                'userid': userid,
                 'password': sha256_crypt.encrypt(str(password)),
-                'username': self.username
+                'username': username
             }
         )
         if response:
-            self.user_id += 1
-            return True
+            return True, "Success"
         else:
-            return False
+            return False, "Insert fail"
 
-    def login(self):
-        username = request.form['username']
-        password = request.form['password']
+    def get_user(self, userid):
         response = self.table.query(
-            KeyConditionExpression=conditions.Key('username').eq(username)
+            KeyConditionExpression=conditions.Key('userid').eq(userid)
         )
         if response['Items']:
-            user_pwd_saved = response['Items'][0]['password']
+            user = response['Items'][0]
+            print(user)
+            return user
+        else:
+            return None
+
+
+    def check_password(self, userid, password):
+        user = self.get_user(userid)
+        if user:
+            user_pwd_saved = user['password']
             # print response['Items'][0]['id']
             if sha256_crypt.verify(password, user_pwd_saved):
-                session['logged_in'] = True
-                session['username'] = username
-                session['id'] = str(response['Items'][0]['userid'])
-                session['name'] = response['Items'][0]['username']
-                return True
-        return False
+                return user, "Login success"
+            else:
+                return None, "Incorrect authentication"
+        return None, "User Id not found"
