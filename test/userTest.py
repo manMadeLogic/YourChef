@@ -1,20 +1,22 @@
 import unittest
+
 from YourChef.dbHelper import UserHelper
 
 
 class UserFunctionTestCase(unittest.TestCase):
 
     def testDBConn(self):
-        db = UserHelper("")
+        db = UserHelper("test_user")
+        assert db is not None
 
     def testGetUser(self):
-        pass
+        assert True
 
     def testAddUser(self):
-        pass
+        assert True
 
     def testCheckPassword(self):
-        pass
+        assert True
 
 
 if __name__ == '__main__':

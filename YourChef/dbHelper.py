@@ -1,6 +1,6 @@
 import boto3
 from boto3.dynamodb import conditions
-from YourChef.credentials import *
+from YourChef.credentials import region, aws_id, aws_key
 
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
