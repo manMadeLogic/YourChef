@@ -1,0 +1,7 @@
+#!/bin/bash
+
+added_modified=$(git diff --cached --diff-filter=AM --name-only | grep .py$)
+
+[[ -z $added_modified ]] && exit 0
+
+python -m pyflakes  $added_modified
