@@ -1,6 +1,6 @@
 
 from flask import session
-from dbHelper import UserHelper
+from YourChef.dbHelper import UserHelper
 
 class BackServer:
     def __init__(self):
