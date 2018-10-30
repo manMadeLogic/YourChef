@@ -18,8 +18,8 @@ class RegisterForm(Form):
 
 
 class UserHelper:
-    def __init__(self):
-        self.table_name_register = 'RegisterInfo'
+    def __init__(self, name='RegisterInfo'):
+        self.table_name_register = name
         dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
         # self.response = self.table.scan()
