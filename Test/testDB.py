@@ -1,6 +1,6 @@
 import boto3
 from YourChef.credentials import region, aws_id, aws_key
-from test.SampleUser import users
+from Test.SampleUser import users
 from passlib.hash import sha256_crypt
 
 

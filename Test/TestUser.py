@@ -2,10 +2,10 @@ import unittest
 
 from YourChef.dbHelper import UserHelper
 from passlib.hash import sha256_crypt
-from test.SampleUser import users
+from Test.SampleUser import users
 
 
-class UserFunctionTestCase(unittest.TestCase):
+class TestUserFunctionCase(unittest.TestCase):
 
     def testDBConn(self):
         db = UserHelper("test_user")
