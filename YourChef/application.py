@@ -1,8 +1,8 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from functools import wraps
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators
 
-from server import BackServer
+from YourChef.server import BackServer
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'animation_app'
@@ -10,7 +10,7 @@ application.config['SESSION_TYPE'] = 'filesystem'
 
 server = BackServer()
 
-from Articles import posts
+from YourChef.Articles import posts
 
 
 class RegisterForm(Form):

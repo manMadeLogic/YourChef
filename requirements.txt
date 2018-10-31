@@ -1,0 +1,5 @@
+Flask==0.12.2
+WTForms==2.1
+passlib==1.7.1
+boto3==1.9.33
+pyflakes==1.5.0

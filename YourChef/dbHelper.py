@@ -1,9 +1,8 @@
-import base64
 import boto3
 from boto3.dynamodb import conditions
-from credentials import *
+from YourChef.credentials import region, aws_id, aws_key
 
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
 
 
@@ -19,9 +18,10 @@ class RegisterForm(Form):
 
 
 class UserHelper:
-    def __init__(self):
+    def __init__(self, name='RegisterInfo'):
+        self.table_name_register = name
         dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
-        self.table = dynamodb.Table(table_name_register)
+        self.table = dynamodb.Table(self.table_name_register)
         # self.response = self.table.scan()
         # self.user_id = len(self.response['Items']) + 1
 
