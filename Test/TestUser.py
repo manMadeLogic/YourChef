@@ -2,10 +2,10 @@ import unittest
 
 from YourChef.dbHelper import UserHelper
 from passlib.hash import sha256_crypt
-from test.SampleUser import users
+from Test.SampleUser import users
 
 
-class UserFunctionTestCase(unittest.TestCase):
+class TestUserFunctionCase(unittest.TestCase):
 
     def testDBConn(self):
         db = UserHelper("test_user")
@@ -16,9 +16,6 @@ class UserFunctionTestCase(unittest.TestCase):
         for user in users:
             user_data = db.get_user(user["userid"])
             assert sha256_crypt.verify(user['password'], user_data['password']) and user_data['email'] == user['email'] and user_data['username'] == user['username']
-    #
-    # def testAddUser(self):
-    #     assert True
 
 
 if __name__ == '__main__':
