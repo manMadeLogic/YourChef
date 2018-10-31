@@ -16,9 +16,6 @@ class TestUserFunctionCase(unittest.TestCase):
         for user in users:
             user_data = db.get_user(user["userid"])
             assert sha256_crypt.verify(user['password'], user_data['password']) and user_data['email'] == user['email'] and user_data['username'] == user['username']
-    #
-    # def testAddUser(self):
-    #     assert True
 
 
 if __name__ == '__main__':
