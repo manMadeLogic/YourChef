@@ -4,7 +4,8 @@ from boto3.dynamodb import conditions
 
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
-import argparse
+# import argparse
+import os
 
 
 class RegisterForm(Form):
@@ -21,15 +22,18 @@ class RegisterForm(Form):
 class UserHelper:
     def __init__(self, name='RegisterInfo'):
         self.table_name_register = name
-        parser = argparse.ArgumentParser(description='Process some integers.')
-        parser.add_argument('--aws_region', type=str, default = "us-east-2",
-                            help='the aws access region')
-        parser.add_argument('--aws_id', type=str, default = "",
-                            help='the aws access id')
-        parser.add_argument('--aws_key', type=str, default = "",
-                            help='the aws access key')
-        args = parser.parse_args()
-        dynamodb = boto3.resource('dynamodb', region_name=args.aws_region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
+        # parser = argparse.ArgumentParser(description='Process some integers.')
+        # parser.add_argument('--aws_region', type=str, default = "us-east-2",
+        #                     help='the aws access region')
+        # parser.add_argument('--aws_id', type=str, default = "",
+        #                     help='the aws access id')
+        # parser.add_argument('--aws_key', type=str, default = "",
+        #                     help='the aws access key')
+        # args = parser.parse_args()
+        region = os.environ.get('region')
+        aws_id = os.environ.get('Access_key_ID')
+        aws_key = os.environ.get('Secret_access_key')
+        dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
         # self.response = self.table.scan()
         # self.user_id = len(self.response['Items']) + 1
