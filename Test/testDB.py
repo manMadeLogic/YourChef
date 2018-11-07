@@ -7,7 +7,7 @@ import argparse
 class arguments:
     def __init__(self, name='RegisterInfo'):
         parser = argparse.ArgumentParser(description='Process some integers.')
-        parser.add_argument('--aws_region', type=str, default = "",
+        parser.add_argument('--aws_region', type=str, default = "us-east-2",
                             help='the aws access region')
         parser.add_argument('--aws_id', type=str, default = "",
                             help='the aws access id')
