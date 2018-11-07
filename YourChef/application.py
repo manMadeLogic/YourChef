@@ -45,10 +45,13 @@ def login():
         # Get Form Fields
         user_id = request.form['userid']
         password = request.form['password']
-        success, err_message = server.login(user_id, password)
-        if success:  # result > 0
+        user, err_message = server.login(user_id, password)
+        if user:  # result > 0
             # Passed
             flash('You are now logged in', 'success')
+            session['logged_in'] = True
+            session['user_name'] = user["username"]
+            session['user_id'] = user["userid"]
             return redirect("/")
         else:
             error = err_message

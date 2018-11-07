@@ -1,5 +1,4 @@
 
-from flask import session
 from YourChef.dbHelper import UserHelper
 import re
 
@@ -9,13 +8,10 @@ class RegistrationHelper:
         self.db = UserHelper(db_name)
 
     def login(self, user_id, password):
-        user, message = self.db.check_password(user_id, password)
-        if not user:
-            return False, message
-        session['logged_in'] = True
-        session['user_name'] = user["username"]
-        session['user_id'] = user["userid"]
-        return True, message
+        return self.db.check_password(user_id, password)
+        # if not user:
+        #     return None, message
+        # return True, message
 
     def register(self, form):
         userid = form.userid.data
