@@ -1,9 +1,8 @@
 import unittest
 
 from YourChef.server import RegistrationHelper
-# from passlib.hash import sha256_crypt
-# from Test.SampleUser import insert_users, insert_fail_users, users
-from Test.SampleUser import insert_users, insert_fail_users
+from Test.SampleUser import insert_users, insert_fail_users, users
+# from Test.SampleUser import insert_users, insert_fail_users
 
 
 class Data:
@@ -32,16 +31,16 @@ class TestRegistrationCase(unittest.TestCase):
             result, message = server.register(form)
             assert not result
 
-    # def testGetUser(self):
-    #     server = RegistrationHelper("test_user")
-    #     for user in users:
-    #         login, message = server.login(user["userid"], user['password'])
-    #         assert login
-    #     #
-    #     fake_password = "xxxx00"
-    #     for user in users:
-    #         login, message = server.login(user["userid"], fake_password)
-    #         assert not login
+    def testGetUser(self):
+        server = RegistrationHelper("test_user")
+        for user in users:
+            login, message = server.login(user["userid"], user['password'])
+            assert login
+        #
+        fake_password = "xxxx00"
+        for user in users:
+            login, message = server.login(user["userid"], fake_password)
+            assert not login
 
 
     def testRegister(self):
