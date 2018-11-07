@@ -54,7 +54,8 @@ class TestRegistrationCase(unittest.TestCase):
             form.userid = Data(user["userid"])
             result, message = server.register(form)
             assert result
-            server.delete_user(user["userid"])
+            assert server.delete_user(user["userid"])
+
 
 if __name__ == '__main__':
     unittest.main()
