@@ -9,4 +9,4 @@ install:
 
 # command to run tests
 script:
-  - pytest Test/TestUser.py --aws_id Access_key_ID --aws_key Secret_access_key
+  - pytest Test/TestUser.py --aws_id $Access_key_ID --aws_key $Secret_access_key
