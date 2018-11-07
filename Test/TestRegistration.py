@@ -20,9 +20,6 @@ class TestRegistrationCase(unittest.TestCase):
     def testServer(self):
         server = RegistrationHelper("test_user")
         assert server is not None
-    #
-    # def testRegister(self):
-    #     server = RegistrationHelper("test_user")
 
     def testFailRegister(self):
         server = RegistrationHelper("test_user")

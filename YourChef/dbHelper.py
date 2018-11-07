@@ -22,14 +22,6 @@ class RegisterForm(Form):
 class UserHelper:
     def __init__(self, name='RegisterInfo'):
         self.table_name_register = name
-        # parser = argparse.ArgumentParser(description='Process some integers.')
-        # parser.add_argument('--aws_region', type=str, default = "us-east-2",
-        #                     help='the aws access region')
-        # parser.add_argument('--aws_id', type=str, default = "",
-        #                     help='the aws access id')
-        # parser.add_argument('--aws_key', type=str, default = "",
-        #                     help='the aws access key')
-        # args = parser.parse_args()
         region = os.environ.get('region')
         aws_id = os.environ.get('Access_key_ID')
         aws_key = os.environ.get('Secret_access_key')
