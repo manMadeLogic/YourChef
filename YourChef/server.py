@@ -9,9 +9,6 @@ class RegistrationHelper:
 
     def login(self, user_id, password):
         return self.db.check_password(user_id, password)
-        # if not user:
-        #     return None, message
-        # return True, message
 
     def register(self, form):
         userid = form.userid.data
