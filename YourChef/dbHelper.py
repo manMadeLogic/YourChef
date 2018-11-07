@@ -1,9 +1,10 @@
 import boto3
 from boto3.dynamodb import conditions
-from YourChef.credentials import region, aws_id, aws_key
+# from YourChef.credentials import region, aws_id, aws_key
 
 from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
+import argparse
 
 
 class RegisterForm(Form):
@@ -20,7 +21,15 @@ class RegisterForm(Form):
 class UserHelper:
     def __init__(self, name='RegisterInfo'):
         self.table_name_register = name
-        dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
+        parser = argparse.ArgumentParser(description='Process some integers.')
+        parser.add_argument('--aws_region', type=str, default = "us-east-2",
+                            help='the aws access region')
+        parser.add_argument('--aws_id', type=str, default = "",
+                            help='the aws access id')
+        parser.add_argument('--aws_key', type=str, default = "",
+                            help='the aws access key')
+        args = parser.parse_args()
+        dynamodb = boto3.resource('dynamodb', region_name=args.aws_region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
         self.table = dynamodb.Table(self.table_name_register)
         # self.response = self.table.scan()
         # self.user_id = len(self.response['Items']) + 1
@@ -54,7 +63,6 @@ class UserHelper:
         else:
             return None
 
-
     def check_password(self, userid, password):
         user = self.get_user(userid)
         if user:
@@ -65,3 +73,21 @@ class UserHelper:
             else:
                 return None, "Incorrect authentication"
         return None, "User Id not found"
+
+    def delete_user(self, userid):
+        response = self.table.delete_item(
+            Key={'userid': userid}
+            # Key={
+            #     'year': year,
+            #     'title': title
+            # },
+            # ConditionExpression="info.rating <= :val",
+            # ExpressionAttributeValues= {
+            #     ":val": decimal.Decimal(5)
+            # }
+        )
+        if response:
+            return True
+        else:
+            return False
+
