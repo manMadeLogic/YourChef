@@ -5,7 +5,6 @@ import re
 
 class RegistrationHelper:
     def __init__(self, db_name="RegisterInfo"):
-        return
         self.db = UserHelper(db_name)
 
 
