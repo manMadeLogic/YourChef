@@ -12,6 +12,8 @@ class RegistrationHelper:
 
     def register(self, form):
         userid = form.userid.data
+        if not userid or userid == "":
+            return False, "empty user id"
         if re.findall('[^A-Za-z0-9_]', userid):
             return False, "Can't contain special character"
         user = self.db.get_user(userid)
