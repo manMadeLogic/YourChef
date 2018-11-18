@@ -2,13 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
-from YourChef.server import RegistrationHelper
+from YourChef.server import RegistrationHelper, ManageDishHelper
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
 
 server = RegistrationHelper()
+server_dish = ManageDishHelper()
 
 
 class RegisterForm(Form):
@@ -79,6 +80,18 @@ def logout():
     session.clear()
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
+
+
+
+@application.route('/manageDish', methods=['GET', 'POST'])
+def manageDish():
+    restaurant = "a"
+    dishes = server_dish.getDish(restaurant);
+    if request.method == 'POST':
+        server_dish.addDish(restaurant, request.form['dishname'])
+        dishes = server_dish.getDish(restaurant)
+
+    return render_template("manageDish.html", dishes=dishes)
 
 
 @application.route('/')
