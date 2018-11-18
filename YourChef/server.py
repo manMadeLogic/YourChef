@@ -29,3 +29,14 @@ class RegistrationHelper:
         return self.db.delete_user(user_id)
     # def check_id(self, user_id):
     #     return True
+
+
+class ManageDishHelper:
+    def __init__(self, db_name = "DishInfo"):
+        self.db = DishHelper(db_name)
+
+    def addDish(self, restaurant, dishname):
+        self.db.add_dish(restaurant, dishname)
+
+    def getDish(self, restaurant):
+        return self.db.get_dish(restaurant)
