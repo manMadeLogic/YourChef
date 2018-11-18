@@ -2,15 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
-from YourChef.server import BackServer
+from YourChef.server import RegistrationHelper
 
 application = Flask(__name__)
-application.config['SECRET_KEY'] = 'animation_app'
+application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
 
-server = BackServer()
-
-from YourChef.Articles import posts
+server = RegistrationHelper()
 
 
 class RegisterForm(Form):
@@ -47,10 +45,13 @@ def login():
         # Get Form Fields
         user_id = request.form['userid']
         password = request.form['password']
-        success, err_message = server.login(user_id, password)
-        if success:  # result > 0
+        user, err_message = server.login(user_id, password)
+        if user:  # result > 0
             # Passed
             flash('You are now logged in', 'success')
+            session['logged_in'] = True
+            session['user_name'] = user["username"]
+            session['user_id'] = user["userid"]
             return redirect("/")
         else:
             error = err_message
@@ -83,7 +84,7 @@ def logout():
 @application.route('/')
 # @application.route("/home")
 def index():
-    return render_template("home.html", posts=posts)
+    return render_template("home.html")
     # return render_template('radio.group.html')
 
 
