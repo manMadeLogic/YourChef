@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Title -->
+          <h1 class="mt-4">Location</h1>
+            
+		<form method="post">
+            <input type="text" id="latitude" name="latitude" value="40">
+            <input type="text" id="longitude" name="longitude" value="-70">
+            Search Address: <input type="search" name="restuarant_name"><br>
+            <input type="button" value="Get Location" onclick="getLocation()">
+            <input type="submit">
+        </form>
+            
+        </div>
+      </div>
+</div>
+
+
+<script>
+var x = document.getElementById("latitude");
+var y = document.getElementById("longitude")    
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    x.value = position.coords.latitude;
+    y.value = position.coords.longitude;
+}
+</script>
+
+{% endblock %}
+
