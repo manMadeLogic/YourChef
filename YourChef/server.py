@@ -7,7 +7,6 @@ import re
 class RegistrationHelper:
     def __init__(self, db_name="RegisterInfo"):
         self.db = UserHelper(db_name)
-        self.gm = MapHelper()
 
     def login(self, user_id, password):
         return self.db.check_password(user_id, password)
@@ -30,6 +29,11 @@ class RegistrationHelper:
         return self.db.delete_user(user_id)
     # def check_id(self, user_id):
     #     return True
+
+
+class RestaurantHelper:
+    def __init__(self, db_name="RegisterInfo"):
+        self.gm = MapHelper()
 
     def get_restuarant_info(self, restuarant_name,latitude,longitude):
         address = self.gm.get_restuarant_info(restuarant_name,latitude,longitude)
