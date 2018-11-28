@@ -9,13 +9,13 @@ install:
 
 # command to run tests
 script:
-  - pwd
+  - export PYTHONPATH="$PYTHONPATH:/home/travis/build/manMadeLogic/YourChef"
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
   - coverage run --source=UserHelper Test/TestUser.py
-  - coverage report -m YourChef/report
+  - coverage report
   - coverage run --source=RegistrationHelper Test/TestRegistration.py
-  - coverage report -m YourChef/report
+  - coverage report
 
 after_success:
   - coveralls
