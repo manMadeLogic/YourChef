@@ -47,5 +47,11 @@ insert_fail_users = [
         'userid': "",
         'password': "666666",
         'username': "Linlin"
+    },
+    {
+        'email': "lt@cu.edu",
+        'userid': "lt",
+        'password': "666666",
+        'username': "Linlin"
     }
 ]

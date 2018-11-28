@@ -46,16 +46,21 @@ def add_dish():
     print(session['restaurant'])
     # amount = request.values.get('amount')
     print(restaurant, session['restaurant'], dish_id)
+    if session['total_dishes'] >= 10:
+        return jsonify(False)
+
     if restaurant != session['restaurant']:
         session['restaurant'] = restaurant
         # todo
         session['dishes'] = []
+        session['total_dishes'] = 0
     session['restaurant'] = 'b'
     if dish_id in session['dishes']:
         i = session['dishes'].index(dish_id)
         session['dishes'][i] = (dish_id, amount+session['dishes'][i][1])
     else:
         session['dishes'].append((dish_id, amount))
+    session['total_dishes'] += 1
 
     print("ending session ", session['dishes'])
     return jsonify(True)
@@ -117,12 +122,19 @@ def manageDish():
 
     return render_template("manageDish.html", dishes=dishes)
 
-@application.route('/menu')
+
+def find_restaurant(restaurant):
+    return restaurant == 'a'
+
+
+@application.route('/menu/<string:restaurant>')
 # @application.route("/home")
-def menu():
-    session['restaurant'] = "a"
-    dishes = server_dish.getDish(session['restaurant'])
-    print(session['dishes'])
+def menu(restaurant):
+    if not find_restaurant(restaurant):
+        return render_template("menu.html", error="invalid restaurant")
+    session['restaurant'] = restaurant
+    dishes = server_dish.getDish(restaurant)
+    # print(session['dishes'])
     return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes, order=session['dishes'])
 
 @application.route('/')
