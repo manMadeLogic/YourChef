@@ -1,6 +1,6 @@
 import unittest
 
-from YourChef.dbHelper import UserHelper
+from YourChef.userHelper import UserHelper
 from passlib.hash import sha256_crypt
 from Test.SampleUser import users
 

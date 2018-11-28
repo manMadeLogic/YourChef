@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
-from YourChef.server import RegistrationHelper, ManageDishHelper
+from YourChef.server import ManageDishHelper
+from YourChef.registration import RegistrationHelper
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'

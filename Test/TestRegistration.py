@@ -1,6 +1,6 @@
 import unittest
 
-from YourChef.server import RegistrationHelper
+from YourChef.registration import RegistrationHelper
 from Test.SampleUser import insert_users, insert_fail_users, users
 # from Test.SampleUser import insert_users, insert_fail_users
 
