@@ -4,4 +4,5 @@ passlib==1.7.1
 boto3==1.9.33
 pyflakes==1.5.0
 googlemaps==3.0.2
+python-coveralls==2.9.1
 
