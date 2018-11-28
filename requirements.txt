@@ -5,4 +5,5 @@ boto3==1.9.33
 pyflakes==1.5.0
 googlemaps==3.0.2
 python-coveralls==2.9.1
+coverage==4.0.3
 

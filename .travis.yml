@@ -11,5 +11,6 @@ install:
 script:
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
+  - coverage report -m
 after_success:
   - coveralls
