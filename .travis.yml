@@ -11,3 +11,8 @@ install:
 script:
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
+  - coverage run --source=UserHelper Test/TestUser.py
+  - coverage report
+  - coverage run --source=RegistrationHelper Test/TestRegistration.py
+  - coverage report
+  - pwd
