@@ -9,12 +9,13 @@ install:
 
 # command to run tests
 script:
+  - pwd
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
   - coverage run --source=UserHelper Test/TestUser.py
   - coverage report -m YourChef/report
   - coverage run --source=RegistrationHelper Test/TestRegistration.py
   - coverage report -m YourChef/report
-  - pwd
+
 after_success:
   - coveralls
