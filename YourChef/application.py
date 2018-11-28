@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
@@ -37,6 +37,29 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+@application.route('/add_dish', methods=['POST'])
+def add_dish():
+    amount = 1
+    restaurant = request.values.get('restaurant')
+    dish_id = request.values.get('dish_id')
+    print("beginning session ", session['dishes'])
+    print(session['restaurant'])
+    # amount = request.values.get('amount')
+    print(restaurant, session['restaurant'], dish_id)
+    if restaurant != session['restaurant']:
+        session['restaurant'] = restaurant
+        # todo
+        session['dishes'] = []
+    session['restaurant'] = 'b'
+    if dish_id in session['dishes']:
+        i = session['dishes'].index(dish_id)
+        session['dishes'][i] = (dish_id, amount+session['dishes'][i][1])
+    else:
+        session['dishes'].append((dish_id, amount))
+
+    print("ending session ", session['dishes'])
+    return jsonify(True)
+
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
@@ -53,10 +76,11 @@ def login():
             session['logged_in'] = True
             session['user_name'] = user["username"]
             session['user_id'] = user["userid"]
+            session['dishes'] = []
             return redirect("/")
         else:
             error = err_message
-            return render_template('login.html', error=error)
+            return render_template('login.html', error=error, order=session['dishes'])
     return render_template('login.html')
 
 
@@ -86,13 +110,20 @@ def logout():
 @application.route('/manageDish', methods=['GET', 'POST'])
 def manageDish():
     restaurant = "a"
-    dishes = server_dish.getDish(restaurant);
+    dishes = server_dish.getDish(restaurant)
     if request.method == 'POST':
         server_dish.addDish(restaurant, request.form['dishname'])
         dishes = server_dish.getDish(restaurant)
 
     return render_template("manageDish.html", dishes=dishes)
 
+@application.route('/menu')
+# @application.route("/home")
+def menu():
+    session['restaurant'] = "a"
+    dishes = server_dish.getDish(session['restaurant'])
+    print(session['dishes'])
+    return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes, order=session['dishes'])
 
 @application.route('/')
 # @application.route("/home")

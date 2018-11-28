@@ -2,21 +2,9 @@ import boto3
 from boto3.dynamodb import conditions
 # from YourChef.credentials import region, aws_id, aws_key
 
-from wtforms import Form, StringField, PasswordField, validators
 from passlib.hash import sha256_crypt
 # import argparse
 import os
-
-
-class RegisterForm(Form):
-    userid = StringField('userid', [validators.Length(min=1, max=50)])
-    username = StringField('username', [validators.Length(min=4, max=25)])
-    email = StringField('email', [validators.Length(min=6, max=50)])
-    password = PasswordField('password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
-    confirm = PasswordField('Confirm Password')
 
 
 class UserHelper:

@@ -1,5 +1,6 @@
-from YourChef.dbHelper import UserHelper
-from YourChef.dbHelper import UserHelper
+from YourChef.gmHelper import MapHelper
+
+from YourChef.dbHelper import UserHelper, DishHelper
 import re
 
 
@@ -29,11 +30,13 @@ class RegistrationHelper:
         return self.db.delete_user(user_id)
     # def check_id(self, user_id):
     #     return True
+
     def get_restuarant_info(self, restuarant_name,latitude,longitude):
         address = self.gm.get_restuarant_info(restuarant_name,latitude,longitude)
         if(address == ""):
             return False, "Invalid"
         return address
+
 class ManageDishHelper:
     def __init__(self, db_name = "DishInfo"):
         self.db = DishHelper(db_name)

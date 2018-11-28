@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<head>
+<!--<head>-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -127,27 +127,18 @@ input {
   background-color: #bbb;
 }
 </style>
-</head>
+<!--</head>-->
 <body>
 
-<form method="post">
-<div id="myDIV" class="header">
-  <h2 style="margin:5px">Manage Dish</h2>
-	   <div class="form-group">
-  <input type="text" name="dishname" id="dishname" placeholder="Add Dish Here.">
-  <input class="addBtn" type="submit" value="Add">
-    </div>
-</div>
-</form>
 
 
 <ul id="myUL">
   {% for dish in dishes %}
-    <li>{{dish}}</li>
+    <li id="{{dish}}">{{dish}} </li>
   {% endfor %}
 </ul>
 
-<script>
+<script type="text/javascript">
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -165,7 +156,21 @@ var i;
 for (i = 0; i < close.length; i++) {
   close[i].onclick = function() {
     var div = this.parentElement;
-    div.style.display = "none";
+    <!--div.style.display = "none";-->
+    <!--alert(div.id);-->
+    <!--, 'amount' : 1-->
+        $.post($SCRIPT_ROOT + '/add_dish', {'restaurant': "{{restaurant}}", 'dish_id': div.id}, function(data) {
+          <!--if(data){-->
+            <!--alert(data);-->
+            <!--if(data.success){-->
+              <!--$("#score").html("Scores: "+ data.score);-->
+            <!--}-->
+            <!--else{-->
+              <!--$("#score").html(data.score);-->
+            <!--}-->
+          <!--}-->
+          <!--alert("returned");-->
+        });
   }
 }
 
