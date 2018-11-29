@@ -12,7 +12,6 @@ application.config['SESSION_TYPE'] = 'filesystem'
 server = RegistrationHelper()
 server_dish = ManageDishHelper()
 
-
 class RegisterForm(Form):
     userid = StringField('userid', [validators.Length(min=1, max=50)])
     username = StringField('username', [validators.Length(min=4, max=25)])
