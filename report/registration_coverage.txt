@@ -1,0 +1,3 @@
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+YourChef/registration.py      19      0   100%
