@@ -1,4 +1,3 @@
-from flask import session
 import unittest
 from YourChef.gmHelper import MapHelper
 import os
