@@ -22,8 +22,6 @@ script:
   - coverage run --source=YourChef.registration Test/TestRegistration.py
   - coverage report
   - coverage report > report/registration_coverage.txt
-  - coverage run --source=YourChef.gmHelper Test/TestGM.py
-  - coverage report
-  - coverage report > report/gm_coverage.txt
+
 after_success:
   - coveralls
