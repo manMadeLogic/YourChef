@@ -22,9 +22,6 @@ script:
   - coverage run --source=YourChef.registration Test/TestRegistration.py
   - coverage report
   - coverage report > report/registration_coverage.txt
-  - coverage run Test/TestAddDish.py
-  - coverage report
-  - coverage report > report/dish_coverage.txt
 
 after_success:
   - coveralls
