@@ -17,7 +17,8 @@ class ManageDishHelper:
         self.db = DishHelper(db_name)
 
     def addDish(self, restaurant, dishname):
-        self.db.add_dish(restaurant, dishname)
+        valid, message = self.db.add_dish(restaurant, form)
+        return valid, message
 
     def getDish(self, restaurant):
         return self.db.get_dish(restaurant)
