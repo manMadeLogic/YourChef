@@ -125,7 +125,11 @@ def manageDish():
     restaurant = "a"
     dishes = server_dish.getDish(restaurant)
     if request.method == 'POST':
-        server_dish.addDish(restaurant, request.form['dishname'])
+        valid, message = server_dish.addDish(restaurant, request.form)
+        if valid is False:
+            flash(message, 'fail')
+        else:
+            flash('Successfully added', 'success')
         dishes = server_dish.getDish(restaurant)
 
     return render_template("manageDish.html", dishes=dishes)
