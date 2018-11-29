@@ -1,0 +1,685 @@
+travis_fold:start:worker_info
+[0K[33;1mWorker information[0m
+hostname: 426a7add-88ce-4656-888d-560d6e70abd8@1.production-1-worker-org-gce-j5rk
+version: v5.1.0 https://github.com/travis-ci/worker/tree/0bdbc36fc39a4c4c18f44c0a80f1eadac7a66a65
+instance: travis-job-f4f8edd2-c134-4091-8840-ac4832770cd1 travis-ci-garnet-trusty-1512502259-986baf0 (via amqp)
+startup: 9.382492317s
+travis_fold:end:worker_info
+[0Ktravis_fold:start:system_info
+[0K[33;1mBuild system information[0m
+Build language: python
+Build group: stable
+Build dist: trusty
+Build id: 461116160
+Job id: 461116161
+Runtime kernel version: 4.4.0-101-generic
+travis-build version: 05ef63ef8
+[34m[1mBuild image provisioning date and time[0m
+Tue Dec  5 19:58:13 UTC 2017
+[34m[1mOperating System Details[0m
+Distributor ID:	Ubuntu
+Description:	Ubuntu 14.04.5 LTS
+Release:	14.04
+Codename:	trusty
+[34m[1mCookbooks Version[0m
+7c2c6a6 https://github.com/travis-ci/travis-cookbooks/tree/7c2c6a6
+[34m[1mgit version[0m
+git version 2.15.1
+[34m[1mbash version[0m
+GNU bash, version 4.3.11(1)-release (x86_64-pc-linux-gnu)
+[34m[1mgcc version[0m
+gcc (Ubuntu 4.8.4-2ubuntu1~14.04.3) 4.8.4
+Copyright (C) 2013 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[34m[1mdocker version[0m
+Client:
+ Version:      17.09.0-ce
+ API version:  1.32
+ Go version:   go1.8.3
+ Git commit:   afdb6d4
+ Built:        Tue Sep 26 22:42:38 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.09.0-ce
+ API version:  1.32 (minimum version 1.12)
+ Go version:   go1.8.3
+ Git commit:   afdb6d4
+ Built:        Tue Sep 26 22:41:20 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+[34m[1mclang version[0m
+clang version 5.0.0 (tags/RELEASE_500/final)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /usr/local/clang-5.0.0/bin
+[34m[1mjq version[0m
+jq-1.5
+[34m[1mbats version[0m
+Bats 0.4.0
+[34m[1mshellcheck version[0m
+0.4.6
+[34m[1mshfmt version[0m
+v2.0.0
+[34m[1mccache version[0m
+ccache version 3.1.9
+
+Copyright (C) 2002-2007 Andrew Tridgell
+Copyright (C) 2009-2011 Joel Rosdahl
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 3 of the License, or (at your option) any later
+version.
+[34m[1mcmake version[0m
+cmake version 3.9.2
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+[34m[1mheroku version[0m
+heroku-cli/6.14.39-addc925 (linux-x64) node-v9.2.0
+[34m[1mimagemagick version[0m
+Version: ImageMagick 6.7.7-10 2017-07-31 Q16 http://www.imagemagick.org
+[34m[1mmd5deep version[0m
+4.2
+[34m[1mmercurial version[0m
+Mercurial Distributed SCM (version 4.2.2)
+(see https://mercurial-scm.org for more information)
+
+Copyright (C) 2005-2017 Matt Mackall and others
+This is free software; see the source for copying conditions. There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+[34m[1mmysql version[0m
+mysql  Ver 14.14 Distrib 5.6.33, for debian-linux-gnu (x86_64) using  EditLine wrapper
+[34m[1mopenssl version[0m
+OpenSSL 1.0.1f 6 Jan 2014
+[34m[1mpacker version[0m
+Packer v1.0.2
+
+Your version of Packer is out of date! The latest version
+is 1.1.2. You can update by downloading from www.packer.io
+[34m[1mpostgresql client version[0m
+psql (PostgreSQL) 9.6.6
+[34m[1mragel version[0m
+Ragel State Machine Compiler version 6.8 Feb 2013
+Copyright (c) 2001-2009 by Adrian Thurston
+[34m[1msubversion version[0m
+svn, version 1.8.8 (r1568071)
+   compiled Aug 10 2017, 17:20:39 on x86_64-pc-linux-gnu
+
+Copyright (C) 2013 The Apache Software Foundation.
+This software consists of contributions made by many people;
+see the NOTICE file for more information.
+Subversion is open source software, see http://subversion.apache.org/
+
+The following repository access (RA) modules are available:
+
+* ra_svn : Module for accessing a repository using the svn network protocol.
+  - with Cyrus SASL authentication
+  - handles 'svn' scheme
+* ra_local : Module for accessing a repository on local disk.
+  - handles 'file' scheme
+* ra_serf : Module for accessing a repository via WebDAV protocol using serf.
+  - using serf 1.3.3
+  - handles 'http' scheme
+  - handles 'https' scheme
+
+[34m[1msudo version[0m
+Sudo version 1.8.9p5
+Configure options: --prefix=/usr -v --with-all-insults --with-pam --with-fqdn --with-logging=syslog --with-logfac=authpriv --with-env-editor --with-editor=/usr/bin/editor --with-timeout=15 --with-password-timeout=0 --with-passprompt=[sudo] password for %p:  --without-lecture --with-tty-tickets --disable-root-mailer --enable-admin-flag --with-sendmail=/usr/sbin/sendmail --with-timedir=/var/lib/sudo --mandir=/usr/share/man --libexecdir=/usr/lib/sudo --with-sssd --with-sssd-lib=/usr/lib/x86_64-linux-gnu --with-selinux
+Sudoers policy plugin version 1.8.9p5
+Sudoers file grammar version 43
+
+Sudoers path: /etc/sudoers
+Authentication methods: 'pam'
+Syslog facility if syslog is being used for logging: authpriv
+Syslog priority to use when user authenticates successfully: notice
+Syslog priority to use when user authenticates unsuccessfully: alert
+Send mail if the user is not in sudoers
+Use a separate timestamp for each user/tty combo
+Lecture user the first time they run sudo
+Root may run sudo
+Allow some information gathering to give useful error messages
+Require fully-qualified hostnames in the sudoers file
+Visudo will honor the EDITOR environment variable
+Set the LOGNAME and USER environment variables
+Length at which to wrap log file lines (0 for no wrap): 80
+Authentication timestamp timeout: 15.0 minutes
+Password prompt timeout: 0.0 minutes
+Number of tries to enter a password: 3
+Umask to use or 0777 to use user's: 022
+Path to mail program: /usr/sbin/sendmail
+Flags for mail program: -t
+Address to send mail to: root
+Subject line for mail messages: *** SECURITY information for %h ***
+Incorrect password message: Sorry, try again.
+Path to authentication timestamp dir: /var/lib/sudo
+Default password prompt: [sudo] password for %p:
+Default user to run commands as: root
+Value to override user's $PATH with: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+Path to the editor for use by visudo: /usr/bin/editor
+When to require a password for 'list' pseudocommand: any
+When to require a password for 'verify' pseudocommand: all
+File descriptors >= 3 will be closed before executing a command
+Environment variables to check for sanity:
+	TZ
+	TERM
+	LINGUAS
+	LC_*
+	LANGUAGE
+	LANG
+	COLORTERM
+Environment variables to remove:
+	RUBYOPT
+	RUBYLIB
+	PYTHONUSERBASE
+	PYTHONINSPECT
+	PYTHONPATH
+	PYTHONHOME
+	TMPPREFIX
+	ZDOTDIR
+	READNULLCMD
+	NULLCMD
+	FPATH
+	PERL5DB
+	PERL5OPT
+	PERL5LIB
+	PERLLIB
+	PERLIO_DEBUG
+	JAVA_TOOL_OPTIONS
+	SHELLOPTS
+	GLOBIGNORE
+	PS4
+	BASH_ENV
+	ENV
+	TERMCAP
+	TERMPATH
+	TERMINFO_DIRS
+	TERMINFO
+	_RLD*
+	LD_*
+	PATH_LOCALE
+	NLSPATH
+	HOSTALIASES
+	RES_OPTIONS
+	LOCALDOMAIN
+	CDPATH
+	IFS
+Environment variables to preserve:
+	JAVA_HOME
+	TRAVIS
+	CI
+	DEBIAN_FRONTEND
+	XAUTHORIZATION
+	XAUTHORITY
+	PS2
+	PS1
+	PATH
+	LS_COLORS
+	KRB5CCNAME
+	HOSTNAME
+	HOME
+	DISPLAY
+	COLORS
+Locale to use while parsing sudoers: C
+Directory in which to store input/output logs: /var/log/sudo-io
+File in which to store the input/output log: %{seq}
+Add an entry to the utmp/utmpx file when allocating a pty
+PAM service name to use
+PAM service name to use for login shells
+Create a new PAM session for the command to run in
+Maximum I/O log sequence number: 0
+
+Local IP address and netmask pairs:
+	10.240.0.28/255.255.255.255
+	172.17.0.1/255.255.0.0
+
+Sudoers I/O plugin version 1.8.9p5
+[34m[1mgzip version[0m
+gzip 1.6
+Copyright (C) 2007, 2010, 2011 Free Software Foundation, Inc.
+Copyright (C) 1993 Jean-loup Gailly.
+This is free software.  You may redistribute copies of it under the terms of
+the GNU General Public License <http://www.gnu.org/licenses/gpl.html>.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Jean-loup Gailly.
+[34m[1mzip version[0m
+Copyright (c) 1990-2008 Info-ZIP - Type 'zip "-L"' for software license.
+This is Zip 3.0 (July 5th 2008), by Info-ZIP.
+Currently maintained by E. Gordon.  Please send bug reports to
+the authors using the web page at www.info-zip.org; see README for details.
+
+Latest sources and executables are at ftp://ftp.info-zip.org/pub/infozip,
+as of above date; see http://www.info-zip.org/ for other sites.
+
+Compiled with gcc 4.8.2 for Unix (Linux ELF) on Oct 21 2013.
+
+Zip special compilation options:
+	USE_EF_UT_TIME       (store Universal Time)
+	BZIP2_SUPPORT        (bzip2 library version 1.0.6, 6-Sept-2010)
+	    bzip2 code and library copyright (c) Julian R Seward
+	    (See the bzip2 license for terms of use)
+	SYMLINK_SUPPORT      (symbolic links supported)
+	LARGE_FILE_SUPPORT   (can read and write large files on file system)
+	ZIP64_SUPPORT        (use Zip64 to store large files in archives)
+	UNICODE_SUPPORT      (store and read UTF-8 Unicode paths)
+	STORE_UNIX_UIDs_GIDs (store UID/GID sizes/values using new extra field)
+	UIDGID_NOT_16BIT     (old Unix 16-bit UID/GID extra field not used)
+	[encryption, version 2.91 of 05 Jan 2007] (modified for Zip 3)
+
+Encryption notice:
+	The encryption code of this program is not copyrighted and is
+	put in the public domain.  It was originally written in Europe
+	and, to the best of our knowledge, can be freely distributed
+	in both source and object forms from any country, including
+	the USA under License Exception TSU of the U.S. Export
+	Administration Regulations (section 740.13(e)) of 6 June 2002.
+
+Zip environment options:
+             ZIP:  [none]
+          ZIPOPT:  [none]
+[34m[1mvim version[0m
+VIM - Vi IMproved 7.4 (2013 Aug 10, compiled Nov 24 2016 16:43:18)
+Included patches: 1-52
+Extra patches: 8.0.0056
+Modified by pkg-vim-maintainers@lists.alioth.debian.org
+Compiled by buildd@
+Huge version without GUI.  Features included (+) or not (-):
++acl             +farsi           +mouse_netterm   +syntax
++arabic          +file_in_path    +mouse_sgr       +tag_binary
++autocmd         +find_in_path    -mouse_sysmouse  +tag_old_static
+-balloon_eval    +float           +mouse_urxvt     -tag_any_white
+-browse          +folding         +mouse_xterm     -tcl
+++builtin_terms  -footer          +multi_byte      +terminfo
++byte_offset     +fork()          +multi_lang      +termresponse
++cindent         +gettext         -mzscheme        +textobjects
+-clientserver    -hangul_input    +netbeans_intg   +title
+-clipboard       +iconv           +path_extra      -toolbar
++cmdline_compl   +insert_expand   -perl            +user_commands
++cmdline_hist    +jumplist        +persistent_undo +vertsplit
++cmdline_info    +keymap          +postscript      +virtualedit
++comments        +langmap         +printer         +visual
++conceal         +libcall         +profile         +visualextra
++cryptv          +linebreak       +python          +viminfo
++cscope          +lispindent      -python3         +vreplace
++cursorbind      +listcmds        +quickfix        +wildignore
++cursorshape     +localmap        +reltime         +wildmenu
++dialog_con      -lua             +rightleft       +windows
++diff            +menu            -ruby            +writebackup
++digraphs        +mksession       +scrollbind      -X11
+-dnd             +modify_fname    +signs           -xfontset
+-ebcdic          +mouse           +smartindent     -xim
++emacs_tags      -mouseshape      -sniff           -xsmp
++eval            +mouse_dec       +startuptime     -xterm_clipboard
++ex_extra        +mouse_gpm       +statusline      -xterm_save
++extra_search    -mouse_jsbterm   -sun_workshop    -xpm
+   system vimrc file: "$VIM/vimrc"
+     user vimrc file: "$HOME/.vimrc"
+ 2nd user vimrc file: "~/.vim/vimrc"
+      user exrc file: "$HOME/.exrc"
+  fall-back for $VIM: "/usr/share/vim"
+Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H     -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
+Linking: gcc   -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,--as-needed -o vim        -lm -ltinfo -lnsl  -lselinux  -lacl -lattr -lgpm -ldl    -L/usr/lib/python2.7/config-x86_64-linux-gnu -lpython2.7 -lpthread -ldl -lutil -lm -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
+[34m[1miptables version[0m
+iptables v1.4.21
+[34m[1mcurl version[0m
+curl 7.35.0 (x86_64-pc-linux-gnu) libcurl/7.35.0 OpenSSL/1.0.1f zlib/1.2.8 libidn/1.28 librtmp/2.3
+[34m[1mwget version[0m
+GNU Wget 1.15 built on linux-gnu.
+[34m[1mrsync version[0m
+rsync  version 3.1.0  protocol version 31
+[34m[1mgimme version[0m
+v1.2.0
+[34m[1mnvm version[0m
+0.33.6
+[34m[1mperlbrew version[0m
+/home/travis/perl5/perlbrew/bin/perlbrew  - App::perlbrew/0.80
+[34m[1mphpenv version[0m
+rbenv 1.1.1-25-g6aa70b6
+[34m[1mrvm version[0m
+rvm 1.29.3 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+[34m[1mdefault ruby version[0m
+ruby 2.4.1p111 (2017-03-22 revision 58053) [x86_64-linux]
+[34m[1mCouchDB version[0m
+couchdb 1.6.1
+[34m[1mElasticSearch version[0m
+5.5.0
+[34m[1mInstalled Firefox version[0m
+firefox 56.0.2
+[34m[1mMongoDB version[0m
+MongoDB 3.4.10
+[34m[1mPhantomJS version[0m
+2.1.1
+[34m[1mPre-installed PostgreSQL versions[0m
+9.2.24
+9.3.20
+9.4.15
+9.5.10
+9.6.6
+[34m[1mRabbitMQ Version[0m
+3.6.14
+[34m[1mRedis version[0m
+redis-server 4.0.6
+[34m[1mriak version[0m
+2.2.3
+[34m[1mPre-installed Go versions[0m
+1.7.4
+[34m[1mant version[0m
+Apache Ant(TM) version 1.9.3 compiled on April 8 2014
+[34m[1mmvn version[0m
+Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T07:58:13Z)
+Maven home: /usr/local/maven-3.5.2
+Java version: 1.8.0_151, vendor: Oracle Corporation
+Java home: /usr/lib/jvm/java-8-oracle/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "4.4.0-98-generic", arch: "amd64", family: "unix"
+[34m[1mgradle version[0m
+
+------------------------------------------------------------
+Gradle 4.0.1
+------------------------------------------------------------
+
+Build time:   2017-07-07 14:02:41 UTC
+Revision:     38e5dc0f772daecca1d2681885d3d85414eb6826
+
+Groovy:       2.4.11
+Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+JVM:          1.8.0_151 (Oracle Corporation 25.151-b12)
+OS:           Linux 4.4.0-98-generic amd64
+
+[34m[1mlein version[0m
+Leiningen 2.8.1 on Java 1.8.0_151 Java HotSpot(TM) 64-Bit Server VM
+[34m[1mPre-installed Node.js versions[0m
+v4.8.6
+v6.12.0
+v6.12.1
+v8.9
+v8.9.1
+[34m[1mphpenv versions[0m
+  system
+  5.6
+* 5.6.32 (set by /home/travis/.phpenv/version)
+  7.0
+  7.0.25
+  7.1
+  7.1.11
+  hhvm
+  hhvm-stable
+[34m[1mcomposer --version[0m
+Composer version 1.5.2 2017-09-11 16:59:25
+[34m[1mPre-installed Ruby versions[0m
+ruby-2.2.7
+ruby-2.3.4
+ruby-2.4.1
+travis_fold:end:system_info
+[0K
+
+travis_fold:start:git.checkout
+[0Ktravis_time:start:17a2954a
+[0K$ git clone --depth=50 --branch=master https://github.com/manMadeLogic/YourChef.git manMadeLogic/YourChef
+Cloning into 'manMadeLogic/YourChef'...
+travis_time:end:17a2954a:start=1543466962888277675,finish=1543466963657126509,duration=768848834
+[0K$ cd manMadeLogic/YourChef
+$ git checkout -qf e64198c01855600c7ab2cf6d65858527cd102b0d
+travis_fold:end:git.checkout
+[0K
+
+[33;1mSetting environment variables from repository settings[0m
+$ export Access_key_ID=[secure]
+$ export Secret_access_key=[secure]
+$ export region=[secure]
+$ export repo_token=[secure]
+$ export gmap_key=[secure]
+
+travis_time:start:0c3e9106
+[0K$ source ~/virtualenv/python3.6/bin/activate
+travis_time:end:0c3e9106:start=1543466963697137422,finish=1543466963705458367,duration=8320945
+[0K$ python --version
+Python 3.6.3
+$ pip --version
+pip 9.0.1 from /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (python 3.6)
+travis_fold:start:install
+[0Ktravis_time:start:00bea01c
+[0K$ pip install -r requirements.txt
+Collecting Flask==0.12.2 (from -r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/77/32/e3597cb19ffffe724ad4bf0beca4153419918e7fa4ba6a34b04ee4da3371/Flask-0.12.2-py2.py3-none-any.whl (83kB)
+Collecting WTForms==2.1 (from -r requirements.txt (line 2))
+  Downloading https://files.pythonhosted.org/packages/bf/91/2e553b86c55e9cf2f33265de50e052441fb753af46f5f20477fe9c61280e/WTForms-2.1.zip (553kB)
+Collecting passlib==1.7.1 (from -r requirements.txt (line 3))
+  Downloading https://files.pythonhosted.org/packages/ee/a7/d6d238d927df355d4e4e000670342ca4705a72f0bf694027cf67d9bcf5af/passlib-1.7.1-py2.py3-none-any.whl (498kB)
+Collecting boto3==1.9.33 (from -r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/13/3f/fa68bacf76b12e4258240a9bdb6569fb4b041f7586c984be53603e88ca35/boto3-1.9.33-py2.py3-none-any.whl (128kB)
+Collecting pyflakes==1.5.0 (from -r requirements.txt (line 5))
+  Downloading https://files.pythonhosted.org/packages/27/49/924098b3b85c286696f37e014475d79471ffc44509613af420645a3c12cb/pyflakes-1.5.0-py2.py3-none-any.whl (225kB)
+Collecting googlemaps==3.0.2 (from -r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/5a/3d/13b4230f3c1b8a586cdc8d8179f3c6af771c11247f8de9c166d1ab37f51d/googlemaps-3.0.2.tar.gz
+Collecting coverage==4.5.2 (from -r requirements.txt (line 7))
+  Downloading https://files.pythonhosted.org/packages/a4/5c/b3eac6aa7eb4af83c8580d9c1578343910bdcc59e64e3565402f9a527f9c/coverage-4.5.2-cp36-cp36m-manylinux1_x86_64.whl (205kB)
+Collecting python-coveralls==2.9.1 (from -r requirements.txt (line 8))
+  Downloading https://files.pythonhosted.org/packages/2f/4a/0f776edd7d985e5fc456a8430bde69ce0701f6b6bae17586c74a309f89ae/python_coveralls-2.9.1-py2.py3-none-any.whl
+Collecting pytest-cov==2.6.0 (from -r requirements.txt (line 9))
+  Downloading https://files.pythonhosted.org/packages/30/0a/1b009b525526cd3cd9f52f52391b426c5a3597447be811a10bcb1f6b05eb/pytest_cov-2.6.0-py2.py3-none-any.whl
+Collecting click>=2.0 (from Flask==0.12.2->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/fa/37/45185cb5abbc30d7257104c434fe0b07e5a195a6847506c074527aa599ec/Click-7.0-py2.py3-none-any.whl (81kB)
+Collecting Werkzeug>=0.7 (from Flask==0.12.2->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/20/c4/12e3e56473e52375aa29c4764e70d1b8f3efa6682bef8d0aae04fe335243/Werkzeug-0.14.1-py2.py3-none-any.whl (322kB)
+Collecting Jinja2>=2.4 (from Flask==0.12.2->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/7f/ff/ae64bacdfc95f27a016a7bed8e8686763ba4d277a78ca76f32659220a731/Jinja2-2.10-py2.py3-none-any.whl (126kB)
+Collecting itsdangerous>=0.21 (from Flask==0.12.2->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl
+Collecting botocore<1.13.0,>=1.12.33 (from boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/d6/be/da181a69e355ec61224de70d2afd306d723834adf2af98ee163975cf8357/botocore-1.12.55-py2.py3-none-any.whl (5.1MB)
+Collecting jmespath<1.0.0,>=0.7.1 (from boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/b7/31/05c8d001f7f87f0f07289a5fc0fc3832e9a57f2dbd4d3b0fee70e0d51365/jmespath-0.9.3-py2.py3-none-any.whl
+Collecting s3transfer<0.2.0,>=0.1.10 (from boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/d7/14/2a0004d487464d120c9fb85313a75cd3d71a7506955be458eebfe19a6b1d/s3transfer-0.1.13-py2.py3-none-any.whl (59kB)
+Collecting requests<3.0,>=2.11.1 (from googlemaps==3.0.2->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/ff/17/5cbb026005115301a8fb2f9b0e3e8d32313142fe8b617070e7baad20554f/requests-2.20.1-py2.py3-none-any.whl (57kB)
+Collecting PyYAML (from python-coveralls==2.9.1->-r requirements.txt (line 8))
+  Downloading https://files.pythonhosted.org/packages/9e/a3/1d13970c3f36777c583f136c136f804d70f500168edc1edea6daa7200769/PyYAML-3.13.tar.gz (270kB)
+Requirement already satisfied: six in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from python-coveralls==2.9.1->-r requirements.txt (line 8))
+Requirement already satisfied: pytest>=2.9 in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from pytest-cov==2.6.0->-r requirements.txt (line 9))
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->Flask==0.12.2->-r requirements.txt (line 1))
+  Downloading https://files.pythonhosted.org/packages/08/04/f2191b50fb7f0712f03f064b71d8b4605190f2178ba02e975a87f7b89a0d/MarkupSafe-1.1.0-cp36-cp36m-manylinux1_x86_64.whl
+Collecting docutils>=0.10 (from botocore<1.13.0,>=1.12.33->boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/36/fa/08e9e6e0e3cbd1d362c3bbee8d01d0aedb2155c4ac112b19ef3cae8eed8d/docutils-0.14-py3-none-any.whl (543kB)
+Collecting python-dateutil<3.0.0,>=2.1; python_version >= "2.7" (from botocore<1.13.0,>=1.12.33->boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/74/68/d87d9b36af36f44254a8d512cbfc48369103a3b9e474be9bdfe536abfc45/python_dateutil-2.7.5-py2.py3-none-any.whl (225kB)
+Collecting urllib3<1.25,>=1.20; python_version >= "3.4" (from botocore<1.13.0,>=1.12.33->boto3==1.9.33->-r requirements.txt (line 4))
+  Downloading https://files.pythonhosted.org/packages/62/00/ee1d7de624db8ba7090d1226aebefab96a2c71cd5cfa7629d6ad3f61b79e/urllib3-1.24.1-py2.py3-none-any.whl (118kB)
+Collecting idna<2.8,>=2.5 (from requests<3.0,>=2.11.1->googlemaps==3.0.2->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/4b/2a/0276479a4b3caeb8a8c1af2f8e4355746a97fab05a372e4a2c6a6b876165/idna-2.7-py2.py3-none-any.whl (58kB)
+Collecting certifi>=2017.4.17 (from requests<3.0,>=2.11.1->googlemaps==3.0.2->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/56/9d/1d02dd80bc4cd955f98980f28c5ee2200e1209292d5f9e9cc8d030d18655/certifi-2018.10.15-py2.py3-none-any.whl (146kB)
+Collecting chardet<3.1.0,>=3.0.2 (from requests<3.0,>=2.11.1->googlemaps==3.0.2->-r requirements.txt (line 6))
+  Downloading https://files.pythonhosted.org/packages/bc/a9/01ffebfb562e4274b6487b4bb1ddec7ca55ec7510b22e4c51f14098443b8/chardet-3.0.4-py2.py3-none-any.whl (133kB)
+Requirement already satisfied: setuptools in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from pytest>=2.9->pytest-cov==2.6.0->-r requirements.txt (line 9))
+Requirement already satisfied: pluggy<0.7,>=0.5 in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from pytest>=2.9->pytest-cov==2.6.0->-r requirements.txt (line 9))
+Requirement already satisfied: py>=1.5.0 in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from pytest>=2.9->pytest-cov==2.6.0->-r requirements.txt (line 9))
+Requirement already satisfied: attrs>=17.2.0 in /home/travis/virtualenv/python3.6.3/lib/python3.6/site-packages (from pytest>=2.9->pytest-cov==2.6.0->-r requirements.txt (line 9))
+Building wheels for collected packages: WTForms, googlemaps, PyYAML
+  Running setup.py bdist_wheel for WTForms: started
+  Running setup.py bdist_wheel for WTForms: finished with status 'done'
+  Stored in directory: /home/travis/.cache/pip/wheels/ab/a2/d1/f24511b7003ea257ef06a71f20b7540b01486aa63f9f7edc4c
+  Running setup.py bdist_wheel for googlemaps: started
+  Running setup.py bdist_wheel for googlemaps: finished with status 'done'
+  Stored in directory: /home/travis/.cache/pip/wheels/3c/3f/25/ce6d7722dba07e5d4a12d27ab38f3d7add65ef43171b02c819
+  Running setup.py bdist_wheel for PyYAML: started
+  Running setup.py bdist_wheel for PyYAML: finished with status 'done'
+  Stored in directory: /home/travis/.cache/pip/wheels/ad/da/0c/74eb680767247273e2cf2723482cb9c924fe70af57c334513f
+Successfully built WTForms googlemaps PyYAML
+Installing collected packages: click, Werkzeug, MarkupSafe, Jinja2, itsdangerous, Flask, WTForms, passlib, jmespath, docutils, python-dateutil, urllib3, botocore, s3transfer, boto3, pyflakes, idna, certifi, chardet, requests, googlemaps, coverage, PyYAML, python-coveralls, pytest-cov
+Successfully installed Flask-0.12.2 Jinja2-2.10 MarkupSafe-1.1.0 PyYAML-3.13 WTForms-2.1 Werkzeug-0.14.1 boto3-1.9.33 botocore-1.12.55 certifi-2018.10.15 chardet-3.0.4 click-7.0 coverage-4.5.2 docutils-0.14 googlemaps-3.0.2 idna-2.7 itsdangerous-1.1.0 jmespath-0.9.3 passlib-1.7.1 pyflakes-1.5.0 pytest-cov-2.6.0 python-coveralls-2.9.1 python-dateutil-2.7.5 requests-2.20.1 s3transfer-0.1.13 urllib3-1.24.1
+travis_time:end:00bea01c:start=1543466964519166605,finish=1543466984961662375,duration=20442495770
+[0Ktravis_fold:end:install
+[0Ktravis_time:start:0a08f4ef
+[0K$ export PYTHONPATH="$PYTHONPATH:/home/travis/build/manMadeLogic/YourChef"
+travis_time:end:0a08f4ef:start=1543466984966646092,finish=1543466984969727433,duration=3081341
+[0K[32;1mThe command "export PYTHONPATH="$PYTHONPATH:/home/travis/build/manMadeLogic/YourChef"" exited with 0.[0m
+
+travis_time:start:1415871b
+[0K$ pytest Test/TestUser.py
+============================= test session starts ==============================
+platform linux -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: /home/travis/build/manMadeLogic/YourChef, inifile:
+plugins: cov-2.6.0
+collected 2 items
+
+Test/TestUser.py ..                                                      [100%]
+
+=========================== 2 passed in 1.22 seconds ===========================
+travis_time:end:1415871b:start=1543466984973418255,finish=1543466986675674848,duration=1702256593
+[0K[32;1mThe command "pytest Test/TestUser.py" exited with 0.[0m
+
+travis_time:start:24951bf6
+[0K$ pytest Test/TestRegistration.py
+============================= test session starts ==============================
+platform linux -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: /home/travis/build/manMadeLogic/YourChef, inifile:
+plugins: cov-2.6.0
+collected 4 items
+
+Test/TestRegistration.py ....                                            [100%]
+
+=========================== 4 passed in 3.31 seconds ===========================
+travis_time:end:24951bf6:start=1543466986679746764,finish=1543466990361575401,duration=3681828637
+[0K[32;1mThe command "pytest Test/TestRegistration.py" exited with 0.[0m
+
+travis_time:start:06940164
+[0K$ pytest Test/TestAddDish.py
+============================= test session starts ==============================
+platform linux -- Python 3.6.3, pytest-3.3.0, py-1.5.2, pluggy-0.6.0
+rootdir: /home/travis/build/manMadeLogic/YourChef, inifile:
+plugins: cov-2.6.0
+collected 1 item
+
+Test/TestAddDish.py .                                                    [100%]
+
+=========================== 1 passed in 0.38 seconds ===========================
+travis_time:end:06940164:start=1543466990367097745,finish=1543466991148020684,duration=780922939
+[0K[32;1mThe command "pytest Test/TestAddDish.py" exited with 0.[0m
+
+travis_time:start:08c5c65c
+[0K$ pytest Test/TestUser.py > report/user_test.txt
+travis_time:end:08c5c65c:start=1543466991153014971,finish=1543466992710727125,duration=1557712154
+[0K[32;1mThe command "pytest Test/TestUser.py > report/user_test.txt" exited with 0.[0m
+
+travis_time:start:0313fcce
+[0K$ pytest Test/TestRegistration.py > report/registration_test.txt
+travis_time:end:0313fcce:start=1543466992715359573,finish=1543466996319583390,duration=3604223817
+[0K[32;1mThe command "pytest Test/TestRegistration.py > report/registration_test.txt" exited with 0.[0m
+
+travis_time:start:11f43aec
+[0K$ pytest Test/TestAddDish.py > report/add_dish_test.txt
+travis_time:end:11f43aec:start=1543466996323443702,finish=1543466997073154709,duration=749711007
+[0K[32;1mThe command "pytest Test/TestAddDish.py > report/add_dish_test.txt" exited with 0.[0m
+
+travis_time:start:022849c8
+[0K$ coverage run --source=YourChef.userHelper Test/TestUser.py
+./opt/python/3.6.3/lib/python3.6/unittest/case.py:605: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('10.20.0.27', 60376), raddr=('52.94.4.72', 443)>
+  testMethod()
+.
+----------------------------------------------------------------------
+Ran 2 tests in 1.043s
+
+OK
+travis_time:end:022849c8:start=1543466997077742869,finish=1543466998510664471,duration=1432921602
+[0K[32;1mThe command "coverage run --source=YourChef.userHelper Test/TestUser.py" exited with 0.[0m
+
+travis_time:start:0e5083b4
+[0K$ coverage report
+Name                     Stmts   Miss  Cover
+--------------------------------------------
+YourChef/userHelper.py      40     20    50%
+travis_time:end:0e5083b4:start=1543466998514758050,finish=1543466998653295045,duration=138536995
+[0K[32;1mThe command "coverage report" exited with 0.[0m
+
+travis_time:start:0a77eca6
+[0K$ coverage report > report/user_coverage.txt
+travis_time:end:0a77eca6:start=1543466998658684474,finish=1543466998796812489,duration=138128015
+[0K[32;1mThe command "coverage report > report/user_coverage.txt" exited with 0.[0m
+
+travis_time:start:056d5eec
+[0K$ coverage run --source=YourChef.registration Test/TestRegistration.py
+/opt/python/3.6.3/lib/python3.6/unittest/case.py:605: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('10.20.0.27', 60380), raddr=('52.94.4.72', 443)>
+  testMethod()
+./opt/python/3.6.3/lib/python3.6/unittest/case.py:605: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('10.20.0.27', 60382), raddr=('52.94.4.72', 443)>
+  testMethod()
+./home/travis/build/manMadeLogic/YourChef/YourChef/userHelper.py:29: DeprecationWarning: the method passlib.handlers.sha2_crypt.sha256_crypt.encrypt() is deprecated as of Passlib 1.7, and will be removed in Passlib 2.0, use .hash() instead.
+  'password': sha256_crypt.encrypt(str(password)),
+/opt/python/3.6.3/lib/python3.6/unittest/case.py:605: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('10.20.0.27', 38258), raddr=('52.94.4.128', 443)>
+  testMethod()
+..
+----------------------------------------------------------------------
+Ran 4 tests in 3.166s
+
+OK
+travis_time:end:056d5eec:start=1543466998803152882,finish=1543467002350504605,duration=3547351723
+[0K[32;1mThe command "coverage run --source=YourChef.registration Test/TestRegistration.py" exited with 0.[0m
+
+travis_time:start:00289300
+[0K$ coverage report
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+YourChef/registration.py      19      0   100%
+travis_time:end:00289300:start=1543467002356924012,finish=1543467002492341391,duration=135417379
+[0K[32;1mThe command "coverage report" exited with 0.[0m
+
+travis_time:start:2b39d8ca
+[0K$ coverage report > report/registration_coverage.txt
+travis_time:end:2b39d8ca:start=1543467002496516738,finish=1543467002632679901,duration=136163163
+[0K[32;1mThe command "coverage report > report/registration_coverage.txt" exited with 0.[0m
+
+travis_time:start:01b2b05c
+[0K$ coverage run --source=YourChef.gmHelper Test/TestGM.py
+./opt/python/3.6.3/lib/python3.6/unittest/suite.py:107: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.20.0.27', 39292), raddr=('108.177.111.95', 443)>
+  for index, test in enumerate(self):
+./opt/python/3.6.3/lib/python3.6/unittest/suite.py:107: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.20.0.27', 58662), raddr=('209.85.234.95', 443)>
+  for index, test in enumerate(self):
+./opt/python/3.6.3/lib/python3.6/unittest/suite.py:84: ResourceWarning: unclosed <ssl.SSLSocket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('10.20.0.27', 48238), raddr=('74.125.124.95', 443)>
+  return self.run(*args, **kwds)
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.979s
+
+OK
+point:0,0
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+point:70,0
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+point:10000,0
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+point:0,-999
+{'candidates': [], 'status': 'ZERO_RESULTS'}
+point:70,0
+{'candidates': [{'formatted_address': 'Korea', 'name': 'Korea'}], 'status': 'OK'}
+point:40,-74
+{'candidates': [{'formatted_address': '222 Rte 37 E, Toms River, NJ 08753, USA', 'name': 'KFC', 'opening_hours': {'open_now': False}}], 'status': 'OK'}
+travis_time:end:01b2b05c:start=1543467002637566641,finish=1543467005035159951,duration=2397593310
+[0K[32;1mThe command "coverage run --source=YourChef.gmHelper Test/TestGM.py" exited with 0.[0m
+
+travis_time:start:02dabf00
+[0K$ coverage report
+Name                   Stmts   Miss  Cover
+------------------------------------------
+YourChef/gmHelper.py      13      0   100%
+travis_time:end:02dabf00:start=1543467005040517542,finish=1543467005178509808,duration=137992266
+[0K[32;1mThe command "coverage report" exited with 0.[0m
+
+travis_time:start:0220f020
+[0K$ coverage report > report/gm_coverage.txt
+travis_time:end:0220f020:start=1543467005182772421,finish=1543467005318668390,duration=135895969
+[0K[32;1mThe command "coverage report > report/gm_coverage.txt" exited with 0.[0m
+
+
+travis_fold:start:after_success
+[0Ktravis_time:start:38820ab0
+[0K$ coveralls
+INFO:coveralls:200
+INFO:coveralls:{"message":"Job #57.1","url":"https://coveralls.io/jobs/42692123"}
+travis_time:end:38820ab0:start=1543467005323089530,finish=1543467006712700064,duration=1389610534
+[0Ktravis_fold:end:after_success
+[0K
+Done. Your build exited with 0.
