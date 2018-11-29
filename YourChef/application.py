@@ -38,34 +38,41 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+
 @application.route('/add_dish', methods=['POST'])
 def add_dish():
     amount = 1
     restaurant = request.values.get('restaurant')
     dish_id = request.values.get('dish_id')
-    print("beginning session ", session['dishes'])
-    print(session['restaurant'])
-    # amount = request.values.get('amount')
-    print(restaurant, session['restaurant'], dish_id)
-    if session['total_dishes'] >= 10:
-        return jsonify(False)
+    return jsonify(add_a_dish(restaurant, dish_id, amount))
 
+
+def add_a_dish(restaurant, dish_id, amount):
+    if session['total_dishes'] >= 10:
+        return False
+
+    # print(restaurant, session['restaurant'])
     if restaurant != session['restaurant']:
         session['restaurant'] = restaurant
         # todo
+        # print("change restaurant")
         session['dishes'] = []
         session['total_dishes'] = 0
-    session['restaurant'] = 'b'
-    if dish_id in session['dishes']:
-        i = session['dishes'].index(dish_id)
+    # session['restaurant'] = 'b'
+    # print(restaurant, dish_id, session['dishes'], session['total_dishes'])
+    i = 0
+    while i < len(session['dishes']):
+        if dish_id == session['dishes'][i][0]:
+            break
+        i += 1
+    if i != len(session['dishes']):
+        print(i)
         session['dishes'][i] = (dish_id, amount+session['dishes'][i][1])
     else:
         session['dishes'].append((dish_id, amount))
+    # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
     session['total_dishes'] += 1
-
-    print("ending session ", session['dishes'])
-    return jsonify(True)
-
+    return True
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():

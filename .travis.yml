@@ -12,9 +12,12 @@ script:
   - export PYTHONPATH="$PYTHONPATH:/home/travis/build/manMadeLogic/YourChef"
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
+  - pytest Test/TestAddDish.py
   - coverage run --source=YourChef.userHelper Test/TestUser.py
   - coverage report
   - coverage run --source=YourChef.registration Test/TestRegistration.py
+  - coverage report
+  - coverage run Test/TestAddDish.py
   - coverage report
 
 after_success:
