@@ -13,12 +13,18 @@ script:
   - pytest Test/TestUser.py
   - pytest Test/TestRegistration.py
   - pytest Test/TestAddDish.py
+  - pytest Test/TestUser.py > report/user_test.txt
+  - pytest Test/TestRegistration.py > report/registration_test.txt
+  - pytest Test/TestAddDish.py > report/add_dish_test.txt
   - coverage run --source=YourChef.userHelper Test/TestUser.py
   - coverage report
+  - coverage report > report/user_coverage.txt
   - coverage run --source=YourChef.registration Test/TestRegistration.py
   - coverage report
+  - coverage report > report/registration_coverage.txt
   - coverage run Test/TestAddDish.py
   - coverage report
+  - coverage report > report/dish_coverage.txt
 
 after_success:
   - coveralls

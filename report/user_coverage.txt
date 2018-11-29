@@ -1,0 +1,3 @@
+Name                     Stmts   Miss  Cover
+--------------------------------------------
+YourChef/userHelper.py      40     20    50%
