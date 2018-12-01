@@ -83,7 +83,7 @@ def add_a_dish(restaurant, dish_id, amount):
             break
         i += 1
     if i != len(session['dishes']):
-        print(i)
+        # print(i)
         session['dishes'][i][1] += amount
     else:
         session['dishes'].append([dish_id, amount])

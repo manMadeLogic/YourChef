@@ -16,7 +16,7 @@ class TestAddDishCase(unittest.TestCase):
     def testSession(self):
         # session['dishes'] = [('a', 1)]
         with patch("YourChef.application.session", dict()) as session:
-            session['dishes'] = [('a', 1)]
+            session['dishes'] = [['a', 1]]
             session['total_dishes'] = 1
             session['restaurant'] = 'a'
             assert application.add_a_dish("a", "c", 1)
