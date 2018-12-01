@@ -60,14 +60,6 @@ class UserHelper:
     def delete_user(self, userid):
         response = self.table.delete_item(
             Key={'userid': userid}
-            # Key={
-            #     'year': year,
-            #     'title': title
-            # },
-            # ConditionExpression="info.rating <= :val",
-            # ExpressionAttributeValues= {
-            #     ":val": decimal.Decimal(5)
-            # }
         )
         if response:
             return True

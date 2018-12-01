@@ -39,6 +39,24 @@ def is_logged_in(f):
     return wrap
 
 
+@application.route('/get_dish_in_cart', methods=['POST'])
+def get_dish_in_cart():
+    if logged_in():
+        # print(session['dishes'])
+        return jsonify(session['dishes'])
+    else:
+        return jsonify(None)
+
+
+@application.route('/clear_cart', methods=['POST'])
+def clear_cart():
+    if logged_in():
+        # print(session['dishes'])
+        session['dishes'] = []
+        session['total_dishes'] = 0
+        return jsonify(True)
+
+
 @application.route('/add_dish', methods=['POST'])
 def add_dish():
     amount = 1
@@ -55,7 +73,6 @@ def add_a_dish(restaurant, dish_id, amount):
     if restaurant != session['restaurant']:
         session['restaurant'] = restaurant
         # todo
-        # print("change restaurant")
         session['dishes'] = []
         session['total_dishes'] = 0
     # session['restaurant'] = 'b'
@@ -67,16 +84,18 @@ def add_a_dish(restaurant, dish_id, amount):
         i += 1
     if i != len(session['dishes']):
         print(i)
-        session['dishes'][i] = (dish_id, amount+session['dishes'][i][1])
+        session['dishes'][i][1] += amount
     else:
-        session['dishes'].append((dish_id, amount))
+        session['dishes'].append([dish_id, amount])
     # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
     session['total_dishes'] += 1
     return True
 
+
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if 'logged_in' in session:
+        flash('You are already logged in', 'success')
         return redirect("/")
     if request.method == 'POST':
         # Get Form Fields
@@ -90,10 +109,11 @@ def login():
             session['user_name'] = user["username"]
             session['user_id'] = user["userid"]
             session['dishes'] = []
+            session['total_dishes'] = 0
             return redirect("/")
         else:
             error = err_message
-            return render_template('login.html', error=error, order=session['dishes'])
+            return render_template('login.html', error=error)
     return render_template('login.html')
 
 
@@ -146,8 +166,7 @@ def menu(restaurant):
         return render_template("menu.html", error="invalid restaurant")
     session['restaurant'] = restaurant
     dishes = server_dish.getDish(restaurant)
-    # print(session['dishes'])
-    return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes, order=session['dishes'])
+    return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes)
 
 @application.route('/')
 # @application.route("/home")

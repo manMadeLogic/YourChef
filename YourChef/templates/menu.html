@@ -160,16 +160,7 @@ for (i = 0; i < close.length; i++) {
     <!--alert(div.id);-->
     <!--, 'amount' : 1-->
         $.post($SCRIPT_ROOT + '/add_dish', {'restaurant': "{{restaurant}}", 'dish_id': div.id}, function(data) {
-          <!--if(data){-->
-            <!--alert(data);-->
-            <!--if(data.success){-->
-              <!--$("#score").html("Scores: "+ data.score);-->
-            <!--}-->
-            <!--else{-->
-              <!--$("#score").html(data.score);-->
-            <!--}-->
-          <!--}-->
-          <!--alert("returned");-->
+          refresh();
         });
   }
 }

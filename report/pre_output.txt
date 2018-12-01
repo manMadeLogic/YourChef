@@ -1,1 +1,5 @@
-YourChef/application.py:15: 'return' outside function
+YourChef/server.py:20: undefined name 'form'
+YourChef/dbHelper.py:18: local variable 'price' is assigned to but never used
+Test/TestManageDish.py:3: 'Test.SampleManageDish.dishes' imported but unused
+Test/TestManageDish.py:18: undefined name 'server'
+Test/TestManageDish.py:22: undefined name 'RegistrationHelper'
