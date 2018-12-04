@@ -1,7 +1,6 @@
 import boto3
 from boto3.dynamodb import conditions
 import os
-import re
 
 
 class DishHelper:
@@ -13,15 +12,7 @@ class DishHelper:
         dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_ManageDish)
 
-    def add_dish(self, restaurant, form):
-
-        # dishname = form.dishname.data
-        dishname = form['dishname']
-        price = form['price']
-        if re.findall(r'[^a-zA-Z-\s]', dishname) or re.findall('[^A-Za-z0-9_]', restaurant):
-            return False, "Can't contain special character."
-
-        # todo price
+    def add_dish(self, restaurant, dishname, price):
 
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
@@ -55,7 +46,6 @@ class DishHelper:
         else:
             return False
 
-
     def get_dish(self, restaurant):
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
@@ -66,4 +56,6 @@ class DishHelper:
                 dishes.append(i['dishname'] + '$' + str(i['price']))
             return dishes
         else:
-            return None
+            # print(response)
+            # todo what to do if no dishes?
+            return []

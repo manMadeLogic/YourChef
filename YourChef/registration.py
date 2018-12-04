@@ -20,10 +20,7 @@ class RegistrationHelper:
             return False, "Repeated user ID"
         else:
             return self.db.insert(form)
-            # return False
 
-    # only for test
+    # only for test and quick fix
     def delete_user(self, user_id):
         return self.db.delete_user(user_id)
-    # def check_id(self, user_id):
-    #     return True

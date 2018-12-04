@@ -82,10 +82,10 @@
     refresh();
     <!--alert(0);-->
     $('#clear').click(function () {
-		<!--alert(0);-->
-		$.post($SCRIPT_ROOT + '/clear_cart', function(data) {});
-		<!--return false;-->
-		refresh();
+		$.post($SCRIPT_ROOT + '/clear_cart', function(data) {
+		    refresh();
+		});
+
 	});
   });
 
@@ -107,6 +107,7 @@
           ul.appendChild(li);
         }
       }
+      <!--todo not logged in-->
     });
   }
 </script>

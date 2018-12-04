@@ -2,15 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
-from YourChef.server import ManageDishHelper
+from YourChef.menu import ManageDishHelper
 from YourChef.registration import RegistrationHelper
+from YourChef.restaurant import RestaurantHelper
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
 
-server = RegistrationHelper()
+server_register = RegistrationHelper()
 server_dish = ManageDishHelper()
+server_restaurant = RestaurantHelper()
 
 
 class RegisterForm(Form):
@@ -37,6 +39,52 @@ def is_logged_in(f):
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
     return wrap
+
+
+@application.route('/login', methods=['GET', 'POST'])
+def login():
+    if 'logged_in' in session:
+        flash('You are already logged in', 'success')
+        return redirect("/")
+    if request.method == 'POST':
+        # Get Form Fields
+        user_id = request.form['userid']
+        password = request.form['password']
+        user, err_message = server_register.login(user_id, password)
+        if user:  # result > 0
+            # Passed
+            flash('You are now logged in', 'success')
+            session['logged_in'] = True
+            session['user_name'] = user["username"]
+            session['user_id'] = user["userid"]
+            session['dishes'] = []
+            session['total_dishes'] = 0
+            return redirect("/")
+        else:
+            error = err_message
+            return render_template('login.html', error=error)
+    return render_template('login.html')
+
+
+@application.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        if server_register.register(form):
+            flash('You are now registered and can log in', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Register fail! Please try again', 'fail')
+
+    return render_template('register.html', form=form)
+
+
+@application.route('/logout')
+@is_logged_in
+def logout():
+    session.clear()
+    flash('You are now logged out', 'success')
+    return redirect(url_for('login'))
 
 
 @application.route('/get_dish_in_cart', methods=['POST'])
@@ -69,7 +117,6 @@ def add_a_dish(restaurant, dish_id, amount):
     if session['total_dishes'] >= 10:
         return False
 
-    # print(restaurant, session['restaurant'])
     if restaurant != session['restaurant']:
         session['restaurant'] = restaurant
         # todo
@@ -92,54 +139,6 @@ def add_a_dish(restaurant, dish_id, amount):
     return True
 
 
-@application.route('/login', methods=['GET', 'POST'])
-def login():
-    if 'logged_in' in session:
-        flash('You are already logged in', 'success')
-        return redirect("/")
-    if request.method == 'POST':
-        # Get Form Fields
-        user_id = request.form['userid']
-        password = request.form['password']
-        user, err_message = server.login(user_id, password)
-        if user:  # result > 0
-            # Passed
-            flash('You are now logged in', 'success')
-            session['logged_in'] = True
-            session['user_name'] = user["username"]
-            session['user_id'] = user["userid"]
-            session['dishes'] = []
-            session['total_dishes'] = 0
-            return redirect("/")
-        else:
-            error = err_message
-            return render_template('login.html', error=error)
-    return render_template('login.html')
-
-
-@application.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():
-        if server.register(form):
-            flash('You are now registered and can log in', 'success')
-            return redirect(url_for('login'))
-        else:
-            flash('Register fail! Please try again', 'fail')
-
-    return render_template('register.html', form=form)
-    # return render_template('register.html', form=form)
-
-
-@application.route('/logout')
-@is_logged_in
-def logout():
-    session.clear()
-    flash('You are now logged out', 'success')
-    return redirect(url_for('login'))
-
-
-
 @application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])
 def manageDish(restaurant):
     # session['restaurant'] = restaurant
@@ -155,18 +154,15 @@ def manageDish(restaurant):
     return render_template("manageDish.html", dishes=dishes)
 
 
-def find_restaurant(restaurant):
-    return restaurant == 'a'
-
-
 @application.route('/menu/<string:restaurant>')
-# @application.route("/home")
 def menu(restaurant):
-    if not find_restaurant(restaurant):
+    if not server_restaurant.find_restaurant(restaurant):
         return render_template("menu.html", error="invalid restaurant")
     session['restaurant'] = restaurant
     dishes = server_dish.getDish(restaurant)
+    # print (dishes)
     return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes)
+
 
 @application.route('/')
 # @application.route("/home")
@@ -174,11 +170,13 @@ def index():
     return render_template("home.html")
     # return render_template('radio.group.html')
 
+
 @application.route('/quick_fix')
 def quick_fix():
     result = server_dish.deleteDish("a", "chi")
     flash('Urgent Quick Fix', str(result))
     return render_template("home.html")
+
 
 if __name__ == '__main__':
     application.run(debug=True)

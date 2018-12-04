@@ -1,9 +1,10 @@
 import googlemaps
 import os
-gmap_key = os.environ.get('gmap_key')
+
 
 class MapHelper:
     def __init__(self):
+        gmap_key = os.environ.get('gmap_key')
         self.gmaps = googlemaps.Client(key=gmap_key)
 
     def get_restuarant_info(self, restuarant_name,latitude, longitude):

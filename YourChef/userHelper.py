@@ -11,11 +11,8 @@ class UserHelper:
         region = os.environ.get('region')
         aws_id = os.environ.get('Access_key_ID')
         aws_key = os.environ.get('Secret_access_key')
-        # print(region, aws_id, aws_key)
         dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
-        # self.response = self.table.scan()
-        # self.user_id = len(self.response['Items']) + 1
 
     def insert(self, form):# name, email, username, password
         email = form.email.data
@@ -41,7 +38,6 @@ class UserHelper:
         )
         if response['Items']:
             user = response['Items'][0]
-            # print(user)
             return user
         else:
             return None
@@ -50,7 +46,6 @@ class UserHelper:
         user = self.get_user(userid)
         if user:
             user_pwd_saved = user['password']
-            # print response['Items'][0]['id']
             if sha256_crypt.verify(password, user_pwd_saved):
                 return user, "Login success"
             else:
