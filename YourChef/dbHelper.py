@@ -14,10 +14,14 @@ class DishHelper:
         self.table = dynamodb.Table(self.table_name_ManageDish)
 
     def add_dish(self, restaurant, form):
+
+        # dishname = form.dishname.data
         dishname = form['dishname']
         price = form['price']
         if re.findall(r'[^a-zA-Z-\s]', dishname) or re.findall('[^A-Za-z0-9_]', restaurant):
             return False, "Can't contain special character."
+
+        # todo price
 
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
@@ -29,16 +33,28 @@ class DishHelper:
             if i['dishname'] == dishname:
                 return False, "DishName already added."
 
+        # print("[" + price + "]")
         response = self.table.put_item(
             Item={
                 'restaurant': restaurant,
-                'dishname': dishname
+                'dishname': dishname,
+                'price': price
             }
         )
         if response:
             return True, "Success"
         else:
             return False, "Insert fail"
+
+    def delete_dish(self, restaurant, dishname):
+        response = self.table.delete_item(
+            Key={'restaurant': restaurant, 'dishname': dishname}
+        )
+        if response:
+            return True
+        else:
+            return False
+
 
     def get_dish(self, restaurant):
         response = self.table.query(

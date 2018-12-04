@@ -19,11 +19,11 @@ class TestManageDishCase(unittest.TestCase):
 
 
     def testFailRegister(self):
-        server = ManageDishHelper("test_user")
+        server = ManageDishHelper("DishInfo")
         for dish in manage_fail_dish:
-            form = Object()
-            form.restaurant = Data(dish['restaurant'])
-            form.dishname = Data(dish['dishname'])
-            result, message = server.addDish(form.restaurant, form.dishname)
+            # form = Object()
+            # form.restaurant = Data(dish['restaurant'])
+            # form.dishname = Data(dish['dishname'])
+            # form.price = Data(dish['price'])
+            result, message = server.addDish(dish['restaurant'], dish)
             assert not result
-            

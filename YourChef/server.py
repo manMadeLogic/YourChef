@@ -13,12 +13,15 @@ class RestaurantHelper:
         return address
 
 class ManageDishHelper:
-    def __init__(self, db_name = "DishInfo"):
+    def __init__(self, db_name="DishInfo"):
         self.db = DishHelper(db_name)
 
-    def addDish(self, restaurant, dishname):
+    def addDish(self, restaurant, form):
         valid, message = self.db.add_dish(restaurant, form)
         return valid, message
 
     def getDish(self, restaurant):
         return self.db.get_dish(restaurant)
+
+    def deleteDish(self, restaurant, dishname):
+        return self.db.delete_dish(restaurant, dishname)

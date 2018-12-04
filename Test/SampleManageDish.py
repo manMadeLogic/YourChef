@@ -2,41 +2,50 @@
 dishes = [
     {
         'restaurant': "a",
-        'dishname': "a"
+        'dishname': "a",
+        'price': 10
     },
     {
         'restaurant': "a",
-        'dishname': "b"
+        'dishname': "b",
+        'price': 10
     },
     {
         'restaurant': "a",
-        'dishname': "c"
+        'dishname': "c",
+        'price': 10
     },
     {
         'restaurant': "a",
-        'dishname': "d"
+        'dishname': "d",
+        'price': 10
     }
 ]
 
 manage_fail_dish = [
     {
         'restaurant': "a",
-        'dishname': "!@#$%"
+        'dishname': "!@#$%",
+        'price': 10
     },
     {
         'restaurant': "a",
-        'dishname': "<>?"
+        'dishname': "<>?",
+        'price': 10
     },
     {
         'restaurant': "b",
-        'dishname': "<>?"
+        'dishname': "<>?",
+        'price': 10
     },
     {
         'restaurant': "b",
-        'dishname': "e"
+        'dishname': "e",
+        'price': 10
     },
     {
         'restaurant': "a",
-        'dishname': "a"
+        'dishname': "a",
+        'price': 10
     }
 ]
