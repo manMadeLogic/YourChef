@@ -34,14 +34,14 @@ class TestRegistrationCase(unittest.TestCase):
     def testGetUser(self):
         server = RegistrationHelper("test_user")
         for user in users:
-            login, message = server.login(user["userid"], user['password'])
+            login, message = server.login(user)
             assert login
         #
         fake_password = "xxxx00"
         for user in users:
-            login, message = server.login(user["userid"], fake_password)
+            user['password'] = fake_password
+            login, message = server.login(user)
             assert not login
-
 
     def testRegister(self):
         server = RegistrationHelper("test_user")

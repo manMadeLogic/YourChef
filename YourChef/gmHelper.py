@@ -13,8 +13,8 @@ class MapHelper:
                                                location_bias=
                                                'point:'+str(latitude)+','+str(longitude),
                                                language='en')
-        print('point:'+str(latitude)+','+str(longitude))
-        print(nearby_result)
+        # print('point:'+str(latitude)+','+str(longitude))
+        # print(nearby_result)
         if(nearby_result['status']!="OK"):
             return "Zero Result"
         return nearby_result['candidates']

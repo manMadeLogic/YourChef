@@ -19,6 +19,34 @@ dishes = [
         'restaurant': "a",
         'dishname': "d",
         'price': 10
+    },
+    {
+        'restaurant': "b",
+        'dishname': "d",
+        'price': 10
+    }
+]
+
+insert_dishes = [
+    {
+        'restaurant': "a",
+        'dishname': "x",
+        'price': 10
+    },
+    {
+        'restaurant': "a",
+        'dishname': "z",
+        'price': 10
+    },
+    {
+        'restaurant': "b",
+        'dishname': "x",
+        'price': 10
+    },
+    {
+        'restaurant': "b",
+        'dishname': "z",
+        'price': 10
     }
 ]
 

@@ -6,7 +6,9 @@ class RegistrationHelper:
     def __init__(self, db_name="RegisterInfo"):
         self.db = UserHelper(db_name)
 
-    def login(self, user_id, password):
+    def login(self, form):
+        user_id = form['userid']
+        password = form['password']
         return self.db.check_password(user_id, password)
 
     def register(self, form):

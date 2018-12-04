@@ -23,7 +23,7 @@ class UserHelper:
             Item={
                 'email': email,
                 'userid': userid,
-                'password': sha256_crypt.encrypt(str(password)),
+                'password': sha256_crypt.hash(str(password)),
                 'username': username
             }
         )

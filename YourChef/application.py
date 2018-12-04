@@ -47,10 +47,7 @@ def login():
         flash('You are already logged in', 'success')
         return redirect("/")
     if request.method == 'POST':
-        # Get Form Fields
-        user_id = request.form['userid']
-        password = request.form['password']
-        user, err_message = server_register.login(user_id, password)
+        user, err_message = server_register.login(request.form)
         if user:  # result > 0
             # Passed
             flash('You are now logged in', 'success')

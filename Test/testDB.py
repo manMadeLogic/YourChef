@@ -1,8 +1,11 @@
-import boto3
+# import boto3
 #from YourChef.credentials import region, aws_id, aws_key
-from SampleUser import users
-from passlib.hash import sha256_crypt
+# from Test.SampleUser import users
+# from passlib.hash import sha256_crypt
 import argparse
+
+from YourChef.userHelper import UserHelper
+
 
 class arguments:
     def __init__(self, name='RegisterInfo'):
@@ -17,36 +20,51 @@ class arguments:
         self.region = args.aws_region
         self.aws_id = args.aws_id
         self.aws_key = args.aws_key
+#
+# if __name__ == '__main__':
+#     args = arguments()
+#     dynamodb = boto3.resource('dynamodb', region_name=args.region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
+#
+#     table = dynamodb.create_table(
+#         TableName='test_user',
+#         KeySchema=[
+#              {'AttributeName': 'userid', 'KeyType': 'HASH'},
+#         ],
+#         AttributeDefinitions=[
+#             {'AttributeName': 'userid', 'AttributeType': 'S'}
+#         ],
+#         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
+#     )
+#     # Wait until the table exists.
+#     table.meta.client.get_waiter('table_exists').wait(TableName='test_user')
+#     print('created table {}.'.format('test_user'))
+#
+#
+#     for user in users:
+#         response = table.put_item(
+#             Item={
+#                 'email': user["email"],
+#                 'userid': user["userid"],
+#                 'password': sha256_crypt.encrypt(str(user["password"])),
+#                 'username': user["username"]
+#             }
+#         )
+#         if response:
+#             print(user['userid']+" saved")
+#         else:
+#             print(user['userid'] + " save fail")
+
+
 
 if __name__ == '__main__':
-    args = arguments()
-    dynamodb = boto3.resource('dynamodb', region_name=args.region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
+    db = UserHelper("test_user")
 
-    table = dynamodb.create_table(
-        TableName='test_user',
-        KeySchema=[
-             {'AttributeName': 'userid', 'KeyType': 'HASH'},
-        ],
-        AttributeDefinitions=[
-            {'AttributeName': 'userid', 'AttributeType': 'S'}
-        ],
-        ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
-    )
-    # Wait until the table exists.
-    table.meta.client.get_waiter('table_exists').wait(TableName='test_user')
-    print('created table {}.'.format('test_user'))
+    response = db.table.scan()
+    if response['Items']:
+        for i in response['Items']:
+            print(i)
 
-
-    for user in users:
-        response = table.put_item(
-            Item={
-                'email': user["email"],
-                'userid': user["userid"],
-                'password': sha256_crypt.encrypt(str(user["password"])),
-                'username': user["username"]
-            }
-        )
-        if response:
-            print(user['userid']+" saved")
-        else:
-            print(user['userid'] + " save fail")
+    #
+    # db.delete_user("lt6666")
+    # db.delete_user("xc-6666")
+    # db.delete_user("xc6666")
