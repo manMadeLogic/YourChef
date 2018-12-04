@@ -1,6 +1,6 @@
 import unittest
 from YourChef.server import ManageDishHelper
-from Test.SampleManageDish import dishes, manage_fail_dish
+from Test.SampleManageDish import manage_fail_dish
 
 
 class Data:
@@ -14,17 +14,16 @@ class Object(object):
 
 class TestManageDishCase(unittest.TestCase):
     def testServer(self):
-        self.server = ManageDishHelper('DishInfo')
+        server = ManageDishHelper('DishInfo')
         assert server is not None
 
 
     def testFailRegister(self):
-        server = RegistrationHelper("test_user")
+        server = ManageDishHelper("test_user")
         for dish in manage_fail_dish:
             form = Object()
             form.restaurant = Data(dish['restaurant'])
             form.dishname = Data(dish['dishname'])
             result, message = server.addDish(form.restaurant, form.dishname)
             assert not result
-
             

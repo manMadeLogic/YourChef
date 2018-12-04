@@ -140,9 +140,9 @@ def logout():
 
 
 
-@application.route('/manageDish', methods=['GET', 'POST'])
-def manageDish():
-    restaurant = "a"
+@application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])
+def manageDish(restaurant):
+    # session['restaurant'] = restaurant
     dishes = server_dish.getDish(restaurant)
     if request.method == 'POST':
         valid, message = server_dish.addDish(restaurant, request.form)
