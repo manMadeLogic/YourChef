@@ -142,11 +142,13 @@ input {
 </form>
 
 
-<ul id="myUL">
-  {% for dish in dishes %}
-    <li>{{dish}}</li>
-  {% endfor %}
-</ul>
+<!--<ul id="myUL">-->
+  <!--{% for dish in dishes %}-->
+    <!--<li>{{dish}}</li>-->
+  <!--{% endfor %}-->
+<!--</ul>-->
+
+{% include "/static/_dishes.html" %}
 
 <script>
 // Create a "close" button and append it to each list item

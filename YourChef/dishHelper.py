@@ -53,7 +53,21 @@ class DishHelper:
         dishes = []
         if response['Items']:
             for i in response['Items']:
-                dishes.append(i['dishname'] + '$' + str(i['price']))
+                dishes.append([i['dishname'], str(i['price'])])
+            return dishes
+        else:
+            # print(response)
+            # todo what to do if no dishes?
+            return []
+
+    def get_dish_price(self, restaurant, dishname):
+        response = self.table.query(
+            KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
+        )
+        dishes = []
+        if response['Items']:
+            for i in response['Items']:
+                dishes.append([i['dishname'], str(i['price'])])
             return dishes
         else:
             # print(response)

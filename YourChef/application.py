@@ -52,6 +52,7 @@ def login():
             # Passed
             flash('You are now logged in', 'success')
             session['logged_in'] = True
+            session['is_restaurant'] = False
             session['user_name'] = user["username"]
             session['user_id'] = user["userid"]
             session['dishes'] = []
@@ -107,10 +108,12 @@ def add_dish():
     amount = 1
     restaurant = request.values.get('restaurant')
     dish_id = request.values.get('dish_id')
-    return jsonify(add_a_dish(restaurant, dish_id, amount))
+    price = request.values.get('price')
+    price = "10"
+    return jsonify(add_a_dish(restaurant, dish_id, price, amount))
 
 
-def add_a_dish(restaurant, dish_id, amount):
+def add_a_dish(restaurant, dish_id, price, amount):
     if session['total_dishes'] >= 10:
         return False
 
@@ -128,9 +131,9 @@ def add_a_dish(restaurant, dish_id, amount):
         i += 1
     if i != len(session['dishes']):
         # print(i)
-        session['dishes'][i][1] += amount
+        session['dishes'][i][2] += amount
     else:
-        session['dishes'].append([dish_id, amount])
+        session['dishes'].append([dish_id, price, amount])
     # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
     session['total_dishes'] += 1
     return True
@@ -138,7 +141,11 @@ def add_a_dish(restaurant, dish_id, amount):
 
 @application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])
 def manageDish(restaurant):
-    # session['restaurant'] = restaurant
+    if session['is_restaurant']:
+        restaurant = session['restaurant']
+    # else:
+        # todo
+        # redirect("/")
     dishes = server_dish.getDish(restaurant)
     if request.method == 'POST':
         valid, message = server_dish.addDish(restaurant, request.form)
