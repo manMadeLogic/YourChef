@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
-from YourChef.menu import ManageDishHelper
+from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
 
@@ -11,7 +11,7 @@ application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
 
 server_register = RegistrationHelper()
-server_dish = ManageDishHelper()
+server_menu = MenuHelper()
 server_restaurant = RestaurantHelper()
 
 
@@ -110,33 +110,7 @@ def add_dish():
     dish_id = request.values.get('dish_id')
     price = request.values.get('price')
     price = "10"
-    return jsonify(add_a_dish(restaurant, dish_id, price, amount))
-
-
-def add_a_dish(restaurant, dish_id, price, amount):
-    if session['total_dishes'] >= 10:
-        return False
-
-    if restaurant != session['restaurant']:
-        session['restaurant'] = restaurant
-        # todo
-        session['dishes'] = []
-        session['total_dishes'] = 0
-    # session['restaurant'] = 'b'
-    # print(restaurant, dish_id, session['dishes'], session['total_dishes'])
-    i = 0
-    while i < len(session['dishes']):
-        if dish_id == session['dishes'][i][0]:
-            break
-        i += 1
-    if i != len(session['dishes']):
-        # print(i)
-        session['dishes'][i][2] += amount
-    else:
-        session['dishes'].append([dish_id, price, amount])
-    # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
-    session['total_dishes'] += 1
-    return True
+    return jsonify(server_menu.add_a_dish(session, restaurant, dish_id, price, amount))
 
 
 @application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])
@@ -146,14 +120,14 @@ def manageDish(restaurant):
     # else:
         # todo
         # redirect("/")
-    dishes = server_dish.getDish(restaurant)
+    dishes = server_menu.getDish(restaurant)
     if request.method == 'POST':
-        valid, message = server_dish.addDish(restaurant, request.form)
+        valid, message = server_menu.addDish(restaurant, request.form)
         if valid is False:
             flash(message, 'fail')
         else:
             flash('Successfully added', 'success')
-        dishes = server_dish.getDish(restaurant)
+        dishes = server_menu.getDish(restaurant)
 
     return render_template("manageDish.html", dishes=dishes)
 
@@ -163,7 +137,7 @@ def menu(restaurant):
     if not server_restaurant.find_restaurant(restaurant):
         return render_template("menu.html", error="invalid restaurant")
     session['restaurant'] = restaurant
-    dishes = server_dish.getDish(restaurant)
+    dishes = server_menu.getDish(restaurant)
     # print (dishes)
     return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes)
 
@@ -177,7 +151,7 @@ def index():
 
 @application.route('/quick_fix')
 def quick_fix():
-    result = server_dish.deleteDish("a", "chi")
+    result = server_menu.deleteDish("a", "chi")
     flash('Urgent Quick Fix', str(result))
     return render_template("home.html")
 

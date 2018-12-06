@@ -1,2 +1,0 @@
-Test/TestMenu.py:3: 'Test.SampleManageDish.dishes' imported but unused
-Test/TestUser.py:5: 'Test.SampleUser.insert_fail_users' imported but unused
