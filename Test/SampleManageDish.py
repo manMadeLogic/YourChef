@@ -22,6 +22,11 @@ dishes = [
     },
     {
         'restaurant': "b",
+        'dishname': "e",
+        'price': 10
+    },
+    {
+        'restaurant': "b",
         'dishname': "d",
         'price': 10
     }
@@ -64,11 +69,6 @@ manage_fail_dish = [
     {
         'restaurant': "b",
         'dishname': "<>?",
-        'price': 10
-    },
-    {
-        'restaurant': "b",
-        'dishname': "e",
         'price': 10
     },
     {
