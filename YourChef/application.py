@@ -108,9 +108,7 @@ def add_dish():
     amount = 1
     restaurant = request.values.get('restaurant')
     dish_id = request.values.get('dish_id')
-    price = request.values.get('price')
-    price = "10"
-    return jsonify(server_menu.add_a_dish(session, restaurant, dish_id, price, amount))
+    return jsonify(server_menu.add_to_cart(session, restaurant, dish_id, amount))
 
 
 @application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])

@@ -19,34 +19,39 @@ class MenuHelper:
         return self.db.get_dish(restaurant)
 
     def getDishPrice(self, restaurant, dishname):
-        return self.db.get_dish_price(restaurant, dishname)
+        dish, message = self.db.get_dish_price(restaurant, dishname)
+        return dish
 
     def deleteDish(self, restaurant, dishname):
         return self.db.delete_dish(restaurant, dishname)
 
-    def add_a_dish(self, session, restaurant, dish_id, price, amount):
+        # todo  cart class
+    def add_to_cart(self, session, restaurant, dishname, amount):
         if session['total_dishes'] >= 10:
             return False
 
-        # todo  cart class
+        dish = self.getDishPrice(restaurant, dishname)
+        if dish:
+            price = dish['price']
+        else:
+            return False
 
         if restaurant != session['restaurant']:
             session['restaurant'] = restaurant
-            # todo
             session['dishes'] = []
             session['total_dishes'] = 0
         # session['restaurant'] = 'b'
         # print(restaurant, dish_id, session['dishes'], session['total_dishes'])
         i = 0
         while i < len(session['dishes']):
-            if dish_id == session['dishes'][i][0]:
+            if dishname == session['dishes'][i][0]:
                 break
             i += 1
         if i != len(session['dishes']):
             # print(i)
             session['dishes'][i][2] += amount
         else:
-            session['dishes'].append([dish_id, price, amount])
+            session['dishes'].append([dishname, price, amount])
         # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
         session['total_dishes'] += 1
         return True

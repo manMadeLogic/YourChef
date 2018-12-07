@@ -25,31 +25,34 @@ class TestManageDishCase(unittest.TestCase):
             assert server.deleteDish(dish['restaurant'], dish["dishname"])
 
 
-    def testSession(self):
+    def testCart(self):
         server = MenuHelper("test_dish2")
+        # server = MenuHelper()
 
         session = dict()
         session['dishes'] = [['a', 10, 1]]
         session['total_dishes'] = 1
         session['restaurant'] = 'a'
-        assert server.add_a_dish(session, "a", "c", 10, 1)
+        assert server.add_to_cart(session, "a", "c", 1)
         # print(len(session['dishes']))
         # print(session['dishes'])
         assert len(session['dishes']) == 2 and session['total_dishes'] == 2
-        assert server.add_a_dish(session, "a", "a", 9, 1)
-        assert server.add_a_dish(session, "a", "c", 10, 1)
+        assert server.add_to_cart(session, "a", "a", 1)
+        assert server.add_to_cart(session, "a", "c", 1)
+        # print(server.add_to_cart(session, "a", "zzzzz", 1))
+        assert not server.add_to_cart(session, "a", "zzzzz", 1)
         # print(len(session['dishes']))
         # print(session['dishes'])
         assert len(session['dishes']) == 2 and session['total_dishes'] == 4
-        assert server.add_a_dish(session, "a", "a", 9, 1)
-        assert server.add_a_dish(session, "a", "c", 10, 1)
-        assert server.add_a_dish(session, "a", "a", 9, 1)
-        assert server.add_a_dish(session, "a", "c", 10, 1)
-        assert server.add_a_dish(session, "a", "a", 9, 1)
-        assert server.add_a_dish(session, "a", "c", 10, 1)
+        assert server.add_to_cart(session, "a", "a", 1)
+        assert server.add_to_cart(session, "a", "c", 1)
+        assert server.add_to_cart(session, "a", "a", 1)
+        assert server.add_to_cart(session, "a", "c", 1)
+        assert server.add_to_cart(session, "a", "a", 1)
+        assert server.add_to_cart(session, "a", "c", 1)
         assert session['total_dishes'] == 10
-        assert not server.add_a_dish(session, "a", "a", 9, 1)
-        assert not server.add_a_dish(session, "a", "c", 10, 1)
+        assert not server.add_to_cart(session, "a", "a", 1)
+        assert not server.add_to_cart(session, "a", "c", 1)
         assert session['total_dishes'] == 10
 
 

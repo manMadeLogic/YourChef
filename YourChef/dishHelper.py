@@ -11,6 +11,7 @@ class DishHelper:
         aws_key = os.environ.get('Secret_access_key')
         dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_ManageDish)
+        # todo price type
 
     def add_dish(self, restaurant, dishname, price):
         # todo find dish
@@ -64,13 +65,9 @@ class DishHelper:
     def get_dish_price(self, restaurant, dishname):
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
+            & conditions.Key('dishname').eq(dishname)
         )
-        dishes = []
         if response['Items']:
-            for i in response['Items']:
-                dishes.append([i['dishname'], str(i['price'])])
-            return dishes
+            return response['Items'][0], "Success"
         else:
-            # print(response)
-            # todo what to do if no dishes?
-            return []
+            return None, "No dish"
