@@ -5,11 +5,11 @@ from Test.SampleManageDish import manage_fail_dish
 
 class TestManageDishCase(unittest.TestCase):
     def testServer(self):
-        server = DishHelper('DishInfo')
+        server = DishHelper('test_dish')
         assert server is not None
 
     def testFailRegister(self):
-        server = DishHelper("DishInfo")
+        server = DishHelper("test_dish")
         for dish in manage_fail_dish:
             # form = Object()
             # form.restaurant = Data(dish['restaurant'])

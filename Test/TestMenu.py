@@ -6,17 +6,17 @@ from Test.SampleManageDish import manage_fail_dish, insert_dishes
 
 class TestManageDishCase(unittest.TestCase):
     def testServer(self):
-        server = MenuHelper('DishInfo')
+        server = MenuHelper('test_dish')
         assert server is not None
 
     def testFailAddDish(self):
-        server = MenuHelper("DishInfo")
+        server = MenuHelper("test_dish")
         for dish in manage_fail_dish:
             result, message = server.addDish(dish['restaurant'], dish)
             assert not result
 
     def testAddAndDeleteDish(self):
-        server = MenuHelper("DishInfo")
+        server = MenuHelper("test_dish")
         for dish in insert_dishes:
             result, message = server.addDish(dish['restaurant'], dish)
             assert result
@@ -26,7 +26,7 @@ class TestManageDishCase(unittest.TestCase):
 
 
     def testSession(self):
-        server = MenuHelper("DishInfo")
+        server = MenuHelper("test_dish")
 
         session = dict()
         session['dishes'] = [['a', 10, 1]]

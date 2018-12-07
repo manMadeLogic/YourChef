@@ -4,7 +4,7 @@ import os
 
 
 class DishHelper:
-    def __init__(self, name = "DishInfo"):
+    def __init__(self, name="DishInfo"):
         self.table_name_ManageDish = name
         region = os.environ.get('region')
         aws_id = os.environ.get('Access_key_ID')
@@ -13,7 +13,8 @@ class DishHelper:
         self.table = dynamodb.Table(self.table_name_ManageDish)
 
     def add_dish(self, restaurant, dishname, price):
-
+        # todo find dish
+        # todo don't test restaurant exist
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
         )
