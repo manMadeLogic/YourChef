@@ -36,15 +36,6 @@ class TestUserFunctionCase(unittest.TestCase):
             result, message = db.insert(form)
             assert result
 
-        # for user in insert_fail_users:
-        #     form = Object()
-        #     form.email = Data(user["email"])
-        #     form.username = Data(user["username"])
-        #     form.password = Data(user["password"])
-        #     form.userid = Data("")
-        #     result, message = db.insert(form)
-        #     assert not result
-
         for user in insert_users:
             assert db.delete_user(user["userid"])
 

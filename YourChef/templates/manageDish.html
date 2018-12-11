@@ -1,11 +1,10 @@
-
 {% extends "layout.html" %}
 {% block content %}
 
 
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
 body {
   margin: 50;
   min-width: 250px;
@@ -126,26 +125,28 @@ input {
 .addBtn:hover {
   background-color: #bbb;
 }
-</style>
+
+
+    </style>
 </head>
 <body>
 
 <form method="post">
-<div id="myDIV" class="header">
-  <h2 style="margin:5px">Manage Dish</h2>
-	   <div class="form-group">
-  <input type="text" name="dishname" id="dishname" placeholder="Add Dish Here.">
-  <input type="text" name="price" id="price" placeholder="Add Price Here.">
-  <input class="addBtn" type="submit" value="Add">
+    <div id="myDIV" class="header">
+        <h2 style="margin:5px">Manage Dish</h2>
+        <div class="form-group">
+            <input type="text" name="dishname" id="dishname" placeholder="Add Dish Here.">
+            <input type="text" name="price" id="price" placeholder="Add Price Here.">
+            <input class="addBtn" type="submit" value="Add">
+        </div>
     </div>
-</div>
 </form>
 
 
 <!--<ul id="myUL">-->
-  <!--{% for dish in dishes %}-->
-    <!--<li>{{dish}}</li>-->
-  <!--{% endfor %}-->
+<!--{% for dish in dishes %}-->
+<!--<li>{{dish}}</li>-->
+<!--{% endfor %}-->
 <!--</ul>-->
 
 {% include "/static/_dishes.html" %}
@@ -206,6 +207,8 @@ function newElement() {
     }
   }
 }
+
+
 </script>
 
 </body>

@@ -6,76 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 
     {% if title %}
-        <title>Flask Blog - {{ title }}</title>
+    <title>Flask Blog - {{ title }}</title>
     {% else %}
-        <title>Flask Blog</title>
+    <title>Flask Blog</title>
     {% endif %}
 </head>
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
   var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+
 </script>
 
 <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+<header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-          <a class="navbar-brand mr-4" href="/">Flask Blog</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="/">Home</a>
-              <a class="nav-item nav-link" href="/about">About</a>
+            <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
+                    aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="/">Home</a>
+                    <a class="nav-item nav-link" href="/about">About</a>
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="/login">Login</a>
+                    <a class="nav-item nav-link" href="/register">Register</a>
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
+                </div>
             </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" href="/login">Login</a>
-              <a class="nav-item nav-link" href="/register">Register</a>
-              <a class="nav-item nav-link" href="/logout">Logout</a>
-            </div>
-          </div>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
-    {% include "/static/_messages.html" %}
+{% include "/static/_messages.html" %}
 
-    <main role="main" class="container">
-      <div class="row">
+<main role="main" class="container">
+    <div class="row">
         <div class="col-md-8">
-          {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
         </div>
-    {% if dishes %}
+        {% if dishes %}
         <div class="col-md-4">
-          <div class="content-section">
+            <div class="content-section">
 
-              <h3>Your order <a id="clear" class="btn btn-primary" type="submit">clear all</a></h3>
+                <h3>Your order <a id="clear" class="btn btn-primary" type="submit">clear all</a></h3>
 
-            <!--<p class='text-muted'>You can put any information here you'd like.-->
-              <ul class="list-group" id="cart">
-                  <!--<li><input id="clear" class="btn btn-primary" type="submit" value="clear all"></li>-->
+                <!--<p class='text-muted'>You can put any information here you'd like.-->
+                <ul class="list-group" id="cart">
+                    <!--<li><input id="clear" class="btn btn-primary" type="submit" value="clear all"></li>-->
 
-              <!--{% for dish in order %}-->
-                <!--<li>{{dish}}</li>-->
-              <!--{% endfor %}-->
-                <!--<li class="list-group-item list-group-item-light">Latest Posts</li>-->
-              </ul>
-            <!--</p>-->
-          </div>
+                    <!--{% for dish in order %}-->
+                    <!--<li>{{dish}}</li>-->
+                    <!--{% endfor %}-->
+                    <!--<li class="list-group-item list-group-item-light">Latest Posts</li>-->
+                </ul>
+                <!--todo-->
+                <p id="total">Total: 0</p>
+                <br/>
+                <a class="btn btn-primary" href="/check_out">check out</a>
+                <!--</p>-->
+            </div>
         </div>
-    {% endif %}
-      </div>
-    </main>
+        {% endif %}
+    </div>
+</main>
 
 <script type="text/javascript">
   $(function() {
@@ -98,24 +106,28 @@
     <!--}-->
     $.post($SCRIPT_ROOT + '/get_dish_in_cart', function(data) {
       if(data != ""){
+        <!--alert(data.dishes);-->
 
-        for(i in data){
+        for(i in data.dishes){
             <!--alert(data[i][0]);-->
             <!--alert(data[i][1]);-->
           var li = document.createElement("li");
-          li.appendChild(document.createTextNode(data[i][0]+"\t"+data[i][1]+"\t"+data[i][2]));
+          li.appendChild(document.createTextNode(data.dishes[i][0]+"\t"+data.dishes[i][1]+"\t"+data.dishes[i][2]));
           ul.appendChild(li);
         }
+        $('#total').text("total:" +  data.total);
       }
       <!--todo not logged in-->
     });
   }
+
+
 </script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 </body>
 </html>

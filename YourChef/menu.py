@@ -1,6 +1,7 @@
 from YourChef.dishHelper import DishHelper
 import re
 
+
 class MenuHelper:
     def __init__(self, db_name="DishInfo"):
         self.db = DishHelper(db_name)
@@ -26,6 +27,7 @@ class MenuHelper:
         return self.db.delete_dish(restaurant, dishname)
 
         # todo  cart class
+
     def add_to_cart(self, session, restaurant, dishname, amount):
         if session['total_dishes'] >= 10:
             return False
@@ -40,6 +42,7 @@ class MenuHelper:
             session['restaurant'] = restaurant
             session['dishes'] = []
             session['total_dishes'] = 0
+            session['total'] = 0.0
         # session['restaurant'] = 'b'
         # print(restaurant, dish_id, session['dishes'], session['total_dishes'])
         i = 0
@@ -54,4 +57,5 @@ class MenuHelper:
             session['dishes'].append([dishname, price, amount])
         # print("end ", restaurant, dish_id, session['dishes'], session['total_dishes'])
         session['total_dishes'] += 1
+        session['total'] += float(price)
         return True

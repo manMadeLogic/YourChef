@@ -1,6 +1,7 @@
 import boto3
 from boto3.dynamodb import conditions
 import os
+import decimal
 
 
 class DishHelper:
@@ -9,22 +10,19 @@ class DishHelper:
         region = os.environ.get('region')
         aws_id = os.environ.get('Access_key_ID')
         aws_key = os.environ.get('Secret_access_key')
-        dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
+        dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id,
+                                  aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_ManageDish)
         # todo price type
 
     def add_dish(self, restaurant, dishname, price):
-        # todo find dish
-        # todo don't test restaurant exist
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
+                                   & conditions.Key('dishname').eq(dishname)
         )
-        if response['Items'] is None:
-            return False, "Restaurant does not exist."
 
-        for i in response['Items']:
-            if i['dishname'] == dishname:
-                return False, "DishName already added."
+        if response['Items']:
+            return False, restaurant + " " + dishname + " already exist."
 
         # print("[" + price + "]")
         response = self.table.put_item(
@@ -48,6 +46,25 @@ class DishHelper:
         else:
             return False
 
+    def change_price(self, restaurant, dishname, price):
+        response = self.table.update_item(
+            Key={
+                'restaurant': restaurant,
+                'dishname': dishname
+            },
+            UpdateExpression="set price = :p",
+            ExpressionAttributeValues={
+                # ':r': decimal.Decimal(5.5),
+                ':p': decimal.Decimal(price)
+            },
+            ReturnValues="UPDATED_NEW"
+        )
+        # todo not tested
+        if response:
+            return True
+        else:
+            return False
+
     def get_dish(self, restaurant):
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
@@ -65,7 +82,7 @@ class DishHelper:
     def get_dish_price(self, restaurant, dishname):
         response = self.table.query(
             KeyConditionExpression=conditions.Key('restaurant').eq(restaurant)
-            & conditions.Key('dishname').eq(dishname)
+                                   & conditions.Key('dishname').eq(dishname)
         )
         if response['Items']:
             return response['Items'][0], "Success"

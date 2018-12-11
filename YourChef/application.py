@@ -38,6 +38,7 @@ def is_logged_in(f):
         else:
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('login'))
+
     return wrap
 
 
@@ -55,8 +56,10 @@ def login():
             session['is_restaurant'] = False
             session['user_name'] = user["username"]
             session['user_id'] = user["userid"]
+
             session['dishes'] = []
             session['total_dishes'] = 0
+            session['total'] = 0.0
             return redirect("/")
         else:
             error = err_message
@@ -89,22 +92,34 @@ def logout():
 def get_dish_in_cart():
     if logged_in():
         # print(session['dishes'])
-        return jsonify(session['dishes'])
+        return jsonify({"dishes":session['dishes'], "total":session["total"]})
     else:
         return jsonify(None)
 
 
 @application.route('/clear_cart', methods=['POST'])
+@is_logged_in
 def clear_cart():
-    if logged_in():
-        # print(session['dishes'])
-        session['dishes'] = []
-        session['total_dishes'] = 0
-        return jsonify(True)
+    session['dishes'] = []
+    session['total_dishes'] = 0
+    session['total'] = 0.0
+    return jsonify(True)
+
+
+@application.route('/check_out')
+@is_logged_in
+def check_out():
+    # todo save order
+    session['dishes'] = []
+    session['total_dishes'] = 0
+    session['total'] = 0.0
+    flash('Successfully placed order', 'success')
+    return redirect("/")
 
 
 @application.route('/add_dish', methods=['POST'])
 def add_dish():
+    # todo guest cart
     amount = 1
     restaurant = request.values.get('restaurant')
     dish_id = request.values.get('dish_id')
@@ -116,8 +131,8 @@ def manageDish(restaurant):
     if session['is_restaurant']:
         restaurant = session['restaurant']
     # else:
-        # todo
-        # redirect("/")
+    # todo
+    # redirect("/")
     dishes = server_menu.getDish(restaurant)
     if request.method == 'POST':
         valid, message = server_menu.addDish(restaurant, request.form)

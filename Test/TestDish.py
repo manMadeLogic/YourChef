@@ -15,5 +15,5 @@ class TestManageDishCase(unittest.TestCase):
             # form.restaurant = Data(dish['restaurant'])
             # form.dishname = Data(dish['dishname'])
             # form.price = Data(dish['price'])
-            result, message = server.add_dish(dish['restaurant'], dish, 10)
+            result, message = server.add_dish(dish['restaurant'], dish['dishname'], dish['price'])
             assert not result
