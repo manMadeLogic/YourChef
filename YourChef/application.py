@@ -71,11 +71,12 @@ def login():
 def register():
     form = RegisterForm(request.form)
     if request.method == 'POST' and form.validate():
-        if server_register.register(form):
+        result, message = server_register.register(form)
+        if result:
             flash('You are now registered and can log in', 'success')
             return redirect(url_for('login'))
         else:
-            flash('Register fail! Please try again', 'fail')
+            flash(message, 'danger')
 
     return render_template('register.html', form=form)
 
@@ -137,12 +138,29 @@ def manageDish(restaurant):
     if request.method == 'POST':
         valid, message = server_menu.addDish(restaurant, request.form)
         if valid is False:
-            flash(message, 'fail')
+            flash(message, 'danger')
         else:
             flash('Successfully added', 'success')
         dishes = server_menu.getDish(restaurant)
 
     return render_template("manageDish.html", dishes=dishes)
+
+
+@application.route('/delete_dish/<string:restaurant>')
+def delete_dish(restaurant):
+    if session['is_restaurant']:
+        restaurant = session['restaurant']
+    # else:
+    # todo
+    #     redirect("/")
+
+    dishname = request.values.get('dishname')
+    result = server_menu.deleteDish(restaurant, dishname)
+    if result:
+        flash('deleted dish ' + dishname, "success")
+    else:
+        flash('delete dish ' + dishname + " fail", "danger")
+    return redirect("/manageDish/"+restaurant)
 
 
 @application.route('/menu/<string:restaurant>')
