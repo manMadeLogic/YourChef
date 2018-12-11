@@ -32,7 +32,9 @@ class TestManageDishCase(unittest.TestCase):
         session = dict()
         session['dishes'] = [['a', 10, 1]]
         session['total_dishes'] = 1
+        session['total'] = 1.0
         session['restaurant'] = 'a'
+
         assert server.add_to_cart(session, "a", "c", 1)
         # print(len(session['dishes']))
         # print(session['dishes'])
