@@ -34,7 +34,8 @@ class RestaurantHelper:
 
     def find_location(self, restaurant):
         address = self.db.find_location(restaurant)
-        if address.has_key('address'):
+        # print (address)
+        if address and 'address' in address:
             return True
         else:
             return False
@@ -44,6 +45,9 @@ class RestaurantHelper:
         if address == "":
             return False, "Invalid"
         return address['formatted_address']
+
+    def get_restaurant_list(self):
+        return self.db.get_all()
 
     def save_restaurant_info(self, restaurant_id, address):
         return self.db.update_address(restaurant_id, address)

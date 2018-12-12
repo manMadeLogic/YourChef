@@ -105,6 +105,7 @@ def clear_cart():
     session['dishes'] = []
     session['total_dishes'] = 0
     session['total'] = 0.0
+    # session['restaurant']
     return jsonify(True)
 
 
@@ -115,6 +116,7 @@ def check_out():
     session['dishes'] = []
     session['total_dishes'] = 0
     session['total'] = 0.0
+    # session['restaurant']
     flash('Successfully placed order', 'success')
     return redirect("/")
 
@@ -205,13 +207,13 @@ def location():
 
         address = server_restaurant.get_restuarant_info(restuarant_name,latitude,longitude)
         restaurant = session['restaurant']
-        server_restaurant.save_restaurant_info(restaurant,address)
+        server_restaurant.save_restaurant_info(restaurant, restuarant_name, address)
 
         if address!="Zero Result":
             flash(address, 'success')
             return redirect("/manageDish/"+restaurant)
         else:
-            flash('Get address fail! Please try again', 'fail')
+            flash('Get address fail! Please try again', 'danger')
 
     return render_template('location.html')
 
@@ -252,8 +254,8 @@ def index():
 
 @application.route('/quick_fix')
 def quick_fix():
-    result = server_menu.deleteDish("a", "chi")
-    flash('Urgent Quick Fix', str(result))
+    result = server_restaurant.get_restaurant_list()
+    flash('Urgent Quick Fix\n' + str(result), "success")
     return render_template("home.html")
 
 

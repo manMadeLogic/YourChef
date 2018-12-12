@@ -43,6 +43,17 @@ class RestaurantDBHelper:
         else:
             return None
 
+    def get_all(self):
+        response = self.table.scan()
+        results = []
+        if response['Items']:
+            for i in response['Items']:
+                print(i)
+                del i['password']
+                results.append(i)
+
+        return results
+
     def check_password(self, userid, password):
         user = self.get_user(userid)
         if user:
@@ -72,14 +83,15 @@ class RestaurantDBHelper:
         else:
             return None
 
-    def update_address(self, restaurant, address):
+    def update_address(self, restaurant, restuarant_name, address):
         response = self.table.update_item(
             Key={
-                'userid' : restaurant
+                'userid': restaurant
             },
-            UpdateExpression="set address = :a",
+            UpdateExpression="set address = :a, username = :n",
             ExpressionAttributeValues={
-                ':a' : address
+                ':a': address,
+                ':n': restuarant_name
             },
              ReturnValues="UPDATED_NEW"
         )
