@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="container" style="height: 100%;">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+            <h1 class="my-4">Restaurant Log in</h1>
+            <form method="post" class="form-signin">
+                <div class="form-group">
+                    <label for="userid" class="sr-only">Name</label>
+                    <input type="text" name="userid" id="userid" class="form-control" placeholder="Restaurant ID or email"
+                           required autofocus>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" name="password" id="password" class="form-control"
+                           placeholder="Your password" required>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="sr-only">Password</label>
+                    <div class="slidecontainer">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

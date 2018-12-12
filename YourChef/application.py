@@ -6,6 +6,7 @@ from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
 
+
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
@@ -144,6 +145,75 @@ def manageDish(restaurant):
         dishes = server_menu.getDish(restaurant)
 
     return render_template("manageDish.html", dishes=dishes)
+
+
+@application.route('/restaurantRegister', methods=['GET', 'POST'])
+def resgister_restaurant():
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        result, message = server_restaurant.register(form)
+        if result:
+            session['restaurant'] = form['userid']
+            flash('You are now registered and can log in', 'success')
+            return redirect(url_for('login_restaurant'))
+        else:
+            flash(message, 'danger')
+
+    return render_template('restaurant_register.html', form=form)
+
+
+
+
+@application.route('/restaurantLogin', methods=['GET', 'POST'])
+def login_restaurant():
+    # if 'logged_in' in session:
+    #     flash('You are already logged in', 'success')
+    #     return redirect("/")
+    if request.method == 'POST':
+        user, err_message = server_restaurant.login(request.form)
+        if user:  # result > 0
+            # Passed
+            flash('You are now logged in', 'success')
+            session['logged_in'] = True
+            session['is_restaurant'] = True
+            session['restaurant'] = user['userid']
+            # session['user_name'] = user["username"]
+            # session['user_id'] = user["userid"]
+            # session['dishes'] = []
+            # session['total_dishes'] = 0
+            # session['total'] = 0.0
+            restaurant = user['userid']
+            if server_restaurant.find_location(restaurant):
+                return redirect("/manageDish/"+restaurant)
+                # redirect("/manageDish/"+restaurant)
+            # return redirect("/")
+            else:
+                return redirect(url_for('location'))
+
+        else:
+            error = err_message
+            return render_template('restaurant_login.html', error=error)
+    return render_template('restaurant_login.html')
+
+@application.route('/location', methods=['GET', 'POST'])
+def location():
+    if request.method == 'POST':
+        restuarant_name = request.form['restuarant_name']
+        latitude = request.form['latitude']
+        longitude = request.form['longitude']
+
+
+        address = server_restaurant.get_restuarant_info(restuarant_name,latitude,longitude)
+        restaurant = session['restaurant']
+        server_restaurant.save_restaurant_info(restaurant,address)
+
+        if address!="Zero Result":
+            flash(address, 'success')
+            return redirect("/manageDish/"+restaurant)
+        else:
+            flash('Get address fail! Please try again', 'fail')
+
+    return render_template('location.html')
 
 
 @application.route('/delete_dish/<string:restaurant>')

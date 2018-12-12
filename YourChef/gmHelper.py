@@ -17,4 +17,4 @@ class MapHelper:
         # print(nearby_result)
         if (nearby_result['status'] != "OK"):
             return "Zero Result"
-        return nearby_result['candidates']
+        return nearby_result['candidates'][0]
