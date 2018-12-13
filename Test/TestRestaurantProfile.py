@@ -1,4 +1,5 @@
 import unittest
+import decimal
 
 from YourChef.restaurant_profile import RestaurantProfileDBHelper
 from Test.SampleResProfile import insert_users, users
@@ -29,10 +30,10 @@ class TestRestaurantProfileCase(unittest.TestCase):
             form = Object()
             form.userid = Data(user["userid"])
             form.username = Data(user["username"])
-            form.salt = Data(user["salt"])
-            form.sour = Data(user["sour"])
-            form.sweet = Data(user["sweet"])
-            form.spicy = Data(user["spice"])
+            form.salt = decimal.Decimal(Data(user["salt"]))
+            form.sour = decimal.Decimal(Data(user["sour"]))
+            form.sweet = decimal.Decimal(Data(user["sweet"]))
+            form.spicy = decimal.Decimal(Data(user["spicy"]))
 
             result, message = server.insert(form)
             assert result
