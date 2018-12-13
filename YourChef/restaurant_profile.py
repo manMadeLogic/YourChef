@@ -5,7 +5,7 @@ import os
 
 
 class RestaurantProfileDBHelper:
-    def __init__(self, name='RProfile'):  # RProfile UProfile
+    def __init__(self, name='RProfile'):
         self.table_name_register = name
 
         region = os.environ.get('region')
@@ -50,16 +50,6 @@ class RestaurantProfileDBHelper:
         else:
             return None
 
-    def get_all(self):
-        response = self.table.scan()
-        results = []
-        if response['Items']:
-            for i in response['Items']:
-                print(i)
-                results.append(i)
-
-        return results
-
 
     def delete_user(self, userid):
         response = self.table.delete_item(
@@ -70,15 +60,7 @@ class RestaurantProfileDBHelper:
         else:
             return False
 
-    def find_location(self, restaurant):
-        response = self.table.query(
-            KeyConditionExpression=conditions.Key('userid').eq(restaurant)
-        )
-        if response['Items']:
-            user = response['Items'][0]
-            return user
-        else:
-            return None
+
 
     def update_flavor(self, userid, salt, sour, sweet, spicy):
         response = self.table.update_item(

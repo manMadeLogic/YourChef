@@ -4,7 +4,7 @@ from boto3.dynamodb import conditions
 import os
 
 
-class UserDBHelper:
+class UserProfileDBHelper:
     def __init__(self, name='UProfile'):  # RProfile UProfile
         self.table_name_register = name
 
@@ -47,15 +47,7 @@ class UserDBHelper:
         else:
             return None
 
-    def get_all(self):
-        response = self.table.scan()
-        results = []
-        if response['Items']:
-            for i in response['Items']:
-                print(i)
-                results.append(i)
 
-        return results
 
     def delete_user(self, userid):
         response = self.table.delete_item(
@@ -66,15 +58,6 @@ class UserDBHelper:
         else:
             return False
 
-    def find_location(self, restaurant):
-        response = self.table.query(
-            KeyConditionExpression=conditions.Key('userid').eq(restaurant)
-        )
-        if response['Items']:
-            user = response['Items'][0]
-            return user
-        else:
-            return None
 
     def update_flavor(self, userid, salt, sour, sweet, spicy):
         response = self.table.update_item(
