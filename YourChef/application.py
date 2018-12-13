@@ -51,10 +51,10 @@ def login():
         return redirect("/")
     route = request.path
     if route == '/login':
-        page = 'login.html'
+        user_type = 'User'
         method = server_register.login
     else:
-        page = 'restaurant_login.html'
+        user_type = 'Restaurant'
         method = server_restaurant.login
 
     if request.method == 'POST':
@@ -80,23 +80,34 @@ def login():
                 else:
                     return redirect(url_for('location'))
         else:
-            error = err_message
-            return render_template(page, error=error)
-    return render_template(page)
+            flash(err_message, 'danger')
+            return render_template('login.html', type=user_type)
+    return render_template('login.html', type=user_type)
 
 
 @application.route('/register', methods=['GET', 'POST'])
+@application.route('/restaurantRegister', methods=['GET', 'POST'])
 def register():
+    if logged_in():
+        return redirect("/")
     form = RegisterForm(request.form)
+    route = request.path
+    if route == '/register':
+        user_type = 'User'
+        method = server_register.register
+        redirect_url = '/login'
+    else:
+        user_type = 'Restaurant'
+        method = server_restaurant.register
+        redirect_url = '/restaurantLogin'
     if request.method == 'POST' and form.validate():
-        result, message = server_register.register(form)
+        result, message = method(form)
         if result:
             flash('You are now registered and can log in', 'success')
-            return redirect(url_for('login'))
+            return redirect(redirect_url)
         else:
             flash(message, 'danger')
-
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, type=user_type)
 
 
 @application.route('/logout')
@@ -105,14 +116,14 @@ def logout():
     session.clear()
     flash('You are now logged out', 'success')
     print(url_for('login'))
-    return redirect(url_for('index'))
+    return redirect('/')
 
 
 @application.route('/get_dish_in_cart', methods=['POST'])
 def get_dish_in_cart():
-    if logged_in():
+    if logged_in() and not session['is_restaurant']:
         # print(session['dishes'])
-        return jsonify({"dishes":session['dishes'], "total":session["total"]})
+        return jsonify({"dishes": session['dishes'], "total": session["total"]})
     else:
         return jsonify(None)
 
@@ -154,7 +165,7 @@ def manageDish():
     if session['is_restaurant']:
         restaurant = session['userid']
     else:
-        redirect("/")
+        return redirect("/")
     dishes = server_menu.getDish(restaurant)
     if request.method == 'POST':
         valid, message = server_menu.addDish(restaurant, request.form)
@@ -167,21 +178,6 @@ def manageDish():
     return render_template("manageDish.html", dishes=dishes)
 
 
-@application.route('/restaurantRegister', methods=['GET', 'POST'])
-def resgister_restaurant():
-    form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():
-        result, message = server_restaurant.register(form)
-        if result:
-            session['restaurant'] = form['userid']
-            flash('You are now registered and can log in', 'success')
-            return redirect(url_for('login_restaurant'))
-        else:
-            flash(message, 'danger')
-
-    return render_template('restaurant_register.html', form=form)
-
-
 @application.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'POST':
@@ -189,27 +185,26 @@ def location():
         latitude = request.form['latitude']
         longitude = request.form['longitude']
 
-
         address = server_restaurant.get_restuarant_info(restuarant_name,latitude,longitude)
-        restaurant = session['restaurant']
+        restaurant = session['userid']
         server_restaurant.save_restaurant_info(restaurant, restuarant_name, address)
 
         if address!="Zero Result":
             flash(address, 'success')
-            return redirect("/manageDish/"+restaurant)
+            return redirect("/manageDish")
         else:
             flash('Get address fail! Please try again', 'danger')
 
     return render_template('location.html')
 
 
-@application.route('/delete_dish/<string:restaurant>')
-def delete_dish(restaurant):
+@application.route('/delete_dish')
+@is_logged_in
+def delete_dish():
     if session['is_restaurant']:
         restaurant = session['restaurant']
-    # else:
-    # todo
-    #     redirect("/")
+    else:
+        return redirect("/")
 
     dishname = request.values.get('dishname')
     result = server_menu.deleteDish(restaurant, dishname)
@@ -217,7 +212,7 @@ def delete_dish(restaurant):
         flash('deleted dish ' + dishname, "success")
     else:
         flash('delete dish ' + dishname + " fail", "danger")
-    return redirect("/manageDish/"+restaurant)
+    return redirect("/manageDish")
 
 
 @application.route('/menu/<string:restaurant>')
