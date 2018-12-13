@@ -44,28 +44,45 @@ def is_logged_in(f):
 
 
 @application.route('/login', methods=['GET', 'POST'])
+@application.route('/restaurantLogin', methods=['GET', 'POST'])
 def login():
     if 'logged_in' in session:
         flash('You are already logged in', 'success')
         return redirect("/")
+    route = request.path
+    if route == '/login':
+        page = 'login.html'
+        method = server_register.login
+    else:
+        page = 'restaurant_login.html'
+        method = server_restaurant.login
+
     if request.method == 'POST':
-        user, err_message = server_register.login(request.form)
+        user, err_message = method(request.form)
         if user:  # result > 0
             # Passed
             flash('You are now logged in', 'success')
             session['logged_in'] = True
-            session['is_restaurant'] = False
-            session['user_name'] = user["username"]
-            session['user_id'] = user["userid"]
+            session['username'] = user["username"]
+            session['userid'] = user["userid"]
 
-            session['dishes'] = []
-            session['total_dishes'] = 0
-            session['total'] = 0.0
-            return redirect("/")
+            if route == '/login':
+                session['dishes'] = []
+                session['total_dishes'] = 0
+                session['total'] = 0.0
+                session['is_restaurant'] = False
+                return redirect("/")
+            else:
+                session['is_restaurant'] = True
+                restaurant = user['userid']
+                if server_restaurant.find_location(restaurant):
+                    return redirect("/manageDish")
+                else:
+                    return redirect(url_for('location'))
         else:
             error = err_message
-            return render_template('login.html', error=error)
-    return render_template('login.html')
+            return render_template(page, error=error)
+    return render_template(page)
 
 
 @application.route('/register', methods=['GET', 'POST'])
@@ -87,7 +104,8 @@ def register():
 def logout():
     session.clear()
     flash('You are now logged out', 'success')
-    return redirect(url_for('login'))
+    print(url_for('login'))
+    return redirect(url_for('index'))
 
 
 @application.route('/get_dish_in_cart', methods=['POST'])
@@ -130,13 +148,13 @@ def add_dish():
     return jsonify(server_menu.add_to_cart(session, restaurant, dish_id, amount))
 
 
-@application.route('/manageDish/<string:restaurant>', methods=['GET', 'POST'])
-def manageDish(restaurant):
+@application.route('/manageDish', methods=['GET', 'POST'])
+@is_logged_in
+def manageDish():
     if session['is_restaurant']:
-        restaurant = session['restaurant']
-    # else:
-    # todo
-    # redirect("/")
+        restaurant = session['userid']
+    else:
+        redirect("/")
     dishes = server_menu.getDish(restaurant)
     if request.method == 'POST':
         valid, message = server_menu.addDish(restaurant, request.form)
@@ -163,39 +181,6 @@ def resgister_restaurant():
 
     return render_template('restaurant_register.html', form=form)
 
-
-
-
-@application.route('/restaurantLogin', methods=['GET', 'POST'])
-def login_restaurant():
-    # if 'logged_in' in session:
-    #     flash('You are already logged in', 'success')
-    #     return redirect("/")
-    if request.method == 'POST':
-        user, err_message = server_restaurant.login(request.form)
-        if user:  # result > 0
-            # Passed
-            flash('You are now logged in', 'success')
-            session['logged_in'] = True
-            session['is_restaurant'] = True
-            session['restaurant'] = user['userid']
-            # session['user_name'] = user["username"]
-            # session['user_id'] = user["userid"]
-            # session['dishes'] = []
-            # session['total_dishes'] = 0
-            # session['total'] = 0.0
-            restaurant = user['userid']
-            if server_restaurant.find_location(restaurant):
-                return redirect("/manageDish/"+restaurant)
-                # redirect("/manageDish/"+restaurant)
-            # return redirect("/")
-            else:
-                return redirect(url_for('location'))
-
-        else:
-            error = err_message
-            return render_template('restaurant_login.html', error=error)
-    return render_template('restaurant_login.html')
 
 @application.route('/location', methods=['GET', 'POST'])
 def location():

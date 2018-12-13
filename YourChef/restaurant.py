@@ -49,5 +49,5 @@ class RestaurantHelper:
     def get_restaurant_list(self):
         return self.db.get_all()
 
-    def save_restaurant_info(self, restaurant_id, address):
-        return self.db.update_address(restaurant_id, address)
+    def save_restaurant_info(self, restaurant_id, restuarant_name, address):
+        return self.db.update_address(restaurant_id, restuarant_name, address)
