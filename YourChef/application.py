@@ -5,7 +5,8 @@ from wtforms import Form, StringField, PasswordField, validators
 from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
-# from YourChef.sortByDistance import sort_restaurant
+from YourChef.sortByDistance import sort_restaurant
+from YourChef.user_profile import UserProfileDBHelper
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
@@ -14,6 +15,7 @@ application.config['SESSION_TYPE'] = 'filesystem'
 server_register = RegistrationHelper()
 server_menu = MenuHelper()
 server_restaurant = RestaurantHelper()
+server_user_profile = UserProfileDBHelper()
 
 
 class RegisterForm(Form):
@@ -198,6 +200,39 @@ def location():
     return render_template('location.html')
 
 
+@application.route('/profile', methods=['GET', 'POST'])
+@is_logged_in
+def profile():
+    # todo pass form
+    if request.method == 'POST':
+        # print("Here")
+        # print(request.form)
+        # salt = request.form['salt']
+        # sour = request.form['sour']
+        # sweet = request.form['sweet']
+        # spicy = request.form['spicy']
+
+        userid = session['userid']
+        # print(salt, sour, sweet, spicy, userid)
+        result, message = server_user_profile.insert(request.form, userid)
+        if result:
+            flash("Profile Updated", 'success')
+        else:
+            flash(message, 'danger')
+
+        # address = server_restaurant.get_restuarant_info(restuarant_name, latitude, longitude)
+        # restaurant = session['userid']
+        # server_restaurant.save_restaurant_info(restaurant, restuarant_name, address)
+        #
+        # if address != "Zero Result":
+        #     flash(address, 'success')
+        #     return redirect("/manageDish")
+        # else:
+        #     flash('Get address fail! Please try again', 'danger')
+
+    return render_template('profile.html', type='User')
+
+
 @application.route('/delete_dish')
 @is_logged_in
 def delete_dish():
@@ -227,12 +262,14 @@ def menu(restaurant):
 
 def get_restaurant_list():
     restaurants = server_restaurant.get_restaurant_list()
-# todo
-#     if logged_in():
+# todo still a lot of discussion
+    if logged_in():
         # server = UserProfileDBHelper
-        # get profile: user = server.get_user
-        # restaurants = sort_restaurant(restaurants, user)
-
+        user_profile = server_user_profile.get_user(session['userid'])
+        print(user_profile)
+        if user_profile:
+            # todo sort
+            restaurants = sort_restaurant(restaurants, user_profile)
     return restaurants
 
 

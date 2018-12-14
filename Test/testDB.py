@@ -26,20 +26,24 @@ import decimal
 #         self.aws_id = args.aws_id
 #         self.aws_key = args.aws_key
 #
-# if __name__ == '__main__':
+if __name__ == '__main__':
 #     args = arguments()
 #     dynamodb = boto3.resource('dynamodb', region_name=args.region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
+    region = os.environ.get('region')
+    aws_id = os.environ.get('Access_key_ID')
+    aws_key = os.environ.get('Secret_access_key')
+    dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
 #
-    # table = dynamodb.create_table(
-    #     TableName='test_user',
-    #     KeySchema=[
-    #          {'AttributeName': 'userid', 'KeyType': 'HASH'},
-    #     ],
-    #     AttributeDefinitions=[
-    #         {'AttributeName': 'userid', 'AttributeType': 'S'}
-    #     ],
-    #     ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
-    # )
+    table = dynamodb.create_table(
+        TableName='UProfile',
+        KeySchema=[
+             {'AttributeName': 'userid', 'KeyType': 'HASH'},
+        ],
+        AttributeDefinitions=[
+            {'AttributeName': 'userid', 'AttributeType': 'S'}
+        ],
+        ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
+    )
 #     # Wait until the table exists.
 #     table.meta.client.get_waiter('table_exists').wait(TableName='test_user')
 #     print('created table {}.'.format('test_user'))
@@ -62,7 +66,7 @@ import decimal
 
 
 # from YourChef.orderHelper import OrderHelper
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # db = UserHelper("test_user")
 
     # response = db.table.scan()
@@ -70,10 +74,6 @@ if __name__ == '__main__':
     #     for i in response['Items']:
     #         print(i)
 
-    region = os.environ.get('region')
-    aws_id = os.environ.get('Access_key_ID')
-    aws_key = os.environ.get('Secret_access_key')
-    dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
     # # table = dynamodb.Table('test_dish')
     # table = dynamodb.create_table(
     #     TableName='Order',

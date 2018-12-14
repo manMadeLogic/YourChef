@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+<!--.slidecontainer {-->
+  <!--width: 100%; /* Width of the outside container */-->
+<!--}-->
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+
+    </style>
+</head>
+
+<div class="container" style="height: 100%;">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+            <h1 class="my-4">{{type}} Profile</h1>
+            <form method="post" class="form-signin">
+                <div class="form-group">
+                    <label for="salt" class="sr-only">Salt</label>
+                    <br/>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="10" value="5" class="slider" id="salt" name="salt">
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="sour" class="sr-only">Sour</label>
+                    <br/>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="10" value="5" class="slider" id="sour" name="sour">
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="sweet" class="sr-only">Sweet</label>
+                    <br/>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="10" value="5" class="slider" id="sweet" name="sweet">
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="spicy" class="sr-only">Spicy</label>
+                    <br/>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="10" value="5" class="slider" id="spicy" name="spicy">
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="Save">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

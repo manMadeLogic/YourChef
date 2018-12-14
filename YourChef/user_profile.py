@@ -16,12 +16,11 @@ class UserProfileDBHelper:
                                   aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
 
-    def insert(self, form):
-        userid = form.userid.data
-        salt = form.salt.data
-        sour = form.sour.data
-        sweet = form.sweet.data
-        spicy = form.spicy.data
+    def insert(self, form, userid):
+        salt = form['salt']
+        sour = form['sour']
+        sweet = form['sweet']
+        spicy = form['spicy']
 
         response = self.table.put_item(
             Item={

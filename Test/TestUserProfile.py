@@ -16,6 +16,7 @@ class Object(object):
 class TestRestaurantProfileCase(unittest.TestCase):
     def testGetUser(self):
         server = UserProfileDBHelper()
+        # todo !!!!!!!!!!!!!!!!!!
         for user in users:
             user_data = server.get_user(user["userid"])
             assert user_data['userid'] == user['userid'] and user_data['spicy'] == user['spicy'] and \
@@ -25,14 +26,14 @@ class TestRestaurantProfileCase(unittest.TestCase):
     def testInsertUser(self):
         server = UserProfileDBHelper()
         for user in insert_users:
-            form = Object()
-            form.userid = Data(user["userid"])
-            form.salt = Data(user["salt"])
-            form.sour = Data(user["sour"])
-            form.sweet = Data(user["sweet"])
-            form.spicy = Data(user["spice"])
+            # form = Object()
+            # form.userid = Data(user["userid"])
+            # form.salt = Data(user["salt"])
+            # form.sour = Data(user["sour"])
+            # form.sweet = Data(user["sweet"])
+            # form.spicy = Data(user["spice"])
 
-            result, message = server.insert(form)
+            result, message = server.insert(user, user["userid"])
             assert result
             assert server.delete_user(user["userid"])
 
