@@ -47,8 +47,6 @@ class UserProfileDBHelper:
         else:
             return None
 
-
-
     def delete_user(self, userid):
         response = self.table.delete_item(
             Key={'userid': userid}
@@ -57,7 +55,6 @@ class UserProfileDBHelper:
             return True
         else:
             return False
-
 
     def update_flavor(self, userid, salt, sour, sweet, spicy):
         response = self.table.update_item(
@@ -78,4 +75,3 @@ class UserProfileDBHelper:
             return True
         else:
             return False
-

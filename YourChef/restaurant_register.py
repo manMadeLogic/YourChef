@@ -48,11 +48,15 @@ class RestaurantDBHelper:
         results = []
         if response['Items']:
             for i in response['Items']:
-                print(i)
+                # print(i)
                 del i['password']
                 results.append(i)
-
         return results
+
+    # todo
+    def get_restaurant_list(self):
+        restaurants = self.get_all()
+        return restaurants
 
     def check_password(self, userid, password):
         user = self.get_user(userid)
@@ -93,7 +97,7 @@ class RestaurantDBHelper:
                 ':a': address,
                 ':n': restuarant_name
             },
-             ReturnValues="UPDATED_NEW"
+            ReturnValues="UPDATED_NEW"
         )
 
         if response:

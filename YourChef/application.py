@@ -6,7 +6,6 @@ from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
 
-
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
 application.config['SESSION_TYPE'] = 'filesystem'
@@ -185,11 +184,11 @@ def location():
         latitude = request.form['latitude']
         longitude = request.form['longitude']
 
-        address = server_restaurant.get_restuarant_info(restuarant_name,latitude,longitude)
+        address = server_restaurant.get_restuarant_info(restuarant_name, latitude, longitude)
         restaurant = session['userid']
         server_restaurant.save_restaurant_info(restaurant, restuarant_name, address)
 
-        if address!="Zero Result":
+        if address != "Zero Result":
             flash(address, 'success')
             return redirect("/manageDish")
         else:
@@ -228,7 +227,8 @@ def menu(restaurant):
 @application.route('/')
 # @application.route("/home")
 def index():
-    return render_template("home.html")
+    result = server_restaurant.get_restaurant_list()
+    return render_template("home.html", restaurant=result)
     # return render_template('radio.group.html')
 
 
