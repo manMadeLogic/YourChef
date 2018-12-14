@@ -203,34 +203,22 @@ def location():
 @application.route('/profile', methods=['GET', 'POST'])
 @is_logged_in
 def profile():
-    # todo pass form
+    userid = session['userid']
+    user_profile = server_user_profile.get_user(userid)
+    if not user_profile:
+        user_profile['spicy'] = 5
+        user_profile['salt'] = 5
+        user_profile['sour'] = 5
+        user_profile['sweet'] = 5
     if request.method == 'POST':
-        # print("Here")
-        # print(request.form)
-        # salt = request.form['salt']
-        # sour = request.form['sour']
-        # sweet = request.form['sweet']
-        # spicy = request.form['spicy']
-
-        userid = session['userid']
-        # print(salt, sour, sweet, spicy, userid)
         result, message = server_user_profile.insert(request.form, userid)
         if result:
             flash("Profile Updated", 'success')
+            return redirect("/")
         else:
             flash(message, 'danger')
 
-        # address = server_restaurant.get_restuarant_info(restuarant_name, latitude, longitude)
-        # restaurant = session['userid']
-        # server_restaurant.save_restaurant_info(restaurant, restuarant_name, address)
-        #
-        # if address != "Zero Result":
-        #     flash(address, 'success')
-        #     return redirect("/manageDish")
-        # else:
-        #     flash('Get address fail! Please try again', 'danger')
-
-    return render_template('profile.html', type='User')
+    return render_template('profile.html', type='User', user=user_profile)
 
 
 @application.route('/delete_dish')
