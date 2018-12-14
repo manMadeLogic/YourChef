@@ -106,7 +106,7 @@ def register():
     else:
         user_type = 'Restaurant'
         method = server_restaurant.register
-        redirect_url = '/restaurantLogin'
+        redirect_url = '/restaurant_login'
     if request.method == 'POST' and form.validate():
         result, message = method(form)
         if result:
@@ -236,7 +236,7 @@ def profile():
         # server = server_user_profile
         profile = server_user_profile.get_user(userid)
     # profile = server.get_user(userid)
-    print(userid, profile)
+    # print(userid, profile)
     if not profile:
         profile = dict()
         profile['spicy'] = 5

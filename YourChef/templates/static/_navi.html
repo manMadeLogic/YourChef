@@ -14,7 +14,13 @@
                 <div class="navbar-nav">
                     {% if session.logged_in %}
                     <a class="nav-item nav-link" href="/logout">Logout</a>
+                    {% if session.is_restaurant %}
+                    <a class="nav-item nav-link" href="/restaurant_profile">ManageProfile</a>
+                    <a class="nav-item nav-link" href="/manageDish">ManageDish</a>
+                    {% else %}
                     <a class="nav-item nav-link" href="/profile">ManageProfile</a>
+                    {% endif %}
+
                     {% else %}
                     <a class="nav-item nav-link" href="/login">Login</a>
                     <a class="nav-item nav-link" href="/restaurant_login">Restaurant Login</a>

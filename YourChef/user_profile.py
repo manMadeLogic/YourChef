@@ -21,10 +21,10 @@ class UserProfileDBHelper:
         response = self.table.put_item(
             Item={
                 'userid': userid,
-                'salt': form['salt'],
-                'sour': form['sour'],
-                'sweet': form['sweet'],
-                'spicy': form['spicy']
+                'salt': int(form['salt']),
+                'sour': int(form['sour']),
+                'sweet': int(form['sweet']),
+                'spicy': int(form['spicy'])
             }
         )
         if response:

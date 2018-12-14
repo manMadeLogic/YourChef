@@ -16,7 +16,7 @@ class RestaurantProfileDBHelper:
                                   aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
 
-# get all todo get all
+    # get all todo get all
     def get_all(self):
         response = self.table.scan()
         results = []
@@ -26,16 +26,15 @@ class RestaurantProfileDBHelper:
                 results.append(i)
         return results
 
-
     def insert(self, form, userid, username):
         response = self.table.put_item(
             Item={
                 'userid': userid,
                 'username': username,
-                'salt': form['salt'],
-                'sour': form['sour'],
-                'sweet': form['sweet'],
-                'spicy': form['spicy']
+                'salt': int(form['salt']),
+                'sour': int(form['sour']),
+                'sweet': int(form['sweet']),
+                'spicy': int(form['spicy'])
             }
         )
         if response:
@@ -54,7 +53,6 @@ class RestaurantProfileDBHelper:
         else:
             return None
 
-
     def delete_user(self, userid):
         response = self.table.delete_item(
             Key={'userid': userid}
@@ -63,8 +61,6 @@ class RestaurantProfileDBHelper:
             return True
         else:
             return False
-
-
 
     def update_flavor(self, userid, salt, sour, sweet, spicy):
         response = self.table.update_item(
