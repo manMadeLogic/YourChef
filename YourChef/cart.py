@@ -1,4 +1,3 @@
-
 class Cart:
     def __init__(self, session):
         if session["restaurant"]:

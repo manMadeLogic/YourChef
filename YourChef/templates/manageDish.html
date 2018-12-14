@@ -15,59 +15,6 @@ body {
   box-sizing: border-box;
 }
 
-/* Remove margins and padding from the list */
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-/* Style the list items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
-
-/* Darker background-color on hover */
-ul li:hover {
-  background: #ddd;
-}
-
-/* When clicked on, add a background color and strike out text */
-ul li.checked {
-  background: #888;
-  color: #fff;
-  text-decoration: line-through;
-}
-
-/* Add a "checked" mark when clicked on */
-ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-color: #fff;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 10px;
-  left: 16px;
-  transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
 
 /* Style the close button */
 .close {
@@ -127,6 +74,7 @@ input {
 }
 
 
+
     </style>
 </head>
 <body>
@@ -156,26 +104,23 @@ input {
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
+  var span = document.createElement("span");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
-  span.onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
+  <!--alert(myNodelist[i].id);-->
+  <!--span.href = $SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id;-->
+  span.onclick = function(){
+    window.location.replace($SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id);
   }
   myNodelist[i].appendChild(span);
 }
 
-// Click on a close button to hide the current list item
-<!--var close = document.getElementsByClassName("close");-->
-<!--var i;-->
-<!--for (i = 0; i < close.length; i++) {-->
-  <!--close[i].onclick = function() {-->
-    <!--var div = this.parentElement;-->
-    <!--div.style.display = "none";-->
-  <!--}-->
-<!--}-->
+function remove() {
+    window.location.replace($SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id);
+  <!--var div = this.parentElement;-->
+  <!--div.style.display = "none";-->
+}
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
@@ -198,16 +143,14 @@ function newElement() {
   }
   document.getElementById("dishname").value = "";
 
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  span.onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-  li.appendChild(span);
+  <!--var span = document.createElement("SPAN");-->
+  <!--var txt = document.createTextNode("\u00D7");-->
+  <!--span.className = "close";-->
+  <!--span.appendChild(txt);-->
+  <!--span.onclick = remove;-->
+  <!--li.appendChild(span);-->
 }
+
 
 
 </script>

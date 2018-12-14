@@ -1,16 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
-{% for
-post in posts %}
+
+
+<!--{% for n in restaurant %}-->
+<!-- Blog Post -->
+<!--<div class="card mb-4">-->
+<!--<div class="card-body">-->
+<!--<h2 class="card-title">{{n['username']}}</h2>-->
+<!--<p class="card-text">{{n['address']}}</p>-->
+<!--<a href="blog_post/{{n['userid']}}" class="btn btn-primary">Order &rarr;</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--{% endfor %}-->
+
+{% for n in restaurant %}
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ post.author }}</a>
-            <small class="text-muted">{{ post.date_posted }}</small>
+            <h2><a class="article-title" href="menu/{{n['userid']}}">{{n['username']}}</a></h2>
         </div>
-        <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content }}</p>
+        <p class="article-content">{{n['address']}}</p>
     </div>
 </article>
 {% endfor %}
+
 {% endblock content %}

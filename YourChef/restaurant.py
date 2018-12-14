@@ -2,13 +2,15 @@ from YourChef.restaurant_register import RestaurantDBHelper
 from YourChef.gmHelper import MapHelper
 import re
 
+
 class RestaurantHelper:
     def __init__(self, db_name="RestaurantInfo"):
         self.db = RestaurantDBHelper(db_name)
         self.gm = MapHelper()
 
     def find_restaurant(self, restaurant):
-        return restaurant == 'a' or restaurant == 'b' or restaurant == 'c'
+        # user = self.db.get_user(restaurant)
+        return self.db.get_user(restaurant)
 
     def login(self, form):
         user_id = form['userid']
@@ -16,6 +18,7 @@ class RestaurantHelper:
         return self.db.check_password(user_id, password)
 
     def register(self, form):
+        # todo general helper
         userid = form.userid.data
         if not userid or userid == "":
             return False, "empty user id"
@@ -30,7 +33,6 @@ class RestaurantHelper:
     # only for test and quick fix
     def delete_user(self, user_id):
         return self.db.delete_user(user_id)
-
 
     def find_location(self, restaurant):
         address = self.db.find_location(restaurant)
