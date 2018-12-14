@@ -17,6 +17,14 @@ class RestaurantProfileDBHelper:
         self.table = dynamodb.Table(self.table_name_register)
 
 # get all todo get all
+    def get_all(self):
+        response = self.table.scan()
+        results = []
+        if response['Items']:
+            for i in response['Items']:
+                print(i)
+                results.append(i)
+        return results
 
 
     def insert(self, form, userid, username):
@@ -41,6 +49,7 @@ class RestaurantProfileDBHelper:
         )
         if response['Items']:
             user = response['Items'][0]
+            print(user)
             return user
         else:
             return None

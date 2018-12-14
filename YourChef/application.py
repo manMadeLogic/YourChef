@@ -3,9 +3,12 @@ from functools import wraps
 from wtforms import Form, StringField, PasswordField, validators
 
 from YourChef.menu import MenuHelper
+from YourChef.orderHelper import OrderHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
 # from YourChef.sortByDistance import sort_restaurant
+from YourChef.restaurant_profile import RestaurantProfileDBHelper
+from YourChef.sortByDistance import sort_restaurant
 from YourChef.user_profile import UserProfileDBHelper
 
 application = Flask(__name__)
@@ -16,6 +19,8 @@ server_register = RegistrationHelper()
 server_menu = MenuHelper()
 server_restaurant = RestaurantHelper()
 server_user_profile = UserProfileDBHelper()
+server_restaurant_profile = RestaurantProfileDBHelper()
+server_order = OrderHelper()
 
 
 class RegisterForm(Form):
@@ -46,7 +51,7 @@ def is_logged_in(f):
 
 
 @application.route('/login', methods=['GET', 'POST'])
-@application.route('/restaurantLogin', methods=['GET', 'POST'])
+@application.route('/restaurant_login', methods=['GET', 'POST'])
 def login():
     if 'logged_in' in session:
         flash('You are already logged in', 'success')
@@ -88,7 +93,7 @@ def login():
 
 
 @application.route('/register', methods=['GET', 'POST'])
-@application.route('/restaurantRegister', methods=['GET', 'POST'])
+@application.route('/restaurant_register', methods=['GET', 'POST'])
 def register():
     if logged_in():
         return redirect("/")
@@ -117,7 +122,7 @@ def register():
 def logout():
     session.clear()
     flash('You are now logged out', 'success')
-    print(url_for('login'))
+    # print(url_for('login'))
     return redirect('/')
 
 
@@ -144,11 +149,30 @@ def clear_cart():
 @is_logged_in
 def check_out():
     # todo save order
-    session['dishes'] = []
-    session['total_dishes'] = 0
-    session['total'] = 0.0
-    # session['restaurant']
-    flash('Successfully placed order', 'success')
+    result, message = server_order.add_order(session['restaurant'], session['dishes'], session['total'], session['userid'])
+    if result:
+
+        session['dishes'] = []
+        session['total_dishes'] = 0
+        session['total'] = 0.0
+        # session['restaurant']
+        flash('Successfully placed order', 'success')
+    else:
+        flash(message, 'danger')
+    # orderPage todo
+    return redirect("/")
+
+# localhost:5111/order?restaurant=a&date=2018-12-13T19:45:44+00:00
+@application.route('/order')
+@is_logged_in
+def order_detail():
+    restaurant = request.values.get('restaurant')
+    date = request.values.get('date')
+    print(restaurant, date)
+    # todo get order
+    # check order['restaurant'] == session['userid'] or order['userid'] == session['userid']
+    # return page
+    # if not: redirect("/") don't show
     return redirect("/")
 
 
@@ -201,24 +225,36 @@ def location():
 
 
 @application.route('/profile', methods=['GET', 'POST'])
+@application.route('/restaurant_profile', methods=['GET', 'POST'])
 @is_logged_in
 def profile():
     userid = session['userid']
-    user_profile = server_user_profile.get_user(userid)
-    if not user_profile:
-        user_profile['spicy'] = 5
-        user_profile['salt'] = 5
-        user_profile['sour'] = 5
-        user_profile['sweet'] = 5
+    if request.path == '/restaurant_profile':
+        # server = server_restaurant_profile
+        profile = server_restaurant_profile.get_user(userid)
+    else:
+        # server = server_user_profile
+        profile = server_user_profile.get_user(userid)
+    # profile = server.get_user(userid)
+    print(userid, profile)
+    if not profile:
+        profile = dict()
+        profile['spicy'] = 5
+        profile['salt'] = 5
+        profile['sour'] = 5
+        profile['sweet'] = 5
     if request.method == 'POST':
-        result, message = server_user_profile.insert(request.form, userid)
+        if request.path == '/restaurant_profile':
+            result, message = server_restaurant_profile.insert(request.form, userid, session['username'])
+        else:
+            result, message = server_user_profile.insert(request.form, userid)
         if result:
             flash("Profile Updated", 'success')
             return redirect("/")
         else:
             flash(message, 'danger')
 
-    return render_template('profile.html', type='User', user=user_profile)
+    return render_template('profile.html', type='User', user=profile)
 
 
 @application.route('/delete_dish')
@@ -249,15 +285,16 @@ def menu(restaurant):
 
 
 def get_restaurant_list():
-    restaurants = server_restaurant.get_restaurant_list()
 # todo still a lot of discussion
-    if logged_in():
+    if logged_in() and not session['is_restaurant']:
         # server = UserProfileDBHelper
         user_profile = server_user_profile.get_user(session['userid'])
-        print(user_profile)
-        # if user_profile:
-        #     # todo sort
-        #     restaurants = sort_restaurant(restaurants, user_profile)
+        # print(user_profile)
+        print(server_restaurant_profile.get_all())
+
+        if user_profile:
+            return sort_restaurant(server_restaurant_profile.get_all(), user_profile)
+    restaurants = server_restaurant.get_restaurant_list()
     return restaurants
 
 

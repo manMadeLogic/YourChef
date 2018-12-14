@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+{% if article %}
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+          <!-- Title -->
+          <h1 class="mt-4">{{article.title}}</h1>
+
+          <!-- Author -->
+          <p class="lead">
+            by
+            <a href="/user/{{article.user_id}}">{{article.user_name}}</a>
+          </p>
+
+          <hr>
+
+          <!-- Date/Time -->
+          <p>Posted on {{article.date}}</p>
+
+          <hr>
+
+            {% if article.writter %}
+            <a class="btn btn-secondary" href="/edit_article/{{article.article_id}}">Edit Article</a>
+          <hr>
+            {% endif %}
+
+          <!-- Preview Image -->
+          <!--<img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">-->
+
+          <!--<hr>-->
+
+                <ul class="list-group" id="dishes">
+                    <!--todo table-->
+                    {% for dish in order.dishes %}
+                    <li>{{dish[0]}}, {{dish[1]}}, {{dish[2]}}</li>
+                    {% endfor %}
+                </ul>
+
+          <hr>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+          <!-- Anime List sidebar -->
+          <div class="card my-4">
+          <h5 class="card-header">Best10 Anime</h5>
+          <div class="card-body">
+            <ol>
+              {% for anime in best10 %}
+                <li><a href="/anime/{{anime.anime_id}}">{{anime.title}}</a></li>
+                {%endfor%}
+            </ol>
+          </div>
+        </div>
+        </div>
+{% else %}
+  <h1>Article Not Found</h1>
+{% endif %}
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+{% endblock %}
