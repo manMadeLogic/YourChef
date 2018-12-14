@@ -16,12 +16,15 @@ class OrderHelper:
         self.table = dynamodb.Table(self.table_name_ManageDish)
 
     def add_order(self, restaurant, dishes, total, userid):
+        if not restaurant or dishes is None or not total or not userid:
+            return False, "Insert Fail"
+
         response = self.table.put_item(
             Item={
                 'restaurant': restaurant,
                 'date': datetime.datetime.now().isoformat(),
-                'dishes': dishes,
-                'total': decimal.Decimal(total),
+                'dishes': str(dishes),
+                'total': decimal.Decimal(str(total)),
                 'userid': userid,
                 'finished': False
             }
