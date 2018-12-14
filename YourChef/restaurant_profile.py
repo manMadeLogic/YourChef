@@ -16,6 +16,9 @@ class RestaurantProfileDBHelper:
                                   aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
 
+# get all todo get all
+
+
     def insert(self, form, userid, username):
         response = self.table.put_item(
             Item={
