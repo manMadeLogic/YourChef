@@ -286,15 +286,15 @@ def menu(restaurant):
 
 def get_restaurant_list():
 # todo still a lot of discussion
+    restaurants = server_restaurant.get_restaurant_list()
     if logged_in() and not session['is_restaurant']:
         # server = UserProfileDBHelper
         user_profile = server_user_profile.get_user(session['userid'])
         # print(user_profile)
-        print(server_restaurant_profile.get_all())
+        # print(server_restaurant_profile.get_all())
 
         if user_profile:
-            return sort_restaurant(server_restaurant_profile.get_all(), user_profile)
-    restaurants = server_restaurant.get_restaurant_list()
+            return sort_restaurant(server_restaurant_profile.get_all(), restaurants, user_profile)
     return restaurants
 
 

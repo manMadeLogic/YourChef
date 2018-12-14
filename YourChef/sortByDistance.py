@@ -5,10 +5,15 @@ def getDistance(A, B):
     return distance
 
 
-def sort_restaurant(query, core):
+def sort_restaurant(query, origin, core):
+    scores = dict()
     for item in query:
-        item['score'] = getDistance(item, core)
-    return sorted(query, key=lambda item: item['score'])
+        scores[item['userid']] = getDistance(item, core)
+        # item['score'] = getDistance(item, core)
+
+    for item in origin:
+        item['score'] = scores.get(item['userid'], 400)
+    return sorted(origin, key=lambda item: item['score'])
 
 
 if __name__ == '__main__':
@@ -17,4 +22,4 @@ if __name__ == '__main__':
              {'salt': 2, 'sour': 2, 'sweet': 2, 'spicy': 2, 'userid': 'asdfmmm', 'username': 'asdfmmm'},
              {'salt': 1, 'sour': 1, 'sweet': 2, 'spicy': 2, 'userid': 'xxxxxx', 'username': 'sun chan'},
              {'salt': 1, 'sour': 1, 'sweet': 2, 'spicy': 1, 'userid': 'kk', 'username': 'kkkk chan'}]
-    print(sort_restaurant(store, query))
+    print(sort_restaurant(store, query, store))

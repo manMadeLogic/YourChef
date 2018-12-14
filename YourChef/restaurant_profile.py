@@ -22,7 +22,7 @@ class RestaurantProfileDBHelper:
         results = []
         if response['Items']:
             for i in response['Items']:
-                print(i)
+                # print(i)
                 results.append(i)
         return results
 
