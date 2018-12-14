@@ -1,43 +1,35 @@
 import unittest
-import decimal
 
-from YourChef.restaurant_profile import RestaurantProfileDBHelper
-from Test.SampleResProfile import insert_users, users
-
-
-class Data:
-    def __init__(self, input):
-        self.data = input
-
-
-class Object(object):
-    pass
+from restaurant_profile import RestaurantProfileDBHelper
+from SampleResProfile import insert_users, update_profiles, profiles
 
 
 class TestRestaurantProfileCase(unittest.TestCase):
 
     def testGetUser(self):
-        server = RestaurantProfileDBHelper()
-        for user in users:
+        server = RestaurantProfileDBHelper('rProfile_test')
+        for user in profiles:
             user_data = server.get_user(user["userid"])
             assert user_data['userid'] == user['userid'] and user_data['username'] == user['username'] and \
                    user_data['spicy'] == user['spicy'] and user_data['sour'] == user['sour'] and \
                    user_data['sweet'] == user['sweet'] and user_data['salt'] == user['salt']
 
     def testInsertUser(self):
-        server = RestaurantProfileDBHelper()
+        server = RestaurantProfileDBHelper('rProfile_test')
         for user in insert_users:
-            form = Object()
-            form.userid = Data(user["userid"])
-            form.username = Data(user["username"])
-            form.salt = decimal.Decimal(Data(user["salt"]))
-            form.sour = decimal.Decimal(Data(user["sour"]))
-            form.sweet = decimal.Decimal(Data(user["sweet"]))
-            form.spicy = decimal.Decimal(Data(user["spicy"]))
-
-            result, message = server.insert(form)
+            result, message = server.insert(user)
             assert result
             assert server.delete_user(user["userid"])
+
+
+    def testUpdateUser(self):
+        server = RestaurantProfileDBHelper('rProfile_test')
+        for user in update_profiles:
+            assert server.update_flavor(user['userid'], user['salt'], user['sour'], user['sweet'], user['spicy'])
+            user_data = server.get_user(user["userid"])
+            assert user_data['userid'] == user['userid'] and user_data['username'] == user['username'] and \
+                   user_data['spicy'] == user['spicy'] and user_data['sour'] == user['sour'] and \
+                   user_data['sweet'] == user['sweet'] and user_data['salt'] == user['salt']
 
 
 if __name__ == '__main__':

@@ -1,20 +1,20 @@
 # Test restaurant profiles
-users = [
+profiles = [
     {
         'userid': "res1@bu.edu",
         'username': "xcz",
-        'salt': 0.2,
-        'sour': 0.7,
-        "sweet": 0.2,
-        "spicy": 0.1
+        'salt': 1,
+        'sour': 2,
+        "sweet": 2,
+        "spicy": 4
     },
 
     {
         'userid': "res2@cu.edu",
         'username': "xcz",
-        'salt': 0.3,
-        'sour': 0.5,
-        "sweet": 0.3,
+        'salt': 3,
+        'sour': 5,
+        "sweet": 3,
         "spicy": 1
     },
 
@@ -25,12 +25,40 @@ insert_users = [
     {
         'userid': "res3@pu.edu",
         'username': "xcz",
-        'salt': 0.2,
-        'sour': 0.5,
-        "sweet": 0.2,
-        "spicy": 0.1
-    }
+        'salt': 2,
+        'sour': 7,
+        "sweet": 2,
+        "spicy": 1
+    },
+    {
+        'userid': "res4@pu.edu",
+        'username': "xcz",
+        'salt': 5,
+        'sour': 7,
+        "sweet": 4,
+        "spicy": 3
+    },
 
 ]
 
+update_profiles = [
+    {
+        'userid': "res1@bu.edu",
+        'username': "xcz",
+        'salt': 3,
+        'sour': 2,
+        "sweet": 2,
+        "spicy": 4
+    },
+
+    {
+        'userid': "res2@cu.edu",
+        'username': "xcz",
+        'salt': 3,
+        'sour': 5,
+        "sweet": 4,
+        "spicy": 1
+    },
+
+]
 
