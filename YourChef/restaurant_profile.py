@@ -16,23 +16,15 @@ class RestaurantProfileDBHelper:
                                   aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
 
-    def insert(self, form):
-
-        userid = form.userid.data
-        username = form.username.data # Restaurant name
-        salt = form.salt.data
-        sour = form.sour.data
-        sweet = form.sweet.data
-        spicy = form.spicy.data
-
+    def insert(self, form, userid, username):
         response = self.table.put_item(
             Item={
                 'userid': userid,
                 'username': username,
-                'spicy': spicy,
-                'salt': salt,
-                'sour': sour,
-                'sweet': sweet
+                'salt': form['salt'],
+                'sour': form['sour'],
+                'sweet': form['sweet'],
+                'spicy': form['spicy']
             }
         )
         if response:

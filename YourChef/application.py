@@ -5,7 +5,7 @@ from wtforms import Form, StringField, PasswordField, validators
 from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
-from YourChef.sortByDistance import sort_restaurant
+# from YourChef.sortByDistance import sort_restaurant
 from YourChef.user_profile import UserProfileDBHelper
 
 application = Flask(__name__)
@@ -267,9 +267,9 @@ def get_restaurant_list():
         # server = UserProfileDBHelper
         user_profile = server_user_profile.get_user(session['userid'])
         print(user_profile)
-        if user_profile:
-            # todo sort
-            restaurants = sort_restaurant(restaurants, user_profile)
+        # if user_profile:
+        #     # todo sort
+        #     restaurants = sort_restaurant(restaurants, user_profile)
     return restaurants
 
 

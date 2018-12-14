@@ -17,18 +17,14 @@ class UserProfileDBHelper:
         self.table = dynamodb.Table(self.table_name_register)
 
     def insert(self, form, userid):
-        salt = form['salt']
-        sour = form['sour']
-        sweet = form['sweet']
-        spicy = form['spicy']
 
         response = self.table.put_item(
             Item={
                 'userid': userid,
-                'spicy': spicy,
-                'salt': salt,
-                'sour': sour,
-                'sweet': sweet
+                'salt': form['salt'],
+                'sour': form['sour'],
+                'sweet': form['sweet'],
+                'spicy': form['spicy']
             }
         )
         if response:
