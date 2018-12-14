@@ -162,8 +162,15 @@ def check_out():
     # orderPage todo
     return redirect("/")
 
-# localhost:5111/order?restaurant=a&date=2018-12-13T19:45:44+00:00
+
 @application.route('/order')
+@is_logged_in
+def order():
+    pass
+
+
+# localhost:5111/order_detail?restaurant=a&date=2018-12-13T19:45:44+00:00
+@application.route('/order_detail')
 @is_logged_in
 def order_detail():
     restaurant = request.values.get('restaurant')
