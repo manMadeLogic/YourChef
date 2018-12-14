@@ -44,6 +44,7 @@ class UserHelper:
             return None
 
     def check_password(self, userid, password):
+        # todo general helper
         user = self.get_user(userid)
         if user:
             user_pwd_saved = user['password']

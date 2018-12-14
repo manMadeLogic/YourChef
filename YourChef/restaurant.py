@@ -18,6 +18,7 @@ class RestaurantHelper:
         return self.db.check_password(user_id, password)
 
     def register(self, form):
+        # todo general helper
         userid = form.userid.data
         if not userid or userid == "":
             return False, "empty user id"
