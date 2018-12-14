@@ -20,7 +20,7 @@ profiles = [
 
 ]
 
-insert_users = [
+insert_profiles = [
 
     {
         'userid': "res3@pu.edu",

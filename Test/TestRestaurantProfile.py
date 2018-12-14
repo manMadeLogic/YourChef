@@ -1,7 +1,7 @@
 import unittest
 
 from YourChef.restaurant_profile import RestaurantProfileDBHelper
-from Test.SampleResProfile import insert_users, update_profiles, profiles
+from Test.SampleResProfile import insert_profiles, update_profiles, profiles
 
 
 class TestRestaurantProfileCase(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestRestaurantProfileCase(unittest.TestCase):
 
     def testInsertUser(self):
         server = RestaurantProfileDBHelper('rProfile_test')
-        for user in insert_users:
+        for user in insert_profiles:
             result, message = server.insert(user, user['userid'], user['username'])
             assert result
             assert server.delete_user(user["userid"])
@@ -32,5 +32,9 @@ class TestRestaurantProfileCase(unittest.TestCase):
                    user_data['sweet'] == user['sweet'] and user_data['salt'] == user['salt']
 
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     server = RestaurantProfileDBHelper('rProfile_test')
+#     for user in profiles:
+#         result, message = server.insert(user, user['userid'], user['username'])
+
+
