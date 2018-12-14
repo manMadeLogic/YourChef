@@ -5,6 +5,7 @@ from wtforms import Form, StringField, PasswordField, validators
 from YourChef.menu import MenuHelper
 from YourChef.registration import RegistrationHelper
 from YourChef.restaurant import RestaurantHelper
+# from YourChef.sortByDistance import sort_restaurant
 
 application = Flask(__name__)
 application.config['SECRET_KEY'] = 'yourchef'
@@ -224,10 +225,21 @@ def menu(restaurant):
     return render_template("menu.html", restaurant=session['restaurant'], dishes=dishes)
 
 
+def get_restaurant_list():
+    restaurants = server_restaurant.get_restaurant_list()
+# todo
+#     if logged_in():
+        # server = UserProfileDBHelper
+        # get profile: user = server.get_user
+        # restaurants = sort_restaurant(restaurants, user)
+
+    return restaurants
+
+
 @application.route('/')
 # @application.route("/home")
 def index():
-    result = server_restaurant.get_restaurant_list()
+    result = get_restaurant_list()
     return render_template("home.html", restaurant=result)
     # return render_template('radio.group.html')
 

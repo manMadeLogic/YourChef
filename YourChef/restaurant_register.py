@@ -53,11 +53,6 @@ class RestaurantDBHelper:
                 results.append(i)
         return results
 
-    # todo
-    def get_restaurant_list(self):
-        restaurants = self.get_all()
-        return restaurants
-
     def check_password(self, userid, password):
         # todo general helper
         user = self.get_user(userid)
