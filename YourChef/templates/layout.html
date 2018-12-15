@@ -38,7 +38,7 @@
         <div class="col-md-4">
             <div class="content-section">
 
-                <h3>Your order <a id="clear" class="btn btn-primary" type="submit">clear all</a></h3>
+                <h3>Your Cart <a id="clear" class="btn btn-primary" type="submit">clear all</a></h3>
 
                 <!--<p class='text-muted'>You can put any information here you'd like.-->
                 <ul class="list-group" id="cart">
@@ -80,6 +80,7 @@
         <!--ul.removeChild(ul.firstChild);-->
     <!--}-->
     $.post($SCRIPT_ROOT + '/get_dish_in_cart', function(data) {
+      alert(data);
       if(data != ""){
         <!--alert(data.dishes);-->
 

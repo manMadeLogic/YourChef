@@ -13,14 +13,15 @@
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
                     {% if session.logged_in %}
-                    <a class="nav-item nav-link" href="/logout">Logout</a>
                     {% if session.is_restaurant %}
-                    <a class="nav-item nav-link" href="/restaurant_profile">ManageProfile</a>
-                    <a class="nav-item nav-link" href="/manageDish">ManageDish</a>
+                    <a class="nav-item nav-link" href="/restaurant_profile">Manage Profile</a>
+                    <a class="nav-item nav-link" href="/manageDish">Manage Dish</a>
                     {% else %}
-                    <a class="nav-item nav-link" href="/profile">ManageProfile</a>
+                    <a class="nav-item nav-link" href="/profile">Manage Profile</a>
                     {% endif %}
 
+                    <a class="nav-item nav-link" href="/order">Order History</a>
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
                     {% else %}
                     <a class="nav-item nav-link" href="/login">Login</a>
                     <a class="nav-item nav-link" href="/restaurant_login">Restaurant Login</a>

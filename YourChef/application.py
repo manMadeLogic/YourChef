@@ -132,7 +132,7 @@ def get_dish_in_cart():
         # print(session['dishes'])
         return jsonify({"dishes": session['dishes'], "total": session["total"]})
     else:
-        return jsonify(None)
+        return jsonify("")
 
 
 @application.route('/clear_cart', methods=['POST'])
@@ -166,7 +166,18 @@ def check_out():
 @application.route('/order')
 @is_logged_in
 def order():
-    pass
+    if session['is_restaurant']:
+        order_list = server_order.get_restaurant_order(session['userid'])
+        title = 'userid'
+    else:
+        order_list = server_order.get_user_order(session['userid'])
+        title = 'restaurant'
+
+    for one_order in order_list:
+        one_order['title'] = one_order[title]
+        # print(one_order)
+
+    return render_template("order_history.html", order=order_list)
 
 
 # localhost:5111/order_detail?restaurant=a&date=2018-12-13T19:45:44+00:00

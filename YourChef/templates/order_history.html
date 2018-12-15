@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1 class="my-4">Order List</h1>
+
+{% for n in order %}
+<!-- Blog Post -->
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">{{n['title']}}</h2>
+        <p class="card-text">{{n['dishes']}}</p>
+        <a href="order_detail?restaurant={{n['restaurant']}}&date={{n['date']}}" class="btn btn-primary">Read More &rarr;</a>
+    </div>
+    <div class="card-footer text-muted">
+        Posted On: {{n['date']}}
+        Total: {{n['total']}}
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
