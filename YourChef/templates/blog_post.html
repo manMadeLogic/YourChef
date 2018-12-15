@@ -1,75 +1,83 @@
 {% extends "layout.html" %}
-{% block body %}
+{% block content %}
 
-    <!-- Page Content -->
-    <div class="container">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-      <div class="row">
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-{% if article %}
-        <!-- Post Content Column -->
-        <div class="col-lg-8">
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
 
-          <!-- Title -->
-          <h1 class="mt-4">{{article.title}}</h1>
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
 
-          <!-- Author -->
-          <p class="lead">
-            by
-            <a href="/user/{{article.user_id}}">{{article.user_name}}</a>
-          </p>
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-          <hr>
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
 
-          <!-- Date/Time -->
-          <p>Posted on {{article.date}}</p>
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+</style>
+</head>
+<body>
 
-          <hr>
+<h2>Detailed Order</h2>
+<p>Please click 'Finished' after reviewing.</p>
 
-            {% if article.writter %}
-            <a class="btn btn-secondary" href="/edit_article/{{article.article_id}}">Edit Article</a>
-          <hr>
-            {% endif %}
 
-          <!-- Preview Image -->
-          <!--<img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">-->
-
-          <!--<hr>-->
-
-                <ul class="list-group" id="dishes">
-                    <!--todo table-->
-                    {% for dish in order.dishes %}
-                    <li>{{dish[0]}}, {{dish[1]}}, {{dish[2]}}</li>
-                    {% endfor %}
-                </ul>
-
-          <hr>
-
+<div class="row">
+    {% for n in dishes %}
+      <div class="column">
+        <div class="card">
+          <h3>Dish: {{n[0]}}</h3>
+          <p>Price: {{n[1]}}</p>
+          <p>Amount: {{n[2]}}</p>
         </div>
-
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
-
-          <!-- Anime List sidebar -->
-          <div class="card my-4">
-          <h5 class="card-header">Best10 Anime</h5>
-          <div class="card-body">
-            <ol>
-              {% for anime in best10 %}
-                <li><a href="/anime/{{anime.anime_id}}">{{anime.title}}</a></li>
-                {%endfor%}
-            </ol>
-          </div>
-        </div>
-        </div>
-{% else %}
-  <h1>Article Not Found</h1>
-{% endif %}
-
       </div>
-      <!-- /.row -->
-
+    {% endfor %}
+</div>
+<p> </p>
+<ul>
+  <li>The total amount is : {{total}}</li>
+</ul>
+<form method="post" class="form-signin">
+    <div class="form-group">
+        <input class="btn btn-primary" type="submit" value="Finished">
     </div>
-    <!-- /.container -->
+</form>
 
-{% endblock %}
+
+</body>
+</html>
+
+
+{% endblock content%}

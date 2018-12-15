@@ -22,6 +22,10 @@ class OrderHelper:
             return False, "Insert Fail"
 
         date_str = datetime.datetime.now().isoformat()
+
+        for dish in dishes:
+            dish[1] = decimal.Decimal(str(dish[1]))
+
         response = self.table.put_item(
             Item={
                 'restaurant': restaurant,
@@ -56,7 +60,7 @@ class OrderHelper:
     def update(self, restaurant, date):
         response = self.table.update_item(
             Key={
-                'userid': restaurant,
+                'restaurant': restaurant,
                 'date': date
             },
             UpdateExpression="set finished = :f",
@@ -97,3 +101,12 @@ class OrderHelper:
             if order:
                 result.append(order)
         return result
+
+
+if __name__ == '__main__':
+    orderHelper = OrderHelper()
+    order = orderHelper.get_order('asdfmmm', '2018-12-13T21:50:42.125577')
+    dishes = order[0]['dishes'][0]
+    res = []
+    # for dish in dishes:
+        # res.append(dish[0] + )

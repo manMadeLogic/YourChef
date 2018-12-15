@@ -181,18 +181,28 @@ def order():
 
 
 # localhost:5111/order_detail?restaurant=a&date=2018-12-13T19:45:44+00:00
-@application.route('/order_detail')
+@application.route('/order_detail', methods=['GET', 'POST'])
 @is_logged_in
 def order_detail():
     restaurant = request.values.get('restaurant')
     date = request.values.get('date')
-    print(restaurant, date)
+    # print(restaurant)
+    order = server_order.get_order(restaurant, date)
+    dishes = order[0]['dishes']
+    total = order[0]['total']
     # todo get order
+    if request.method == 'POST':
+        server_order.update(restaurant, date)
+        return redirect("/order")
+    if order[0]['restaurant'] == session['userid'] or order[0]['userid'] == session['userid']:
+        return render_template('blog_post.html', dishes=dishes, total = total)
+    else:
+        return redirect("/")
     # check order['restaurant'] == session['userid'] or order['userid'] == session['userid']
     # return page
     # if not: redirect("/") don't show
-    return redirect("/")
-
+    # return redirect("/")
+    return render_template('blog_post.html', dishes = dishes, total = total)
 
 @application.route('/add_dish', methods=['POST'])
 def add_dish():
