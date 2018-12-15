@@ -30,7 +30,7 @@ class OrderHelper:
             Item={
                 'restaurant': restaurant,
                 'date': date_str,
-                'dishes': str(dishes),
+                'dishes': dishes,
                 'total': decimal.Decimal(str(total)),
                 'userid': userid,
                 'finished': False
