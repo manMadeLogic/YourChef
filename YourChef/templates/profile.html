@@ -56,34 +56,43 @@
             <h1 class="my-4">{{type}} Profile</h1>
             <form method="post" class="form-signin">
                 <div class="form-group">
-                    <label for="salt" class="sr-only">Salt</label>
+                     <!--class="sr-only"-->
+                    <label for="salt" class="col-sm-4 col-form-label">Salt</label>
                     <br/>
+                    <div class="col-sm-10">
                     <div class="slidecontainer">
                         <input type="range" min="0" max="10" value="{{user.salt}}" class="slider" id="salt" name="salt">
                     </div>
+                    </div>
                     <br>
                 </div>
                 <div class="form-group">
-                    <label for="sour" class="sr-only">Sour</label>
+                    <label for="sour"class="col-sm-4 col-form-label">Sour</label>
                     <br/>
+                    <div class="col-sm-10">
                     <div class="slidecontainer">
                         <input type="range" min="0" max="10" value="{{user.sour}}" class="slider" id="sour" name="sour">
                     </div>
-                    <br>
-                </div>
-                <div class="form-group">
-                    <label for="sweet" class="sr-only">Sweet</label>
-                    <br/>
-                    <div class="slidecontainer">
-                        <input type="range" min="0" max="10" value="{{user.sweet}}" class="slider" id="sweet" name="sweet">
                     </div>
                     <br>
                 </div>
                 <div class="form-group">
-                    <label for="spicy" class="sr-only">Spicy</label>
+                    <label for="sweet"class="col-sm-4 col-form-label">Sweet</label>
                     <br/>
+                    <div class="col-sm-10">
                     <div class="slidecontainer">
-                        <input type="range" min="0" max="10" value="{{user.spicy}}" class="slider" id="spicy" name="spicy">
+                        <input type="range" min="0" max="10" value="{{user.sweet}}" class="slider" id="sweet" name="sweet">
+                    </div>
+                    </div>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="spicy"class="col-sm-4 col-form-label">Spicy</label>
+                    <br/>
+                    <div class="col-sm-10">
+                        <div class="slidecontainer">
+                            <input type="range" min="0" max="10" value="{{user.spicy}}" class="slider" id="spicy" name="spicy">
+                        </div>
                     </div>
                     <br>
                 </div>

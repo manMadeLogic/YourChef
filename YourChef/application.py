@@ -243,7 +243,7 @@ def location():
 
         if address != "Zero Result":
             flash(address, 'success')
-            return redirect("/manageDish")
+            return redirect("/restaurant_profile")
         else:
             flash('Get address fail! Please try again', 'danger')
 
@@ -258,9 +258,11 @@ def profile():
     if request.path == '/restaurant_profile':
         # server = server_restaurant_profile
         profile = server_restaurant_profile.get_user(userid)
+        redirect_url = 'manageDish'
     else:
         # server = server_user_profile
         profile = server_user_profile.get_user(userid)
+        redirect_url = '/'
     # profile = server.get_user(userid)
     # print(userid, profile)
     if not profile:
@@ -276,7 +278,7 @@ def profile():
             result, message = server_user_profile.insert(request.form, userid)
         if result:
             flash("Profile Updated", 'success')
-            return redirect("/")
+            return redirect(redirect_url)
         else:
             flash(message, 'danger')
 
