@@ -9,6 +9,7 @@ class TestRestaurantProfileCase(unittest.TestCase):
     def testGetUser(self):
         server = RestaurantProfileDBHelper('rProfile_test')
         for user in profiles:
+            # server.insert(user, user['userid'], user['username'])
             user_data = server.get_user(user["userid"])
             assert user_data['userid'] == user['userid'] and user_data['username'] == user['username'] and \
                    user_data['spicy'] == user['spicy'] and user_data['sour'] == user['sour'] and \
