@@ -12,8 +12,15 @@
         <a href="order_detail?restaurant={{n['restaurant']}}&date={{n['date']}}" class="btn btn-primary">Read More &rarr;</a>
     </div>
     <div class="card-footer text-muted">
-        Posted On: {{n['date']}}
-        Total: {{n['total']}}
+        <p>Posted On: {{n['date']}}</p>
+        <p>Total: {{n['total']}}</p>
+        {% if session.is_restaurant %}
+        {% if n.finished %}
+        <p>Finished</p>
+        {% else %}
+        <p>Unfinished</p>
+        {% endif %}
+        {% endif %}
     </div>
 </div>
 {% endfor %}

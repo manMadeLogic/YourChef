@@ -176,7 +176,7 @@ def order():
     for one_order in order_list:
         one_order['title'] = one_order[title]
         # print(one_order)
-    print(order_list)
+    # print(order_list)
     return render_template("order_history.html", order=order_list)
 
 
