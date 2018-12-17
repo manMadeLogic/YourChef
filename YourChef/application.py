@@ -78,7 +78,7 @@ def login():
                 session['total_dishes'] = 0
                 session['total'] = 0.0
                 session['is_restaurant'] = False
-                return redirect("/")
+                return redirect("/profile")
             else:
                 session['is_restaurant'] = True
                 restaurant = user['userid']
