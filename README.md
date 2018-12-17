@@ -31,33 +31,69 @@ python YourChef/application.py
 Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-1. Register
+### User
 
-   ![Screenshot 2018-12-14 17.00.37](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.00.37.png)
+1. User Register
 
-2. Log in
+   ![User_registration](./Images/User_registration.png)
 
-   ![Screenshot 2018-12-14 17.01.49](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.01.49.png)
+2. User Log in
+
+   ![User_login](./Images/User_login.png)
 
 3. Log out
 
-   ![Screenshot 2018-12-14 17.02.39](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.02.39.png)
-
    Click the Logout button to log out
-
-   ![Screenshot 2018-12-14 17.03.17](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.03.17.png)
 
 4. Modify Profile
 
-5. Restaurant Dish Management
+   ![User_taste_profile](./Images/User_taste_profile.png)
 
-   ADD/DELETE DISH
+5. Restaurant List
 
-   ![Screenshot 2018-12-14 17.18.30](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.18.30.png)
+   After log in you will see this page, click any restaurant to see their offers.
 
-6. Cart
+   ![Restaurant_list](./Images/Restaurant_list.png)
 
-7. Order
+6. User shopping cart
+
+   ![User_dish_list](./Images/User_dish_list.png)
+
+7. User Order History
+
+   ![User_order_history](./Images/User_order_history.png)
+
+8. Restaurant Dish Management
+
+### Restaurant
+
+1. Restaurant Registration
+
+   ![Restaurant_registration](./Images/Restaurant_registration.png)
+
+2. Restaurant auto-fill address
+
+   ![Restaurant_address_search](./Images/Restaurant_address_search.png)
+
+3. Restaurant Login
+
+   ![Restaurant_login](./Images/Restaurant_login.png)
+
+4. Restaurant Logout
+
+   Click logout button to log out.
+
+5. Restaurant Manage Dish
+
+   ![Restaurant_manage_dish](./Images/Restaurant_manage_dish.png)
+
+6. Restaurant Modify Taste Profile
+
+   ![Restaurant_taste_profile](./Images/Restaurant_taste_profile.png)
+
+7. Restaurant check order list
+
+   ![Restaurant_order_list](./Images/Restaurant_order_list.png)
 
 ## Test:
 
