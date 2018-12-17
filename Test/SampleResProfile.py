@@ -3,7 +3,7 @@ profiles = [
     {
         'userid': "res1@bu.edu",
         'username': "xcz",
-        'salt': 1,
+        'salt': 3,
         'sour': 2,
         "sweet": 2,
         "spicy": 4
@@ -14,7 +14,7 @@ profiles = [
         'username': "xcz",
         'salt': 3,
         'sour': 5,
-        "sweet": 3,
+        "sweet": 4,
         "spicy": 1
     },
 

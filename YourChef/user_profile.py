@@ -38,6 +38,10 @@ class UserProfileDBHelper:
         )
         if response['Items']:
             user = response['Items'][0]
+            user['salt'] = int(user['salt'])
+            user['sweet'] = int(user['sweet'])
+            user['sour'] = int(user['sour'])
+            user['spicy'] = int(user['spicy'])
             return user
         else:
             return None

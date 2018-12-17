@@ -1,6 +1,6 @@
 import unittest
 
-from SampleOrder import orders, orders_failed
+from Test.SampleOrder import orders, orders_failed
 from YourChef.orderHelper import OrderHelper
 
 

@@ -3,17 +3,17 @@ users = [
     {
         'userid': "user1@bu.edu",
         'salt': 3,
-        'sour': 7,
+        'sour': 8,
         "sweet": 2,
-        "spicy": 1
+        "spicy": 2
     },
 
     {
         'userid': "user2@cu.edu",
         'salt': 3,
-        'sour': 5,
+        'sour': 6,
         "sweet": 3,
-        "spicy": 1
+        "spicy": 9
     },
 
 ]
