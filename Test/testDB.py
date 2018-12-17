@@ -8,7 +8,7 @@ import boto3
 # from YourChef.dishHelper import DishHelper
 # from Test.SampleManageDish import dishes
 import os
-import decimal
+# import decimal
 # from YourChef.userHelper import UserHelper
 
 
@@ -26,6 +26,10 @@ import decimal
 #         self.aws_id = args.aws_id
 #         self.aws_key = args.aws_key
 #
+# from YourChef.orderHelper import OrderHelper
+from YourChef.restaurant_register import RestaurantDBHelper
+# from YourChef.userHelper import UserHelper
+
 if __name__ == '__main__':
 #     args = arguments()
 #     dynamodb = boto3.resource('dynamodb', region_name=args.region, aws_access_key_id=args.aws_id, aws_secret_access_key=args.aws_key)
@@ -34,16 +38,16 @@ if __name__ == '__main__':
     aws_key = os.environ.get('Secret_access_key')
     dynamodb = boto3.resource('dynamodb', region_name=region, aws_access_key_id=aws_id, aws_secret_access_key=aws_key)
 #
-    table = dynamodb.create_table(
-        TableName='UProfile',
-        KeySchema=[
-             {'AttributeName': 'userid', 'KeyType': 'HASH'},
-        ],
-        AttributeDefinitions=[
-            {'AttributeName': 'userid', 'AttributeType': 'S'}
-        ],
-        ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
-    )
+    # table = dynamodb.create_table(
+    #     TableName='UProfile',
+    #     KeySchema=[
+    #          {'AttributeName': 'userid', 'KeyType': 'HASH'},
+    #     ],
+    #     AttributeDefinitions=[
+    #         {'AttributeName': 'userid', 'AttributeType': 'S'}
+    #     ],
+    #     ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
+    # )
 #     # Wait until the table exists.
 #     table.meta.client.get_waiter('table_exists').wait(TableName='test_user')
 #     print('created table {}.'.format('test_user'))
@@ -76,45 +80,46 @@ if __name__ == '__main__':
 
     # # table = dynamodb.Table('test_dish')
     # table = dynamodb.create_table(
-    #     TableName='Order',
+    #     TableName='test_user_order',
+    #     # TableName='User_order',
     #     # TableName='order_test',
     #     KeySchema=[
-    #         {'AttributeName': 'restaurant', 'KeyType': 'HASH'},
+    #         {'AttributeName': 'user', 'KeyType': 'HASH'},
     #         # {'AttributeName': 'userid', 'KeyType': 'HASH'},
     #         {'AttributeName': 'date', 'KeyType': 'RANGE'}
     #     ],
     #     AttributeDefinitions=[
-    #         {'AttributeName': 'restaurant', 'AttributeType': 'S'},
+    #         {'AttributeName': 'user', 'AttributeType': 'S'},
     #         # {'AttributeName': 'userid', 'AttributeType': 'S'},
     #         {'AttributeName': 'date', 'AttributeType': 'S'}
     #     ],
     #     ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     # )
 
-    session = dict()
-    session['dishes'] = [['a', 10, 1]]
-    session['total_dishes'] = 1
-    session['total'] = 1.0
-    session['restaurant'] = 'a'
-    # server = OrderHelper('test_dish2')
-    finished = False
-    userid = 'xc'
-
-    table = dynamodb.Table('Order')
-    response = table.put_item(
-        Item={
-            'restaurant': session['restaurant'],
-            'date': '2018-12-13T19:42:44+00:00',
-            'dishes': session['dishes'],
-            'total': decimal.Decimal(session['total']),
-            'userid': userid,
-            'finished': finished
-        }
-    )
-    if response:
-        print("success")
-    else:
-        print("fail")
+    # session = dict()
+    # session['dishes'] = [['a', 10, 1]]
+    # session['total_dishes'] = 1
+    # session['total'] = 1.0
+    # session['restaurant'] = 'a'
+    # # server = OrderHelper('test_dish2')
+    # finished = False
+    # userid = 'xc'
+    #
+    # table = dynamodb.Table('Order')
+    # response = table.put_item(
+    #     Item={
+    #         'restaurant': session['restaurant'],
+    #         'date': '2018-12-13T19:42:44+00:00',
+    #         'dishes': session['dishes'],
+    #         'total': decimal.Decimal(session['total']),
+    #         'userid': userid,
+    #         'finished': finished
+    #     }
+    # )
+    # if response:
+    #     print("success")
+    # else:
+    #     print("fail")
 
     # server = DishHelper('test_dish2')
     # for dish in dishes:
@@ -132,3 +137,27 @@ if __name__ == '__main__':
     # db.delete_user("lt6666")
     # db.delete_user("xc-6666")
     # db.delete_user("xc6666")
+
+
+    # server = OrderHelper()
+    # response = server.table.scan()
+    # if response['Items']:
+    #     for i in response['Items']:
+    #         print(i)
+    #
+    # orders = server.get_restaurant_order('a')
+    # if orders:
+    #     for i in orders:
+    #         print(i)
+
+    #
+    # order = server.get_user_order('xc6666')
+    # # order = server.get_restaurant_order('b')
+    # # order = server.get_order('a', '2018-12-14T18:02:11.318333')
+    # print(order)
+
+    server = RestaurantDBHelper()
+    server.delete_user('demo_rest')
+
+    # server = UserHelper()
+    # server.delete_user('a')
