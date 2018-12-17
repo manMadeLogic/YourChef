@@ -8,6 +8,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
                 <div class="navbar-nav mr-auto">
+                    {% if session.logged_in %}
+                    <a class="navbar-brand">Hi, {{session.username}}</a>
+                    {% endif %}
                 </div>
 
                 <!-- Navbar Right Side -->

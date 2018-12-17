@@ -108,18 +108,17 @@ for (i = 0; i < myNodelist.length; i++) {
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
-  <!--alert(myNodelist[i].id);-->
-  <!--span.href = $SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id;-->
   span.onclick = function(){
-    window.location.replace($SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id);
+    var div = this.parentElement;
+    div.style.display = "none";
+    $.post($SCRIPT_ROOT + '/delete_dish', {'dishname': div.id}, function(data) {
+      <!--alert(data);-->
+      if(data = true){
+        div.style.display = "none";
+      }
+    });
   }
   myNodelist[i].appendChild(span);
-}
-
-function remove() {
-    window.location.replace($SCRIPT_ROOT + "/delete_dish?dishname=" + myNodelist[i].id);
-  <!--var div = this.parentElement;-->
-  <!--div.style.display = "none";-->
 }
 
 // Add a "checked" symbol when clicking on a list item
@@ -142,6 +141,19 @@ function newElement() {
     document.getElementById("myUL").appendChild(li);
   }
   document.getElementById("dishname").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 
   <!--var span = document.createElement("SPAN");-->
   <!--var txt = document.createTextNode("\u00D7");-->

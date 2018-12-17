@@ -53,9 +53,12 @@ body {
 <h2>Detailed Order</h2>
 <p>Please click 'Finished' after reviewing.</p>
 
+<h4>Restaurant id : {{order.restaurant}}</h4>
+<h4>Date : {{order.date}}</h4>
+<h4>User ID : {{order.userid}}</h4>
 
 <div class="row">
-    {% for n in dishes %}
+    {% for n in order.dishes %}
       <div class="column">
         <div class="card">
           <h3>Dish: {{n[0]}}</h3>
@@ -65,15 +68,17 @@ body {
       </div>
     {% endfor %}
 </div>
-<p> </p>
-<ul>
-  <li>The total amount is : {{total}}</li>
-</ul>
+<h4>The total amount is : {{order.total}}</h4>
+
+{% if order.finished %}
+<h4>Finished</h4>
+{% else %}
 <form method="post" class="form-signin">
     <div class="form-group">
         <input class="btn btn-primary" type="submit" value="Finished">
     </div>
 </form>
+{% endif %}
 
 
 </body>

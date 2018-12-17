@@ -55,7 +55,9 @@ Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 
    ![Screenshot 2018-12-14 17.18.30](/Users/zhaojialin/Dropbox/屏幕截图/Screenshot 2018-12-14 17.18.30.png)
 
-6. Order
+6. Cart
+
+7. Order
 
 ## Test:
 

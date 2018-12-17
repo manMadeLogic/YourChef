@@ -176,7 +176,7 @@ def order():
     for one_order in order_list:
         one_order['title'] = one_order[title]
         # print(one_order)
-
+    print(order_list)
     return render_template("order_history.html", order=order_list)
 
 
@@ -187,22 +187,20 @@ def order_detail():
     restaurant = request.values.get('restaurant')
     date = request.values.get('date')
     # print(restaurant)
-    order = server_order.get_order(restaurant, date)
-    dishes = order[0]['dishes']
-    total = order[0]['total']
-    # todo get order
+    orders = server_order.get_order(restaurant, date)
+    if not orders:
+        flash("Can't get order", "danger")
+        return redirect("/")
+    curr_order = orders[0]
+    if curr_order['restaurant'] != session['userid'] and curr_order['userid'] != session['userid']:
+        return redirect("/")
     if request.method == 'POST':
         server_order.update(restaurant, date)
-        return redirect("/order")
-    if order[0]['restaurant'] == session['userid'] or order[0]['userid'] == session['userid']:
-        return render_template('blog_post.html', dishes=dishes, total = total)
-    else:
-        return redirect("/")
-    # check order['restaurant'] == session['userid'] or order['userid'] == session['userid']
-    # return page
-    # if not: redirect("/") don't show
-    # return redirect("/")
-    return render_template('blog_post.html', dishes = dishes, total = total)
+        # return redirect("/order")
+        return redirect("/order_detail?restaurant=" + curr_order['restaurant'] + "&date=" + curr_order['date'])
+    # print(curr_order)
+    return render_template('order_detail.html', order=curr_order)
+
 
 @application.route('/add_dish', methods=['POST'])
 def add_dish():
@@ -285,21 +283,27 @@ def profile():
     return render_template('profile.html', type='User', user=profile)
 
 
-@application.route('/delete_dish')
+@application.route('/delete_dish', methods=['POST'])
 @is_logged_in
 def delete_dish():
     if session['is_restaurant']:
-        restaurant = session['restaurant']
+        restaurant = session['userid']
     else:
-        return redirect("/")
+        return jsonify(False)
 
     dishname = request.values.get('dishname')
     result = server_menu.deleteDish(restaurant, dishname)
-    if result:
-        flash('deleted dish ' + dishname, "success")
-    else:
-        flash('delete dish ' + dishname + " fail", "danger")
-    return redirect("/manageDish")
+    return jsonify(result)
+
+    #     return redirect("/")
+    #
+    # dishname = request.values.get('dishname')
+    # result = server_menu.deleteDish(restaurant, dishname)
+    # if result:
+    #     flash('deleted dish ' + dishname, "success")
+    # else:
+    #     flash('delete dish ' + dishname + " fail", "danger")
+    # return redirect("/manageDish")
 
 
 @application.route('/menu/<string:restaurant>')

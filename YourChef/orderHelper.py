@@ -19,7 +19,7 @@ class OrderHelper:
 
     def add_order(self, restaurant, dishes, total, userid):
         if not restaurant or dishes is None or not total or not userid:
-            return False, "Insert Fail"
+            return None, "Insert Fail"
 
         date_str = datetime.datetime.now().isoformat()
 
@@ -38,8 +38,8 @@ class OrderHelper:
         )
 
         if response:
-            order, message = self.get_order(restaurant, date_str)
-            if order:
+            order_return, message = self.get_order(restaurant, date_str)
+            if order_return:
                 # print(order)
                 response = self.user_table.put_item(
                     Item={
@@ -49,13 +49,13 @@ class OrderHelper:
                     }
                 )
                 if response:
-                    return True, "Success"
+                    return order_return, "Success"
                 else:
-                    return False, "Insert User Order Fail"
+                    return None, "Insert User Order Fail"
             else:
-                return False, message
+                return None, message
         else:
-            return False, "Insert Restaurant Order Fail"
+            return None, "Insert Restaurant Order Fail"
 
     def update(self, restaurant, date):
         response = self.table.update_item(
