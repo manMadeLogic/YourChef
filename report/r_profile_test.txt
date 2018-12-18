@@ -4,6 +4,6 @@ rootdir: /Users/xi/Desktop/YourChef, inifile:
 plugins: cov-2.6.0
 collected 4 items
 
-Test/TestRegistration.py ....                                            [100%]
+Test/TestRestaurantProfile.py ....                                       [100%]
 
-========================== 4 passed in 21.42 seconds ===========================
+========================== 4 passed in 15.35 seconds ===========================

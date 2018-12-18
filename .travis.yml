@@ -10,8 +10,21 @@ install:
 # command to run tests
 script:
   - export PYTHONPATH="$PYTHONPATH:/home/travis/build/manMadeLogic/YourChef"
-  - pytest Test/*
-  - pytest Test/* > report/unit_test.txt
+  - pytest Test/TestDish.py
+  - pytest Test/TestGM.py
+  - pytest Test/TestUser.py
+  - pytest Test/TestOrder.py
+  - pytest Test/TestRegistration.py
+  - pytest Test/TestMenu.py
+  - pytest Test/TestUserProfile.py
+  - pytest Test/TestDish.py > report/dish_test.txt
+  - pytest Test/TestGM.py > report/gm_test.txt
+  - pytest Test/TestUser.py > report/user_test.txt
+  - pytest Test/TestOrder.py > report/order_test.txt
+  - pytest Test/TestRegistration.py > report/registration_test.txt
+  - pytest Test/TestMenu.py > report/menu_test.txt
+  - pytest Test/TestRestaurantProfile.py > report/r_profile_test.txt
+  - pytest Test/TestUserProfile.py > report/u_profile_text.txt
   - coverage run --source=YourChef.userHelper Test/TestUser.py
   - coverage report -m
   - coverage report > report/user_coverage.txt
