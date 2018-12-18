@@ -40,21 +40,16 @@ class TestRestaurantProfileCase(unittest.TestCase):
     # TODO REVIEW
     def testGetAll(self):
         server = RestaurantProfileDBHelper('rProfile_test')
-        response = server.table.scan()
-        assert response and len(response['Items']) == len(profiles)
+        response = server.get_all()
+        assert response and len(response) == len(profiles)
 
         # Assuming 'userid' is the primary key, response and profiles should have the same entries
-        for res in response['Items']:
-            flag = False
+        for res in response:
             for user in profiles:
                 if res['userid'] == user['userid']:
-                    flag = res['userid'] == user['userid'] and res['username'] == user['username'] and \
+                    assert res['userid'] == user['userid'] and res['username'] == user['username'] and \
                            res['spicy'] == user['spicy'] and res['sour'] == user['sour'] and \
                            res['sweet'] == user['sweet'] and res['salt'] == user['salt']
-                    break
-
-            assert flag
-
 
 
 if __name__ == '__main__':

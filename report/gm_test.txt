@@ -2,8 +2,8 @@
 platform darwin -- Python 3.6.4, pytest-3.3.2, py-1.5.2, pluggy-0.6.0
 rootdir: /Users/xi/Desktop/YourChef, inifile:
 plugins: cov-2.6.0
-collected 4 items
+collected 3 items
 
-Test/TestRegistration.py ....                                            [100%]
+Test/TestGM.py ...                                                       [100%]
 
-========================== 4 passed in 21.42 seconds ===========================
+=========================== 3 passed in 8.86 seconds ===========================
