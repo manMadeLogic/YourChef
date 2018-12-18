@@ -1,7 +1,7 @@
 import unittest
 
-from SampleOrder import orders, orders_failed, orders_update, users
-from orderHelper import OrderHelper
+from YourChef.SampleOrder import orders, orders_failed, orders_update, users
+from Test.orderHelper import OrderHelper
 
 
 class TestManageDishCase(unittest.TestCase):
