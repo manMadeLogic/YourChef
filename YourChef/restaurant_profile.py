@@ -16,7 +16,7 @@ class RestaurantProfileDBHelper:
                                   aws_secret_access_key=aws_key)
         self.table = dynamodb.Table(self.table_name_register)
 
-    # get all todo get all
+    # get all
     def get_all(self):
         response = self.table.scan()
         results = []

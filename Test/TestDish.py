@@ -33,7 +33,6 @@ class TestManageDishCase(unittest.TestCase):
             print(user_data, user)
             assert int(user_data['price']) == user['price']
 
-
     def testUpdateUser(self):
         server = DishHelper("test_dish2")
         for user in dishes:
@@ -41,6 +40,11 @@ class TestManageDishCase(unittest.TestCase):
             user_data, message = server.get_dish_price(user['restaurant'], user['dishname'])
             assert int(user_data['price']) == 35
             assert server.change_price(user['restaurant'], user['dishname'], user['price'])
+
+    def testGetDish(self):
+        server = DishHelper("test_dish2")
+        assert server.get_dish('a')
+        assert server.get_dish('b')
 
 
 if __name__ == '__main__':
