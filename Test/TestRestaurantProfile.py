@@ -10,7 +10,7 @@ class TestRestaurantProfileCase(unittest.TestCase):
         server = RestaurantProfileDBHelper('rProfile_test')
         # print (profiles)
         for user in profiles:
-            # server.insert(user, user['userid'], user['username'])
+            server.insert(user, user['userid'], user['username'])
             user_data = server.get_user(user["userid"])
             # print("user_data", user_data)
             # print("user", user)
@@ -34,6 +34,9 @@ class TestRestaurantProfileCase(unittest.TestCase):
                    user_data['spicy'] == user['spicy'] and user_data['sour'] == user['sour'] and \
                    user_data['sweet'] == user['sweet'] and user_data['salt'] == user['salt']
 
+        for user in profiles:
+            assert server.update_flavor(user['userid'], user['salt'], user['sour'], user['sweet'], user['spicy'])
+
     # TODO REVIEW
     def testGetAll(self):
         server = RestaurantProfileDBHelper('rProfile_test')
@@ -54,10 +57,5 @@ class TestRestaurantProfileCase(unittest.TestCase):
 
 
 
-
-# if __name__ == '__main__':
-#     server = RestaurantProfileDBHelper('rProfile_test')
-#     for user in profiles:
-#         result, message = server.insert(user, user['userid'], user['username'])
-
-
+if __name__ == '__main__':
+    unittest.main()

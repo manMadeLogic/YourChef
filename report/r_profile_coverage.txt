@@ -1,0 +1,3 @@
+Name                             Stmts   Miss  Cover
+----------------------------------------------------
+YourChef/restaurant_profile.py      43     10    77%

@@ -8,7 +8,7 @@ class TestRestaurantProfileCase(unittest.TestCase):
     def testGetUser(self):
         server = UserProfileDBHelper('uProfile_test')
         for user in users:
-            # server.insert(user, user['userid'])
+            server.insert(user, user['userid'])
             user_data = server.get_user(user["userid"])
             print("user_data", user_data)
             print("user", user)
@@ -32,9 +32,12 @@ class TestRestaurantProfileCase(unittest.TestCase):
                    user_data['sour'] == user['sour'] and user_data['sweet'] == user['sweet'] and \
                    user_data['salt'] == user['salt']
 
+        for user in users:
+            assert server.update_flavor(user['userid'], user['salt'], user['sour'], user['sweet'], user['spicy'])
 
-# if __name__ == '__main__':
-#     # unittest.main()
+
+if __name__ == '__main__':
+    unittest.main()
 #     server = UserProfileDBHelper("uProfile_test")
 #     for user in users:
 #         result, message = server.insert(user, user["userid"])

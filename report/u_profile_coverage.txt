@@ -1,0 +1,3 @@
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+YourChef/user_profile.py      36      4    89%

@@ -5,8 +5,8 @@ profiles = [
         'username': "xcz",
         'salt': 3,
         'sour': 2,
-        "sweet": 2,
-        "spicy": 4
+        "sweet": 9,
+        "spicy": 3
     },
 
     {
@@ -14,7 +14,7 @@ profiles = [
         'username': "xcz",
         'salt': 3,
         'sour': 5,
-        "sweet": 4,
+        "sweet": 8,
         "spicy": 1
     },
 

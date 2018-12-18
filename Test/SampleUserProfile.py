@@ -4,14 +4,14 @@ users = [
         'userid': "user1@bu.edu",
         'salt': 3,
         'sour': 8,
-        "sweet": 2,
-        "spicy": 2
+        "sweet": 1,
+        "spicy": 7
     },
 
     {
         'userid': "user2@cu.edu",
         'salt': 3,
-        'sour': 6,
+        'sour': 1,
         "sweet": 3,
         "spicy": 9
     },

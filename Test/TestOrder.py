@@ -20,3 +20,6 @@ class TestManageDishCase(unittest.TestCase):
         for order in orders_failed:
             result, message = server.add_order(order['restaurant'], order['dishes'], order['total'], order['userid'])
             assert not result
+
+if __name__ == '__main__':
+    unittest.main()

@@ -24,5 +24,18 @@ script:
   - coverage run --source=YourChef.menu Test/TestMenu.py
   - coverage report -m
   - coverage report > report/menu_coverage.txt
+  - coverage run --source=YourChef.orderHelper Test/TestOrder.py
+  - coverage report -m
+  - coverage report > report/order_coverage.txt
+  - coverage run --source=YourChef.dishHelper Test/TestDish.py
+  - coverage report -m
+  - coverage report > report/dish_coverage.txt
+  - coverage run --source=YourChef.restaurant_profile Test/TestRestaurantProfile.py
+  - coverage report -m
+  - coverage report > report/r_profile_coverage.txt
+  - coverage run --source=YourChef.user_profile Test/TestUserProfile.py
+  - coverage report -m
+  - coverage report > report/u_profile_coverage.txt
+
 after_success:
   - coveralls
