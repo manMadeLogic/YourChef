@@ -102,11 +102,3 @@ class OrderHelper:
                 result.append(order)
         return result
 
-
-if __name__ == '__main__':
-    orderHelper = OrderHelper()
-    order = orderHelper.get_order('asdfmmm', '2018-12-13T21:50:42.125577')
-    dishes = order[0]['dishes'][0]
-    res = []
-    # for dish in dishes:
-        # res.append(dish[0] + )
