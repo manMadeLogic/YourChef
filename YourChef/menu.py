@@ -26,8 +26,6 @@ class MenuHelper:
     def deleteDish(self, restaurant, dishname):
         return self.db.delete_dish(restaurant, dishname)
 
-        # todo  cart class
-
     def add_to_cart(self, session, restaurant, dishname, amount):
         if session['total_dishes'] >= 10:
             return False
